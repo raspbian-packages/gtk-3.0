@@ -189,8 +189,8 @@ if HAVE_INTROSPECTION
 introspection_files = 		\
 	$(filter-out gdkkeysyms-compat.h, $(gdk_public_h_sources))	\
 	$(gdk_c_sources)	\
-        gdkenumtypes.c		\
-        gdkenumtypes.h
+        $(srcdir)/gdkenumtypes.c	\
+        $(srcdir)/gdkenumtypes.h
 
 Gdk-3.0.gir: libgdk-3.la Makefile
 Gdk_3_0_gir_SCANNERFLAGS = 	\
@@ -305,7 +305,7 @@ endif
 
 lib_LTLIBRARIES = libgdk-3.la
 
-MAINTAINERCLEANFILES = $(gdk_built_sources) stamp-gdkenumtypes.h
+MAINTAINERCLEANFILES = $(gdk_built_sources)
 EXTRA_DIST += $(gdk_built_sources)
 
 install-exec-hook:
@@ -317,18 +317,15 @@ BUILT_SOURCES = \
 	$(gdk_built_sources)			\
 	gdkconfig.h
 
-gdkenumtypes.h: stamp-gdkenumtypes.h
-	@true
-stamp-gdkenumtypes.h: @REBUILD@ $(gdk_public_h_sources) gdkenumtypes.h.template
+gdkenumtypes.h: @REBUILD@ $(gdk_public_h_sources) $(srcdir)/gdkenumtypes.h.template
 	$(AM_V_GEN) ( cd $(srcdir) && $(GLIB_MKENUMS) --template gdkenumtypes.h.template \
 		$(gdk_public_h_sources) ) >> xgen-geth \
-	&& (cmp -s xgen-geth gdkenumtypes.h || cp xgen-geth gdkenumtypes.h ) \
-	&& rm -f xgen-geth \
-	&& echo timestamp > $(@F)
+	&& (cmp -s xgen-geth gdkenumtypes.h || cp xgen-geth $(srcdir)/gdkenumtypes.h ) \
+	&& rm -f xgen-geth 
 gdkenumtypes.c: @REBUILD@ $(gdk_public_h_sources) gdkenumtypes.c.template
 	$(AM_V_GEN) ( cd $(srcdir) && $(GLIB_MKENUMS) --template gdkenumtypes.c.template \
 		$(gdk_public_h_sources) ) > xgen-getc \
-	&& cp xgen-getc gdkenumtypes.c  \
+	&& cp xgen-getc $(srcdir)/gdkenumtypes.c  \
 	&& rm -f xgen-getc
 
 #
