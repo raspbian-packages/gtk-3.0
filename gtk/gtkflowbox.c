@@ -893,31 +893,6 @@ get_visible_children (GtkFlowBox *box)
   return i;
 }
 
-static GtkFlowBoxChild *
-gtk_flow_box_find_child_at_pos (GtkFlowBox *box,
-                                gint        x,
-                                gint        y)
-{
-  GtkWidget *child;
-  GSequenceIter *iter;
-  GtkAllocation allocation;
-
-  for (iter = g_sequence_get_begin_iter (BOX_PRIV (box)->children);
-       !g_sequence_iter_is_end (iter);
-       iter = g_sequence_iter_next (iter))
-    {
-      child = g_sequence_get (iter);
-      if (!child_is_visible (child))
-        continue;
-      gtk_widget_get_allocation (child, &allocation);
-      if (x >= allocation.x && x < (allocation.x + allocation.width) &&
-          y >= allocation.y && y < (allocation.y + allocation.height))
-        return GTK_FLOW_BOX_CHILD (child);
-    }
-
-  return NULL;
-}
-
 static void
 gtk_flow_box_update_active (GtkFlowBox      *box,
                             GtkFlowBoxChild *child)
@@ -2820,7 +2795,7 @@ autoscroll_cb (GtkWidget     *widget,
       sequence = gtk_gesture_single_get_current_sequence (GTK_GESTURE_SINGLE (priv->drag_gesture));
       gtk_gesture_get_point (priv->drag_gesture, sequence, &x, &y);
 
-      child = gtk_flow_box_find_child_at_pos (box, x, y);
+      child = gtk_flow_box_get_child_at_pos (box, x, y);
 
       gtk_flow_box_update_active (box, child);
 
@@ -2923,7 +2898,7 @@ gtk_flow_box_enter_notify_event (GtkWidget        *widget,
   if (event->window != gtk_widget_get_window (GTK_WIDGET (box)))
     return FALSE;
 
-  child = gtk_flow_box_find_child_at_pos (box, event->x, event->y);
+  child = gtk_flow_box_get_child_at_pos (box, event->x, event->y);
   gtk_flow_box_update_active (box, child);
 
   return FALSE;
@@ -2942,7 +2917,7 @@ gtk_flow_box_leave_notify_event (GtkWidget        *widget,
   if (event->detail != GDK_NOTIFY_INFERIOR)
     child = NULL;
   else
-    child = gtk_flow_box_find_child_at_pos (box, event->x, event->y);
+    child = gtk_flow_box_get_child_at_pos (box, event->x, event->y);
 
   gtk_flow_box_update_active (box, child);
 
@@ -2966,7 +2941,7 @@ gtk_flow_box_drag_gesture_update (GtkGestureDrag *gesture,
       (offset_x * offset_x) + (offset_y * offset_y) > RUBBERBAND_START_DISTANCE * RUBBERBAND_START_DISTANCE)
     {
       priv->rubberband_select = TRUE;
-      priv->rubberband_first = gtk_flow_box_find_child_at_pos (box, start_x, start_y);
+      priv->rubberband_first = gtk_flow_box_get_child_at_pos (box, start_x, start_y);
   
       widget_node = gtk_widget_get_css_node (GTK_WIDGET (box));
       priv->rubberband_node = gtk_css_node_new ();
@@ -2982,7 +2957,7 @@ gtk_flow_box_drag_gesture_update (GtkGestureDrag *gesture,
 
   if (priv->rubberband_select)
     {
-      child = gtk_flow_box_find_child_at_pos (box, start_x + offset_x,
+      child = gtk_flow_box_get_child_at_pos (box, start_x + offset_x,
                                               start_y + offset_y);
 
       if (priv->rubberband_first == NULL)
@@ -3023,7 +2998,7 @@ gtk_flow_box_motion_notify_event (GtkWidget      *widget,
       event_window = gdk_window_get_effective_parent (event_window);
     }
 
-  child = gtk_flow_box_find_child_at_pos (box, relative_x, relative_y);
+  child = gtk_flow_box_get_child_at_pos (box, relative_x, relative_y);
   gtk_flow_box_update_active (box, child);
 
   return GTK_WIDGET_CLASS (gtk_flow_box_parent_class)->motion_notify_event (widget, event);
@@ -3039,7 +3014,7 @@ gtk_flow_box_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
   GtkFlowBoxPrivate *priv = BOX_PRIV (box);
   GtkFlowBoxChild *child;
 
-  child = gtk_flow_box_find_child_at_pos (box, x, y);
+  child = gtk_flow_box_get_child_at_pos (box, x, y);
 
   if (child == NULL)
     return;
@@ -3095,6 +3070,13 @@ gtk_flow_box_multipress_gesture_released (GtkGestureMultiPress *gesture,
           gtk_flow_box_update_selection (box, priv->active_child, modify, extend);
         }
     }
+}
+
+static void
+gtk_flow_box_multipress_gesture_stopped (GtkGestureMultiPress *gesture,
+                                         GtkFlowBox           *box)
+{
+  GtkFlowBoxPrivate *priv = BOX_PRIV (box);
 
   priv->active_child = NULL;
   priv->active_child_active = FALSE;
@@ -3275,7 +3257,7 @@ gtk_flow_box_remove (GtkContainer *container,
   if (was_visible && gtk_widget_get_visible (GTK_WIDGET (box)))
     gtk_widget_queue_resize (GTK_WIDGET (box));
 
-  if (was_selected)
+  if (was_selected && !gtk_widget_in_destruction (GTK_WIDGET (box)))
     g_signal_emit (box, signals[SELECTED_CHILDREN_CHANGED], 0);
 }
 
@@ -4131,6 +4113,8 @@ gtk_flow_box_init (GtkFlowBox *box)
                     G_CALLBACK (gtk_flow_box_multipress_gesture_pressed), box);
   g_signal_connect (priv->multipress_gesture, "released",
                     G_CALLBACK (gtk_flow_box_multipress_gesture_released), box);
+  g_signal_connect (priv->multipress_gesture, "stopped",
+                    G_CALLBACK (gtk_flow_box_multipress_gesture_stopped), box);
 
   priv->drag_gesture = gtk_gesture_drag_new (GTK_WIDGET (box));
   gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (priv->drag_gesture),
@@ -4323,6 +4307,45 @@ gtk_flow_box_get_child_at_index (GtkFlowBox *box,
   iter = g_sequence_get_iter_at_pos (BOX_PRIV (box)->children, idx);
   if (!g_sequence_iter_is_end (iter))
     return g_sequence_get (iter);
+
+  return NULL;
+}
+
+/**
+ * gtk_flow_box_get_child_at_pos:
+ * @box: a #GtkFlowBox
+ * @x: the x coordinate of the child
+ * @y: the y coordinate of the child
+ *
+ * Gets the child in the (@x, @y) position.
+ *
+ * Returns: (transfer none) (nullable): the child widget, which will
+ *     always be a #GtkFlowBoxChild or %NULL in case no child widget
+ *     exists for the given x and y coordinates.
+ *
+ * Since: 3.22.6
+ */
+GtkFlowBoxChild *
+gtk_flow_box_get_child_at_pos (GtkFlowBox *box,
+                               gint        x,
+                               gint        y)
+{
+  GtkWidget *child;
+  GSequenceIter *iter;
+  GtkAllocation allocation;
+
+  for (iter = g_sequence_get_begin_iter (BOX_PRIV (box)->children);
+       !g_sequence_iter_is_end (iter);
+       iter = g_sequence_iter_next (iter))
+    {
+      child = g_sequence_get (iter);
+      if (!child_is_visible (child))
+        continue;
+      gtk_widget_get_allocation (child, &allocation);
+      if (x >= allocation.x && x < (allocation.x + allocation.width) &&
+          y >= allocation.y && y < (allocation.y + allocation.height))
+        return GTK_FLOW_BOX_CHILD (child);
+    }
 
   return NULL;
 }

@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.5-1+rpi1) stretch-staging; urgency=medium
+gtk+3.0 (3.22.6-1+rpi1) stretch-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,18 @@ gtk+3.0 (3.22.5-1+rpi1) stretch-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Thu, 12 Jan 2017 14:37:32 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Wed, 18 Jan 2017 14:29:50 +0000
+
+gtk+3.0 (3.22.6-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * Update debian/watch to only look for GTK+ 3.22 releases
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release.
+  * debian/libgtk-3-0.symbols: add new symbol.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Jan 2017 15:55:17 +0100
 
 gtk+3.0 (3.22.5-1) unstable; urgency=medium
 

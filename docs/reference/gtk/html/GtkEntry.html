@@ -4225,6 +4225,10 @@ ignore unknown values.</p>
 <pre class="programlisting">  “attributes”               <a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Text-Attributes.html#PangoAttrList-struct"><span class="type">PangoAttrList</span></a> *</pre>
 <p>A list of Pango attributes to apply to the text of the entry.</p>
 <p>This is mainly useful to change the size or weight of the text.</p>
+<p>The <a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Text-Attributes.html#PangoAttribute"><span class="type">PangoAttribute</span></a>'s <em class="parameter"><code>start_index</code></em>
+ and <em class="parameter"><code>end_index</code></em>
+ must refer to the
+<a class="link" href="GtkEntryBuffer.html" title="GtkEntryBuffer"><span class="type">GtkEntryBuffer</span></a> text, i.e. without the preedit string.</p>
 <p>Flags: Read / Write</p>
 <p class="since">Since: <a class="link" href="api-index-3-6.html#api-index-3.6">3.6</a></p>
 </div>

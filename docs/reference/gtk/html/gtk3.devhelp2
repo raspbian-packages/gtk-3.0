@@ -989,6 +989,7 @@
     <keyword type="function" name="gtk_flow_box_new ()" link="GtkFlowBox.html#gtk-flow-box-new" since="3.12"/>
     <keyword type="function" name="gtk_flow_box_insert ()" link="GtkFlowBox.html#gtk-flow-box-insert" since="3.12"/>
     <keyword type="function" name="gtk_flow_box_get_child_at_index ()" link="GtkFlowBox.html#gtk-flow-box-get-child-at-index" since="3.12"/>
+    <keyword type="function" name="gtk_flow_box_get_child_at_pos ()" link="GtkFlowBox.html#gtk-flow-box-get-child-at-pos" since="3.22.6"/>
     <keyword type="function" name="gtk_flow_box_set_hadjustment ()" link="GtkFlowBox.html#gtk-flow-box-set-hadjustment" since="3.12"/>
     <keyword type="function" name="gtk_flow_box_set_vadjustment ()" link="GtkFlowBox.html#gtk-flow-box-set-vadjustment" since="3.12"/>
     <keyword type="function" name="gtk_flow_box_set_homogeneous ()" link="GtkFlowBox.html#gtk-flow-box-set-homogeneous" since="3.12"/>
