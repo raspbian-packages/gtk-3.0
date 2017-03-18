@@ -91,6 +91,8 @@ void _gdk_mir_window_impl_set_surface_type (GdkMirWindowImpl *impl, MirSurfaceTy
 
 void _gdk_mir_window_set_surface_output (GdkWindow *window, gdouble scale);
 
+void _gdk_mir_window_set_final_rect (GdkWindow *window, MirRectangle rect);
+
 void _gdk_mir_window_impl_set_cursor_state (GdkMirWindowImpl *impl, gdouble x, gdouble y, gboolean cursor_inside, guint button_state);
 
 void _gdk_mir_window_impl_get_cursor_state (GdkMirWindowImpl *impl, gdouble *x, gdouble *y, gboolean *cursor_inside, guint *button_state);
@@ -106,6 +108,15 @@ void _gdk_mir_window_reference_unref (GdkMirWindowReference *ref);
 void _gdk_mir_event_source_queue (GdkMirWindowReference *window_ref, const MirEvent *event);
 
 MirPixelFormat _gdk_mir_display_get_pixel_format (GdkDisplay *display, MirBufferUsage usage);
+
+void _gdk_mir_display_focus_window (GdkDisplay *display, GdkWindow *window);
+
+void _gdk_mir_display_unfocus_window (GdkDisplay *display, GdkWindow *window);
+
+void _gdk_mir_display_create_paste (GdkDisplay          *display,
+                                    const gchar * const *paste_formats,
+                                    gconstpointer        paste_data,
+                                    gsize                paste_size);
 
 gboolean _gdk_mir_display_init_egl_display (GdkDisplay *display);
 

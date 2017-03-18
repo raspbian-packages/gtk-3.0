@@ -4388,6 +4388,7 @@ gdk_window_thaw_updates (<em class="parameter"><code><a class="link" href="gdk3-
 <a name="gdk-window-process-all-updates"></a><h3>gdk_window_process_all_updates ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gdk_window_process_all_updates (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="warning"><p><code class="literal">gdk_window_process_all_updates</code> has been deprecated since version 3.22 and should not be used in newly-written code.</p></div>
 <p>Calls <a class="link" href="gdk3-Windows.html#gdk-window-process-updates" title="gdk_window_process_updates ()"><code class="function">gdk_window_process_updates()</code></a> for all windows (see <a class="link" href="gdk3-Windows.html#GdkWindow"><span class="type">GdkWindow</span></a>)
 in the application.</p>
 </div>
@@ -4397,6 +4398,7 @@ in the application.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gdk_window_process_updates (<em class="parameter"><code><a class="link" href="gdk3-Windows.html#GdkWindow"><span class="type">GdkWindow</span></a> *window</code></em>,
                             <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> update_children</code></em>);</pre>
+<div class="warning"><p><code class="literal">gdk_window_process_updates</code> has been deprecated since version 3.22 and should not be used in newly-written code.</p></div>
 <p>Sends one or more expose events to <em class="parameter"><code>window</code></em>
 . The areas in each
 expose event will cover the entire update area for the window (see

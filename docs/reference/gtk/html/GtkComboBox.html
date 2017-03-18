@@ -657,7 +657,7 @@ an arrow.</p>
 
 <p></p>
 <p>A GtkComboBox with an entry has a single CSS node with name combobox. It
-contains a bx with the .linked class and that box contains an entry and a
+contains a box with the .linked class. That box contains an entry and a
 button, both with the .combo class added.
 The button also contains another node with name arrow.</p>
 </div>
@@ -1390,6 +1390,8 @@ gtk_combo_box_popup (<em class="parameter"><code><a class="link" href="GtkComboB
 .</p>
 <p>This function is mostly intended for use by accessibility technologies;
 applications should have little use for it.</p>
+<p>Before calling this, <em class="parameter"><code>combo_box</code></em>
+ must be mapped, or nothing will happen.</p>
 <div class="refsect3">
 <a name="gtk-combo-box-popup.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

@@ -428,8 +428,8 @@
     <keyword type="function" name="gdk_window_get_update_area ()" link="gdk3-Windows.html#gdk-window-get-update-area"/>
     <keyword type="function" name="gdk_window_freeze_updates ()" link="gdk3-Windows.html#gdk-window-freeze-updates"/>
     <keyword type="function" name="gdk_window_thaw_updates ()" link="gdk3-Windows.html#gdk-window-thaw-updates"/>
-    <keyword type="function" name="gdk_window_process_all_updates ()" link="gdk3-Windows.html#gdk-window-process-all-updates"/>
-    <keyword type="function" name="gdk_window_process_updates ()" link="gdk3-Windows.html#gdk-window-process-updates"/>
+    <keyword type="function" name="gdk_window_process_all_updates ()" link="gdk3-Windows.html#gdk-window-process-all-updates" deprecated="3.22"/>
+    <keyword type="function" name="gdk_window_process_updates ()" link="gdk3-Windows.html#gdk-window-process-updates" deprecated="3.22"/>
     <keyword type="function" name="gdk_window_set_debug_updates ()" link="gdk3-Windows.html#gdk-window-set-debug-updates" deprecated="3.22"/>
     <keyword type="function" name="gdk_window_enable_synchronized_configure ()" link="gdk3-Windows.html#gdk-window-enable-synchronized-configure" deprecated="3.8: this function is no longer needed" since="2.6"/>
     <keyword type="function" name="gdk_window_configure_finished ()" link="gdk3-Windows.html#gdk-window-configure-finished" deprecated="3.8: this function is no longer needed" since="2.6"/>

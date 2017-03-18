@@ -1656,13 +1656,25 @@ get_real_parent_and_translate (GdkWindow *window,
   GdkWindowImplWayland *impl = GDK_WINDOW_IMPL_WAYLAND (window->impl);
   GdkWindow *parent = impl->transient_for;
 
-  while (parent &&
-         !gdk_window_has_native (parent) &&
-         gdk_window_get_effective_parent (parent))
+  while (parent)
     {
+      GdkWindowImplWayland *parent_impl =
+        GDK_WINDOW_IMPL_WAYLAND (parent->impl);
+      GdkWindow *effective_parent = gdk_window_get_effective_parent (parent);
+
+      if ((gdk_window_has_native (parent) &&
+           !parent_impl->display_server.wl_subsurface) ||
+          !effective_parent)
+        break;
+
       *x += parent->x;
       *y += parent->y;
-      parent = gdk_window_get_effective_parent (parent);
+
+      if (gdk_window_has_native (parent) &&
+          parent_impl->display_server.wl_subsurface)
+        parent = parent->transient_for;
+      else
+        parent = effective_parent;
     }
 
   return parent;
@@ -2516,6 +2528,7 @@ gdk_wayland_window_hide_surface (GdkWindow *window)
         {
           gtk_surface1_destroy (impl->display_server.gtk_surface);
           impl->display_server.gtk_surface = NULL;
+          impl->application.was_set = FALSE;
         }
 
       wl_surface_destroy (impl->display_server.wl_surface);
@@ -2656,6 +2669,20 @@ gdk_window_wayland_move_resize (GdkWindow *window,
     gdk_wayland_window_maybe_configure (window, width, height, impl->scale);
 }
 
+/* Avoid zero width/height as this is a protocol error */
+static void
+sanitize_anchor_rect (GdkWindow    *window,
+                      GdkRectangle *rect)
+{
+  gint original_width = rect->width;
+  gint original_height = rect->height;
+
+  rect->width  = MAX (1, rect->width);
+  rect->height = MAX (1, rect->height);
+  rect->x = MAX (rect->x + original_width - rect->width, 0);
+  rect->y = MAX (rect->y + original_height - rect->height, 0);
+}
+
 static void
 gdk_window_wayland_move_to_rect (GdkWindow          *window,
                                  const GdkRectangle *rect,
@@ -2668,6 +2695,8 @@ gdk_window_wayland_move_to_rect (GdkWindow          *window,
   GdkWindowImplWayland *impl = GDK_WINDOW_IMPL_WAYLAND (window->impl);
 
   impl->pending_move_to_rect.rect = *rect;
+  sanitize_anchor_rect (window, &impl->pending_move_to_rect.rect);
+
   impl->pending_move_to_rect.rect_anchor = rect_anchor;
   impl->pending_move_to_rect.window_anchor = window_anchor;
   impl->pending_move_to_rect.anchor_hints = anchor_hints;

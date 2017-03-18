@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gtk+ 3.22.6\n"
+"Project-Id-Version: gtk+ 3.22.8\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtk"
 "%2B\n"
-"POT-Creation-Date: 2017-01-04 15:13-0500\n"
+"POT-Creation-Date: 2017-02-13 13:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -490,7 +490,7 @@ msgstr ""
 msgid "Appearance of the shadow surrounding the arrow"
 msgstr ""
 
-#: gtk/deprecated/gtkarrow.c:138 gtk/gtkcombobox.c:1231 gtk/gtkmenu.c:1002
+#: gtk/deprecated/gtkarrow.c:138 gtk/gtkcombobox.c:1233 gtk/gtkmenu.c:1002
 #: gtk/gtkmenuitem.c:896
 msgid "Arrow Scaling"
 msgstr ""
@@ -587,7 +587,7 @@ msgstr ""
 msgid "The text to display in order to demonstrate the selected font"
 msgstr ""
 
-#: gtk/deprecated/gtkhandlebox.c:223 gtk/gtkcombobox.c:1250 gtk/gtkentry.c:991
+#: gtk/deprecated/gtkhandlebox.c:223 gtk/gtkcombobox.c:1252 gtk/gtkentry.c:991
 #: gtk/gtkmenubar.c:253 gtk/gtkstatusbar.c:177 gtk/gtktoolbar.c:675
 #: gtk/gtkviewport.c:408
 msgid "Shadow type"
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "The pixel size that icons should be forced to, or zero"
 msgstr ""
 
-#: gtk/deprecated/gtkuimanager.c:457 gtk/gtkcombobox.c:1014
+#: gtk/deprecated/gtkuimanager.c:457 gtk/gtkcombobox.c:1016
 msgid "Add tearoffs to menus"
 msgstr ""
 
@@ -1767,7 +1767,7 @@ msgid ""
 "rectangle"
 msgstr ""
 
-#: gtk/gtkbutton.c:610 gtk/gtkentry.c:889 gtk/gtkentry.c:2061
+#: gtk/gtkbutton.c:610 gtk/gtkentry.c:889 gtk/gtkentry.c:2064
 msgid "Inner Border"
 msgstr ""
 
@@ -2152,7 +2152,7 @@ msgstr ""
 msgid "A column in the data source model to get the strings from"
 msgstr ""
 
-#: gtk/gtkcellrenderercombo.c:169 gtk/gtkcombobox.c:1099
+#: gtk/gtkcellrenderercombo.c:169 gtk/gtkcombobox.c:1101
 msgid "Has Entry"
 msgstr ""
 
@@ -2321,7 +2321,7 @@ msgstr ""
 msgid "Marked up text to render"
 msgstr ""
 
-#: gtk/gtkcellrenderertext.c:269 gtk/gtkentry.c:1480 gtk/gtklabel.c:808
+#: gtk/gtkcellrenderertext.c:269 gtk/gtkentry.c:1483 gtk/gtklabel.c:808
 msgid "Attributes"
 msgstr ""
 
@@ -2525,7 +2525,7 @@ msgid ""
 "have enough room to display the entire string"
 msgstr ""
 
-#: gtk/gtkcellrenderertext.c:561 gtk/gtkcombobox.c:925
+#: gtk/gtkcellrenderertext.c:561 gtk/gtkcombobox.c:927
 msgid "Wrap width"
 msgstr ""
 
@@ -2730,12 +2730,12 @@ msgstr ""
 msgid "The model for cell view"
 msgstr ""
 
-#: gtk/gtkcellview.c:282 gtk/gtkcombobox.c:1186 gtk/gtkentrycompletion.c:467
+#: gtk/gtkcellview.c:282 gtk/gtkcombobox.c:1188 gtk/gtkentrycompletion.c:467
 #: gtk/gtkiconview.c:649 gtk/gtktreemenu.c:307 gtk/gtktreeviewcolumn.c:399
 msgid "Cell Area"
 msgstr ""
 
-#: gtk/gtkcellview.c:283 gtk/gtkcombobox.c:1187 gtk/gtkentrycompletion.c:468
+#: gtk/gtkcellview.c:283 gtk/gtkcombobox.c:1189 gtk/gtkentrycompletion.c:468
 #: gtk/gtkiconview.c:650 gtk/gtktreemenu.c:308 gtk/gtktreeviewcolumn.c:400
 msgid "The GtkCellArea used to layout cells"
 msgstr ""
@@ -2876,143 +2876,143 @@ msgstr ""
 msgid "Whether the swatch should offer customization"
 msgstr ""
 
-#: gtk/gtkcombobox.c:908
+#: gtk/gtkcombobox.c:910
 msgid "ComboBox model"
 msgstr ""
 
-#: gtk/gtkcombobox.c:909
+#: gtk/gtkcombobox.c:911
 msgid "The model for the combo box"
 msgstr ""
 
-#: gtk/gtkcombobox.c:926
+#: gtk/gtkcombobox.c:928
 msgid "Wrap width for laying out the items in a grid"
 msgstr ""
 
-#: gtk/gtkcombobox.c:948 gtk/gtktreemenu.c:361
+#: gtk/gtkcombobox.c:950 gtk/gtktreemenu.c:361
 msgid "Row span column"
 msgstr ""
 
-#: gtk/gtkcombobox.c:949 gtk/gtktreemenu.c:362
+#: gtk/gtkcombobox.c:951 gtk/gtktreemenu.c:362
 msgid "TreeModel column containing the row span values"
 msgstr ""
 
-#: gtk/gtkcombobox.c:970 gtk/gtktreemenu.c:382
+#: gtk/gtkcombobox.c:972 gtk/gtktreemenu.c:382
 msgid "Column span column"
 msgstr ""
 
-#: gtk/gtkcombobox.c:971 gtk/gtktreemenu.c:383
+#: gtk/gtkcombobox.c:973 gtk/gtktreemenu.c:383
 msgid "TreeModel column containing the column span values"
 msgstr ""
 
-#: gtk/gtkcombobox.c:992
+#: gtk/gtkcombobox.c:994
 msgid "Active item"
 msgstr ""
 
-#: gtk/gtkcombobox.c:993
+#: gtk/gtkcombobox.c:995
 msgid "The item which is currently active"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1015
+#: gtk/gtkcombobox.c:1017
 msgid "Whether dropdowns should have a tearoff menu item"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1030 gtk/gtkentry.c:873
+#: gtk/gtkcombobox.c:1032 gtk/gtkentry.c:873
 msgid "Has Frame"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1031
+#: gtk/gtkcombobox.c:1033
 msgid "Whether the combo box draws a frame around the child"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1048 gtk/gtkmenu.c:695
+#: gtk/gtkcombobox.c:1050 gtk/gtkmenu.c:695
 msgid "Tearoff Title"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1049
+#: gtk/gtkcombobox.c:1051
 msgid ""
 "A title that may be displayed by the window manager when the popup is torn-"
 "off"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1066
+#: gtk/gtkcombobox.c:1068
 msgid "Popup shown"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1067
+#: gtk/gtkcombobox.c:1069
 msgid "Whether the combo's dropdown is shown"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1083
+#: gtk/gtkcombobox.c:1085
 msgid "Button Sensitivity"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1084
+#: gtk/gtkcombobox.c:1086
 msgid "Whether the dropdown button is sensitive when the model is empty"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1100
+#: gtk/gtkcombobox.c:1102
 msgid "Whether combo box has an entry"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1115
+#: gtk/gtkcombobox.c:1117
 msgid "Entry Text Column"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1116
+#: gtk/gtkcombobox.c:1118
 msgid ""
 "The column in the combo box's model to associate with strings from the entry "
 "if the combo was created with #GtkComboBox:has-entry = %TRUE"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1133
+#: gtk/gtkcombobox.c:1135
 msgid "ID Column"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1134
+#: gtk/gtkcombobox.c:1136
 msgid ""
 "The column in the combo box's model that provides string IDs for the values "
 "in the model"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1149
+#: gtk/gtkcombobox.c:1151
 msgid "Active id"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1150
+#: gtk/gtkcombobox.c:1152
 msgid "The value of the id column for the active row"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1166
+#: gtk/gtkcombobox.c:1168
 msgid "Popup Fixed Width"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1167
+#: gtk/gtkcombobox.c:1169
 msgid ""
 "Whether the popup's width should be a fixed width matching the allocated "
 "width of the combo box"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1193
+#: gtk/gtkcombobox.c:1195
 msgid "Appears as list"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1194
+#: gtk/gtkcombobox.c:1196
 msgid "Whether dropdowns should look like lists rather than menus"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1213
+#: gtk/gtkcombobox.c:1215
 msgid "Arrow Size"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1214
+#: gtk/gtkcombobox.c:1216
 msgid "The minimum size of the arrow in the combo box"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1232
+#: gtk/gtkcombobox.c:1234
 msgid "The amount of space used by the arrow"
 msgstr ""
 
-#: gtk/gtkcombobox.c:1251
+#: gtk/gtkcombobox.c:1253
 msgid "Which kind of shadow to draw around the combo box"
 msgstr ""
 
@@ -3220,11 +3220,11 @@ msgid ""
 "Border between text and frame. Overrides the inner-border style property"
 msgstr ""
 
-#: gtk/gtkentry.c:896 gtk/gtkentry.c:1568
+#: gtk/gtkentry.c:896 gtk/gtkentry.c:1571
 msgid "Invisible character"
 msgstr ""
 
-#: gtk/gtkentry.c:897 gtk/gtkentry.c:1569
+#: gtk/gtkentry.c:897 gtk/gtkentry.c:1572
 msgid "The character to use when masking entry contents (in \"password mode\")"
 msgstr ""
 
@@ -3496,43 +3496,43 @@ msgstr ""
 msgid "Hints for the text field behaviour"
 msgstr ""
 
-#: gtk/gtkentry.c:1481 gtk/gtklabel.c:809
+#: gtk/gtkentry.c:1484 gtk/gtklabel.c:809
 msgid "A list of style attributes to apply to the text of the label"
 msgstr ""
 
-#: gtk/gtkentry.c:1495 gtk/gtkplacessidebar.c:4510 gtk/gtktextview.c:1041
+#: gtk/gtkentry.c:1498 gtk/gtkplacessidebar.c:4510 gtk/gtktextview.c:1041
 msgid "Populate all"
 msgstr ""
 
-#: gtk/gtkentry.c:1496 gtk/gtktextview.c:1042
+#: gtk/gtkentry.c:1499 gtk/gtktextview.c:1042
 msgid "Whether to emit ::populate-popup for touch popups"
 msgstr ""
 
-#: gtk/gtkentry.c:1509 gtk/gtktexttag.c:578 gtk/gtktextview.c:936
+#: gtk/gtkentry.c:1512 gtk/gtktexttag.c:578 gtk/gtktextview.c:936
 msgid "Tabs"
 msgstr ""
 
-#: gtk/gtkentry.c:1510
+#: gtk/gtkentry.c:1513
 msgid "A list of tabstop locations to apply to the text of the entry"
 msgstr ""
 
-#: gtk/gtkentry.c:1529
+#: gtk/gtkentry.c:1532
 msgid "Icon Prelight"
 msgstr ""
 
-#: gtk/gtkentry.c:1530
+#: gtk/gtkentry.c:1533
 msgid "Whether activatable icons should prelight when hovered"
 msgstr ""
 
-#: gtk/gtkentry.c:1547
+#: gtk/gtkentry.c:1550
 msgid "Progress Border"
 msgstr ""
 
-#: gtk/gtkentry.c:1548
+#: gtk/gtkentry.c:1551
 msgid "Border around the progress bar"
 msgstr ""
 
-#: gtk/gtkentry.c:2062
+#: gtk/gtkentry.c:2065
 msgid "Border between text and frame."
 msgstr ""
 

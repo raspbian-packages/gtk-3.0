@@ -461,9 +461,9 @@ needs, use <a class="link" href="GtkScale.html#gtk-scale-set-digits" title="gtk_
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_scale_set_digits (<em class="parameter"><code><a class="link" href="GtkScale.html" title="GtkScale"><span class="type">GtkScale</span></a> *scale</code></em>,
                       <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> digits</code></em>);</pre>
-<p>Sets the number of decimal places that are displayed in the value.
-Also causes the value of the adjustment to be rounded off to this
-number of digits, so the retrieved value matches the value the user saw.</p>
+<p>Sets the number of decimal places to which the value is rounded when it is
+changed. This also sets the number of digits shown in the displayed value
+when using the default handler for the <a class="link" href="GtkScale.html#GtkScale-format-value" title="The “format-value” signal"><span class="type">“format-value”</span></a> signal.</p>
 <p>Note that rounding to a small number of digits can interfere with
 the smooth autoscrolling that is built into <a class="link" href="GtkScale.html" title="GtkScale"><span class="type">GtkScale</span></a>. As an alternative,
 you can use the <a class="link" href="GtkScale.html#GtkScale-format-value" title="The “format-value” signal"><span class="type">“format-value”</span></a> signal to format the displayed
@@ -484,8 +484,7 @@ value yourself.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>digits</p></td>
-<td class="parameter_description"><p>the number of decimal places to display,
-e.g. use 1 to display 1.0, 2 to display 1.00, etc</p></td>
+<td class="parameter_description"><p>the number of decimal places to which the value will be rounded</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>

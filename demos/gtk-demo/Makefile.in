@@ -169,8 +169,8 @@ am__gtk3_demo_SOURCES_DIST = application_demo.c assistant.c builder.c \
 	search_entry2.c shortcuts.c sidebar.c sizegroup.c spinbutton.c \
 	spinner.c stack.c tabs.c textmask.c textview.c textscroll.c \
 	theming_style_classes.c toolpalette.c transparent.c \
-	tree_store.c font_features.c pagesetup.c demo_resources.c \
-	main.c
+	tree_store.c font_features.c pagesetup.c gtkfishbowl.c \
+	gtkfishbowl.h demo_resources.c main.c
 am__objects_1 = application_demo.$(OBJEXT) assistant.$(OBJEXT) \
 	builder.$(OBJEXT) button_box.$(OBJEXT) changedisplay.$(OBJEXT) \
 	clipboard.$(OBJEXT) colorsel.$(OBJEXT) combobox.$(OBJEXT) \
@@ -202,8 +202,8 @@ am__objects_1 = application_demo.$(OBJEXT) assistant.$(OBJEXT) \
 @OS_UNIX_TRUE@am__objects_3 = pagesetup.$(OBJEXT)
 am__objects_4 = $(am__objects_2) $(am__objects_3)
 am__objects_5 = $(am__objects_1) $(am__objects_4)
-am_gtk3_demo_OBJECTS = $(am__objects_5) demo_resources.$(OBJEXT) \
-	main.$(OBJEXT)
+am_gtk3_demo_OBJECTS = $(am__objects_5) gtkfishbowl.$(OBJEXT) \
+	demo_resources.$(OBJEXT) main.$(OBJEXT)
 nodist_gtk3_demo_OBJECTS =
 gtk3_demo_OBJECTS = $(am_gtk3_demo_OBJECTS) \
 	$(nodist_gtk3_demo_OBJECTS)
@@ -715,6 +715,8 @@ gsettings_SCHEMAS = \
 nodist_gtk3_demo_SOURCES = demos.h
 gtk3_demo_SOURCES = \
 	$(demos)		\
+	gtkfishbowl.c		\
+	gtkfishbowl.h		\
 	demo_resources.c	\
 	main.c
 
@@ -895,6 +897,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/foreigndrawing.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gestures.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glarea.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkfishbowl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/headerbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hypertext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iconview.Po@am__quote@

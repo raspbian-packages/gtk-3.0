@@ -4395,6 +4395,7 @@
     <keyword type="function" name="gtk_print_job_get_printer ()" link="GtkPrintJob.html#gtk-print-job-get-printer" since="2.10"/>
     <keyword type="function" name="gtk_print_job_get_title ()" link="GtkPrintJob.html#gtk-print-job-get-title" since="2.10"/>
     <keyword type="function" name="gtk_print_job_get_status ()" link="GtkPrintJob.html#gtk-print-job-get-status" since="2.10"/>
+    <keyword type="function" name="gtk_print_job_set_source_fd ()" link="GtkPrintJob.html#gtk-print-job-set-source-fd" since="3.22"/>
     <keyword type="function" name="gtk_print_job_set_source_file ()" link="GtkPrintJob.html#gtk-print-job-set-source-file" since="2.10"/>
     <keyword type="function" name="gtk_print_job_get_surface ()" link="GtkPrintJob.html#gtk-print-job-get-surface" since="2.10"/>
     <keyword type="function" name="gtk_print_job_send ()" link="GtkPrintJob.html#gtk-print-job-send" since="2.10"/>

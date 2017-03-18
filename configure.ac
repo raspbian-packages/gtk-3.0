@@ -10,8 +10,8 @@
 
 m4_define([gtk_major_version], [3])
 m4_define([gtk_minor_version], [22])
-m4_define([gtk_micro_version], [6])
-m4_define([gtk_interface_age], [6])
+m4_define([gtk_micro_version], [8])
+m4_define([gtk_interface_age], [8])
 m4_define([gtk_binary_age],
           [m4_eval(100 * gtk_minor_version + gtk_micro_version)])
 m4_define([gtk_version],
@@ -464,7 +464,7 @@ else
   AM_CONDITIONAL(USE_WAYLAND, false)
 fi
 
-MIR_DEPENDENCIES="mirclient >= mirclient_required_version mircookie >= mircookie_required_version"
+MIR_DEPENDENCIES="mirclient >= mirclient_required_version mircookie >= mircookie_required_version libcontent-hub-glib"
 if test "$enable_mir_backend" = "maybe" ; then
   PKG_CHECK_EXISTS($MIR_DEPENDENCIES, [have_mir_deps=yes], [have_mir_deps=no])
   AC_MSG_CHECKING([for MIR_DEPENDENCIES])

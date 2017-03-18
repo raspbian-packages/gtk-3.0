@@ -36,25 +36,64 @@
 
 #define MAX_EGL_ATTRS 30
 
+typedef struct
+{
+  GdkAtom type;
+  GArray *array;
+} GdkMirProperty;
+
+static GdkMirProperty *
+gdk_mir_property_new (GdkAtom type,
+                      guint   format,
+                      guint   capacity)
+{
+  GdkMirProperty *property = g_slice_new (GdkMirProperty);
+
+  property->type = type;
+  property->array = g_array_sized_new (TRUE, FALSE, format, capacity);
+
+  return property;
+}
+
+static void
+gdk_mir_property_free (gpointer data)
+{
+  GdkMirProperty *property = data;
+
+  if (!property)
+    return;
+
+  g_array_unref (property->array);
+  g_slice_free (GdkMirProperty, property);
+}
+
 typedef struct _GdkMirWindowImplClass GdkMirWindowImplClass;
 
 struct _GdkMirWindowImpl
 {
   GdkWindowImpl parent_instance;
 
+  GHashTable *properties;
+
   /* Window we are temporary for */
   GdkWindow *transient_for;
   gint transient_x;
   gint transient_y;
 
-  /* Anchor rectangle */
-  gboolean has_rect;
-  MirRectangle rect;
-  MirEdgeAttachment edge;
+  /* gdk_window_move_to_rect */
+  gboolean            has_rect;
+  GdkRectangle        rect;
+  MirRectangle        mir_rect;
+  MirPlacementGravity rect_anchor;
+  MirPlacementGravity window_anchor;
+  MirPlacementHints   anchor_hints;
+  gint                rect_anchor_dx;
+  gint                rect_anchor_dy;
 
   /* Desired surface attributes */
   GdkWindowTypeHint type_hint;
   MirSurfaceState surface_state;
+  gboolean modal;
 
   /* Pattern for background */
   cairo_pattern_t *background;
@@ -233,6 +272,7 @@ _gdk_mir_window_impl_get_cursor_state (GdkMirWindowImpl *impl,
 static void
 gdk_mir_window_impl_init (GdkMirWindowImpl *impl)
 {
+  impl->properties = g_hash_table_new_full (NULL, NULL, NULL, gdk_mir_property_free);
   impl->type_hint = GDK_WINDOW_TYPE_HINT_NORMAL;
   impl->surface_state = mir_surface_state_unknown;
   impl->output_scale = 1;
@@ -271,17 +311,14 @@ create_window_type_spec (GdkDisplay *display,
                          gint y,
                          gint width,
                          gint height,
+                         gboolean modal,
                          GdkWindowTypeHint type,
-                         const MirRectangle *rect,
-                         MirEdgeAttachment edge,
                          MirBufferUsage buffer_usage)
 {
-  MirPixelFormat format;
-  MirSurface *parent_surface = NULL;
   MirConnection *connection = gdk_mir_display_get_mir_connection (display);
-  MirRectangle real_rect;
-
-  format = _gdk_mir_display_get_pixel_format (display, buffer_usage);
+  MirSurface *parent_surface = NULL;
+  MirPixelFormat format;
+  MirRectangle rect;
 
   if (parent && parent->impl)
     {
@@ -302,28 +339,27 @@ create_window_type_spec (GdkDisplay *display,
         }
     }
 
-  if (rect)
-    {
-      real_rect = *rect;
+  format = _gdk_mir_display_get_pixel_format (display, buffer_usage);
 
-      while (parent && !gdk_window_has_native (parent) && gdk_window_get_effective_parent (parent))
-        {
-          real_rect.left += parent->x;
-          real_rect.top += parent->y;
-          parent = gdk_window_get_effective_parent (parent);
-        }
-    }
-  else
-    {
-      real_rect.left = x;
-      real_rect.top = y;
-      real_rect.width = 1;
-      real_rect.height = 1;
-    }
+  rect.left = x;
+  rect.top = y;
+  rect.width = 1;
+  rect.height = 1;
 
   switch (type)
     {
       case GDK_WINDOW_TYPE_HINT_DIALOG:
+        if (modal)
+          return mir_connection_create_spec_for_modal_dialog (connection,
+                                                              width,
+                                                              height,
+                                                              format,
+                                                              parent_surface);
+        else
+          return mir_connection_create_spec_for_dialog (connection,
+                                                        width,
+                                                        height,
+                                                        format);
       case GDK_WINDOW_TYPE_HINT_DOCK:
         return mir_connection_create_spec_for_dialog (connection,
                                                       width,
@@ -342,9 +378,8 @@ create_window_type_spec (GdkDisplay *display,
                                                     height,
                                                     format,
                                                     parent_surface,
-                                                    &real_rect,
-                                                    edge);
-        break;
+                                                    &rect,
+                                                    0);
       case GDK_WINDOW_TYPE_HINT_SPLASHSCREEN:
       case GDK_WINDOW_TYPE_HINT_UTILITY:
         return mir_connection_create_spec_for_modal_dialog (connection,
@@ -391,20 +426,48 @@ static MirSurfaceSpec*
 create_spec (GdkWindow *window, GdkMirWindowImpl *impl)
 {
   MirSurfaceSpec *spec = NULL;
+  GdkWindow *parent;
 
   spec = create_window_type_spec (impl->display,
                                   impl->transient_for,
-                                  impl->transient_x, impl->transient_y,
-                                  window->width, window->height,
+                                  impl->transient_x,
+                                  impl->transient_y,
+                                  window->width,
+                                  window->height,
+                                  impl->modal,
                                   impl->type_hint,
-                                  impl->has_rect ? &impl->rect : NULL,
-                                  impl->has_rect ? impl->edge : mir_edge_attachment_any,
                                   impl->buffer_usage);
 
   mir_surface_spec_set_name (spec, impl->title);
   mir_surface_spec_set_buffer_usage (spec, impl->buffer_usage);
 
   apply_geometry_hints (spec, impl);
+
+  if (impl->has_rect)
+    {
+      impl->mir_rect.left = impl->rect.x;
+      impl->mir_rect.top = impl->rect.y;
+      impl->mir_rect.width = impl->rect.width;
+      impl->mir_rect.height = impl->rect.height;
+
+      parent = impl->transient_for;
+
+      while (parent && !gdk_window_has_native (parent))
+        {
+          impl->mir_rect.left += parent->x;
+          impl->mir_rect.top += parent->y;
+
+          parent = gdk_window_get_parent (parent);
+        }
+
+      mir_surface_spec_set_placement (spec,
+                                      &impl->mir_rect,
+                                      impl->rect_anchor,
+                                      impl->window_anchor,
+                                      impl->anchor_hints,
+                                      impl->rect_anchor_dx,
+                                      impl->rect_anchor_dy);
+    }
 
   return spec;
 }
@@ -687,6 +750,8 @@ gdk_mir_window_impl_finalize (GObject *object)
   if (impl->cairo_surface)
     cairo_surface_destroy (impl->cairo_surface);
 
+  g_clear_pointer (&impl->properties, g_hash_table_unref);
+
   G_OBJECT_CLASS (gdk_mir_window_impl_parent_class)->finalize (object);
 }
 
@@ -811,52 +876,117 @@ gdk_mir_window_impl_move_resize (GdkWindow *window,
     }
 }
 
-static MirEdgeAttachment
-get_edge_for_anchors (GdkGravity     rect_anchor,
-                      GdkGravity     window_anchor,
-                      GdkAnchorHints anchor_hints)
+static MirPlacementGravity
+get_mir_placement_gravity (GdkGravity gravity)
 {
-  MirEdgeAttachment edge = 0;
+  switch (gravity)
+    {
+    case GDK_GRAVITY_STATIC:
+    case GDK_GRAVITY_NORTH_WEST:
+      return mir_placement_gravity_northwest;
+    case GDK_GRAVITY_NORTH:
+      return mir_placement_gravity_north;
+    case GDK_GRAVITY_NORTH_EAST:
+      return mir_placement_gravity_northeast;
+    case GDK_GRAVITY_WEST:
+      return mir_placement_gravity_west;
+    case GDK_GRAVITY_CENTER:
+      return mir_placement_gravity_center;
+    case GDK_GRAVITY_EAST:
+      return mir_placement_gravity_east;
+    case GDK_GRAVITY_SOUTH_WEST:
+      return mir_placement_gravity_southwest;
+    case GDK_GRAVITY_SOUTH:
+      return mir_placement_gravity_south;
+    case GDK_GRAVITY_SOUTH_EAST:
+      return mir_placement_gravity_southeast;
+    }
 
-  if (anchor_hints & GDK_ANCHOR_FLIP_X)
-    edge |= mir_edge_attachment_vertical;
+  g_warn_if_reached ();
 
-  if (anchor_hints & GDK_ANCHOR_FLIP_Y)
-    edge |= mir_edge_attachment_horizontal;
-
-  return edge;
+  return mir_placement_gravity_center;
 }
 
-static void
-get_rect_for_edge (MirRectangle       *out_rect,
-                   const GdkRectangle *in_rect,
-                   MirEdgeAttachment   edge,
-                   GdkWindow          *window)
+static MirPlacementHints
+get_mir_placement_hints (GdkAnchorHints hints)
 {
-  out_rect->left = in_rect->x;
-  out_rect->top = in_rect->y;
-  out_rect->width = in_rect->width;
-  out_rect->height = in_rect->height;
+  MirPlacementHints mir_hints = 0;
 
-  switch (edge)
+  if (hints & GDK_ANCHOR_FLIP_X)
+    mir_hints |= mir_placement_hints_flip_x;
+
+  if (hints & GDK_ANCHOR_FLIP_Y)
+    mir_hints |= mir_placement_hints_flip_y;
+
+  if (hints & GDK_ANCHOR_SLIDE_X)
+    mir_hints |= mir_placement_hints_slide_x;
+
+  if (hints & GDK_ANCHOR_SLIDE_Y)
+    mir_hints |= mir_placement_hints_slide_y;
+
+  if (hints & GDK_ANCHOR_RESIZE_X)
+    mir_hints |= mir_placement_hints_resize_x;
+
+  if (hints & GDK_ANCHOR_RESIZE_Y)
+    mir_hints |= mir_placement_hints_resize_y;
+
+  return mir_hints;
+}
+
+static gint
+get_window_shadow_dx (GdkWindow  *window,
+                      GdkGravity  window_anchor)
+{
+  switch (window_anchor)
     {
-    case mir_edge_attachment_vertical:
-      out_rect->left += window->shadow_right;
-      out_rect->top -= window->shadow_top;
-      out_rect->width -= window->shadow_left + window->shadow_right;
-      out_rect->height += window->shadow_top + window->shadow_bottom;
-      break;
+    case GDK_GRAVITY_STATIC:
+    case GDK_GRAVITY_NORTH_WEST:
+    case GDK_GRAVITY_WEST:
+    case GDK_GRAVITY_SOUTH_WEST:
+      return -window->shadow_left;
 
-    case mir_edge_attachment_horizontal:
-      out_rect->left -= window->shadow_left;
-      out_rect->top += window->shadow_bottom;
-      out_rect->width += window->shadow_left + window->shadow_right;
-      out_rect->height -= window->shadow_top + window->shadow_bottom;
-      break;
+    case GDK_GRAVITY_NORTH:
+    case GDK_GRAVITY_CENTER:
+    case GDK_GRAVITY_SOUTH:
+      return (window->shadow_right - window->shadow_left) / 2;
 
-    default:
-      break;
+    case GDK_GRAVITY_NORTH_EAST:
+    case GDK_GRAVITY_EAST:
+    case GDK_GRAVITY_SOUTH_EAST:
+      return window->shadow_right;
     }
+
+  g_warn_if_reached ();
+
+  return 0;
+}
+
+static gint
+get_window_shadow_dy (GdkWindow  *window,
+                      GdkGravity  window_anchor)
+{
+  switch (window_anchor)
+    {
+    case GDK_GRAVITY_STATIC:
+    case GDK_GRAVITY_NORTH_WEST:
+    case GDK_GRAVITY_NORTH:
+    case GDK_GRAVITY_NORTH_EAST:
+      return -window->shadow_top;
+
+    case GDK_GRAVITY_WEST:
+    case GDK_GRAVITY_CENTER:
+    case GDK_GRAVITY_EAST:
+      return (window->shadow_bottom - window->shadow_top) / 2;
+
+    case GDK_GRAVITY_SOUTH_WEST:
+    case GDK_GRAVITY_SOUTH:
+    case GDK_GRAVITY_SOUTH_EAST:
+      return window->shadow_bottom;
+    }
+
+  g_warn_if_reached ();
+
+  return 0;
 }
 
 static void
@@ -870,18 +1000,223 @@ gdk_mir_window_impl_move_to_rect (GdkWindow          *window,
 {
   GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
 
-  impl->edge = get_edge_for_anchors (rect_anchor, window_anchor, anchor_hints);
-  get_rect_for_edge (&impl->rect, rect, impl->edge, window);
   impl->has_rect = TRUE;
+  impl->rect = *rect;
+  impl->rect_anchor = get_mir_placement_gravity (rect_anchor);
+  impl->window_anchor = get_mir_placement_gravity (window_anchor);
+  impl->anchor_hints = get_mir_placement_hints (anchor_hints);
+  impl->rect_anchor_dx = rect_anchor_dx + get_window_shadow_dx (window, window_anchor);
+  impl->rect_anchor_dy = rect_anchor_dy + get_window_shadow_dy (window, window_anchor);
 
-  ensure_no_surface (window);
+  if (impl->surface && !impl->pending_spec_update)
+    update_surface_spec (window);
+}
+
+static gint
+get_mir_placement_gravity_x (MirPlacementGravity gravity)
+{
+  switch (gravity)
+    {
+    case mir_placement_gravity_west:
+    case mir_placement_gravity_northwest:
+    case mir_placement_gravity_southwest:
+      return 0;
+
+    case mir_placement_gravity_center:
+    case mir_placement_gravity_north:
+    case mir_placement_gravity_south:
+      return 1;
+
+    case mir_placement_gravity_east:
+    case mir_placement_gravity_northeast:
+    case mir_placement_gravity_southeast:
+      return 2;
+    }
+
+  g_warn_if_reached ();
+
+  return 1;
+}
+
+static gint
+get_mir_placement_gravity_y (MirPlacementGravity gravity)
+{
+  switch (gravity)
+    {
+    case mir_placement_gravity_north:
+    case mir_placement_gravity_northwest:
+    case mir_placement_gravity_northeast:
+      return 0;
+
+    case mir_placement_gravity_center:
+    case mir_placement_gravity_west:
+    case mir_placement_gravity_east:
+      return 1;
+
+    case mir_placement_gravity_south:
+    case mir_placement_gravity_southwest:
+    case mir_placement_gravity_southeast:
+      return 2;
+    }
+
+  g_warn_if_reached ();
+
+  return 1;
+}
+
+static GdkRectangle
+get_unflipped_rect (const GdkRectangle  *rect,
+                    gint                 width,
+                    gint                 height,
+                    MirPlacementGravity  rect_anchor,
+                    MirPlacementGravity  window_anchor,
+                    gint                 rect_anchor_dx,
+                    gint                 rect_anchor_dy)
+{
+  GdkRectangle unflipped_rect;
+
+  unflipped_rect.x = rect->x;
+  unflipped_rect.x += rect->width * get_mir_placement_gravity_x (rect_anchor) / 2;
+  unflipped_rect.x -= width * get_mir_placement_gravity_x (window_anchor) / 2;
+  unflipped_rect.x += rect_anchor_dx;
+  unflipped_rect.y = rect->y;
+  unflipped_rect.y += rect->height * get_mir_placement_gravity_y (rect_anchor) / 2;
+  unflipped_rect.y -= height * get_mir_placement_gravity_y (window_anchor) / 2;
+  unflipped_rect.y += rect_anchor_dy;
+  unflipped_rect.width = width;
+  unflipped_rect.height = height;
+
+  return unflipped_rect;
+}
+
+static MirPlacementGravity
+get_opposite_mir_placement_gravity (MirPlacementGravity gravity)
+{
+  switch (gravity)
+    {
+    case mir_placement_gravity_center:
+      return mir_placement_gravity_center;
+    case mir_placement_gravity_west:
+      return mir_placement_gravity_east;
+    case mir_placement_gravity_east:
+      return mir_placement_gravity_west;
+    case mir_placement_gravity_north:
+      return mir_placement_gravity_south;
+    case mir_placement_gravity_south:
+      return mir_placement_gravity_north;
+    case mir_placement_gravity_northwest:
+      return mir_placement_gravity_southeast;
+    case mir_placement_gravity_northeast:
+      return mir_placement_gravity_southwest;
+    case mir_placement_gravity_southwest:
+      return mir_placement_gravity_northeast;
+    case mir_placement_gravity_southeast:
+      return mir_placement_gravity_northwest;
+    }
+
+  g_warn_if_reached ();
+
+  return gravity;
+}
+
+static gint
+get_anchor_x (const GdkRectangle  *rect,
+              MirPlacementGravity  anchor)
+{
+  return rect->x + rect->width * get_mir_placement_gravity_x (anchor) / 2;
+}
+
+static gint
+get_anchor_y (const GdkRectangle  *rect,
+              MirPlacementGravity  anchor)
+{
+  return rect->y + rect->height * get_mir_placement_gravity_y (anchor) / 2;
+}
+
+void
+_gdk_mir_window_set_final_rect (GdkWindow    *window,
+                                MirRectangle  rect)
+{
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+  GdkRectangle best_rect;
+  GdkRectangle worst_rect;
+  GdkRectangle flipped_rect;
+  GdkRectangle final_rect;
+  gboolean flipped_x = FALSE;
+  gboolean flipped_y = FALSE;
+  gint test_position;
+  gint final_position;
+  gint unflipped_offset;
+  gint flipped_offset;
+
+  g_return_if_fail (impl->has_rect);
+
+  best_rect = get_unflipped_rect (&impl->rect,
+                                  window->width,
+                                  window->height,
+                                  impl->rect_anchor,
+                                  impl->window_anchor,
+                                  impl->rect_anchor_dx,
+                                  impl->rect_anchor_dy);
+
+  worst_rect = get_unflipped_rect (&impl->rect,
+                                   window->width,
+                                   window->height,
+                                   get_opposite_mir_placement_gravity (impl->rect_anchor),
+                                   get_opposite_mir_placement_gravity (impl->window_anchor),
+                                   -impl->rect_anchor_dx,
+                                   -impl->rect_anchor_dy);
+
+  flipped_rect.x = best_rect.x;
+  flipped_rect.y = best_rect.y;
+  flipped_rect.width = window->width;
+  flipped_rect.height = window->height;
+
+  final_rect.x = rect.left - (impl->mir_rect.left - impl->rect.x);
+  final_rect.y = rect.top - (impl->mir_rect.top - impl->rect.y);
+  final_rect.width = rect.width;
+  final_rect.height = rect.height;
+
+  if (impl->anchor_hints & mir_placement_hints_flip_x)
+    {
+      test_position = get_anchor_x (&best_rect, impl->window_anchor);
+      final_position = get_anchor_x (&final_rect, impl->window_anchor);
+      unflipped_offset = final_position - test_position;
+
+      test_position = get_anchor_x (&worst_rect, get_opposite_mir_placement_gravity (impl->window_anchor));
+      final_position = get_anchor_x (&final_rect, get_opposite_mir_placement_gravity (impl->window_anchor));
+      flipped_offset = final_position - test_position;
+
+      if (ABS (flipped_offset) < ABS (unflipped_offset))
+        {
+          flipped_rect.x = worst_rect.x;
+          flipped_x = TRUE;
+        }
+    }
+
+  if (impl->anchor_hints & mir_placement_hints_flip_y)
+    {
+      test_position = get_anchor_y (&best_rect, impl->window_anchor);
+      final_position = get_anchor_y (&final_rect, impl->window_anchor);
+      unflipped_offset = final_position - test_position;
+
+      test_position = get_anchor_y (&worst_rect, get_opposite_mir_placement_gravity (impl->window_anchor));
+      final_position = get_anchor_y (&final_rect, get_opposite_mir_placement_gravity (impl->window_anchor));
+      flipped_offset = final_position - test_position;
+
+      if (ABS (flipped_offset) < ABS (unflipped_offset))
+        {
+          flipped_rect.y = worst_rect.y;
+          flipped_y = TRUE;
+        }
+    }
 
   g_signal_emit_by_name (window,
                          "moved-to-rect",
-                         NULL,
-                         NULL,
-                         FALSE,
-                         FALSE);
+                         &flipped_rect,
+                         &final_rect,
+                         flipped_x,
+                         flipped_y);
 }
 
 static void
@@ -1097,8 +1432,15 @@ void
 gdk_mir_window_impl_set_modal_hint (GdkWindow *window,
                                     gboolean   modal)
 {
-  //g_printerr ("gdk_mir_window_impl_set_modal_hint window=%p\n", window);
-  /* Mir doesn't support modal windows */
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+
+  if (modal != impl->modal)
+    {
+      impl->modal = modal;
+
+      if (impl->surface && !impl->pending_spec_update)
+        update_surface_spec (window);
+    }
 }
 
 static void
@@ -1482,19 +1824,213 @@ gdk_mir_window_impl_simulate_button (GdkWindow       *window,
 }
 
 static gboolean
-gdk_mir_window_impl_get_property (GdkWindow   *window,
-                                  GdkAtom      property,
-                                  GdkAtom      type,
-                                  gulong       offset,
-                                  gulong       length,
-                                  gint         pdelete,
-                                  GdkAtom     *actual_property_type,
-                                  gint        *actual_format_type,
-                                  gint        *actual_length,
-                                  guchar     **data)
+gdk_mir_window_impl_get_property (GdkWindow  *window,
+                                  GdkAtom     property,
+                                  GdkAtom     type,
+                                  gulong      offset,
+                                  gulong      length,
+                                  gint        pdelete,
+                                  GdkAtom    *actual_type,
+                                  gint       *actual_format,
+                                  gint       *actual_length,
+                                  guchar    **data)
 {
-  //g_printerr ("gdk_mir_window_impl_get_property window=%p\n", window);
-  return FALSE;
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+  GdkMirProperty *mir_property;
+  GdkAtom dummy_actual_type;
+  gint dummy_actual_format;
+  gint dummy_actual_length;
+  guint width;
+
+  if (!actual_type)
+    actual_type = &dummy_actual_type;
+  if (!actual_format)
+    actual_format = &dummy_actual_format;
+  if (!actual_length)
+    actual_length = &dummy_actual_length;
+
+  *actual_type = GDK_NONE;
+  *actual_format = 0;
+  *actual_length = 0;
+
+  if (data)
+    *data = NULL;
+
+  mir_property = g_hash_table_lookup (impl->properties, property);
+
+  if (!mir_property)
+    return FALSE;
+
+  width = g_array_get_element_size (mir_property->array);
+  *actual_type = mir_property->type;
+  *actual_format = 8 * width;
+
+  /* ICCCM 2.7: GdkAtoms can be 64-bit, but ATOMs and ATOM_PAIRs have format 32  */
+  if (*actual_type == GDK_SELECTION_TYPE_ATOM || *actual_type == gdk_atom_intern_static_string ("ATOM_PAIR"))
+    *actual_format = 32;
+
+  if (type != GDK_NONE && type != mir_property->type)
+    return FALSE;
+
+  offset *= 4;
+
+  /* round up to next nearest multiple of width */
+  if (length < G_MAXULONG - width + 1)
+    length = (length - 1 + width) / width * width;
+  else
+    length = G_MAXULONG / width * width;
+
+  /* we're skipping the first offset bytes */
+  if (length > mir_property->array->len * width - offset)
+    length = mir_property->array->len * width - offset;
+
+  /* leave room for null terminator */
+  if (length > G_MAXULONG - width)
+    length -= width;
+
+  *actual_length = length;
+
+  if (data)
+    {
+      *data = g_memdup (mir_property->array->data + offset, length + width);
+      memset (*data + length, 0, width);
+    }
+
+  return TRUE;
+}
+
+static void
+request_targets (GdkWindow     *window,
+                 const GdkAtom *available_targets,
+                 gint           n_available_targets)
+{
+  GArray *requested_targets;
+  GdkAtom target_pair[2];
+  gchar *target_location;
+  GdkEvent *event;
+  gint i;
+
+  requested_targets = g_array_sized_new (TRUE, FALSE, sizeof (GdkAtom), 2 * n_available_targets);
+
+  for (i = 0; i < n_available_targets; i++)
+    {
+      target_pair[0] = available_targets[i];
+
+      if (target_pair[0] == gdk_atom_intern_static_string ("TIMESTAMP") ||
+          target_pair[0] == gdk_atom_intern_static_string ("TARGETS") ||
+          target_pair[0] == gdk_atom_intern_static_string ("MULTIPLE") ||
+          target_pair[0] == gdk_atom_intern_static_string ("SAVE_TARGETS"))
+        continue;
+
+      target_location = g_strdup_printf ("REQUESTED_TARGET_U%u", requested_targets->len / 2);
+      target_pair[1] = gdk_atom_intern (target_location, FALSE);
+      g_free (target_location);
+
+      g_array_append_vals (requested_targets, target_pair, 2);
+    }
+
+  gdk_property_delete (window, gdk_atom_intern_static_string ("AVAILABLE_TARGETS"));
+  gdk_property_delete (window, gdk_atom_intern_static_string ("REQUESTED_TARGETS"));
+
+  gdk_property_change (window,
+                       gdk_atom_intern_static_string ("REQUESTED_TARGETS"),
+                       GDK_SELECTION_TYPE_ATOM,
+                       8 * sizeof (GdkAtom),
+                       GDK_PROP_MODE_REPLACE,
+                       (const guchar *) requested_targets->data,
+                       requested_targets->len);
+
+  g_array_unref (requested_targets);
+
+  event = gdk_event_new (GDK_SELECTION_REQUEST);
+  event->selection.window = g_object_ref (window);
+  event->selection.send_event = FALSE;
+  event->selection.selection = GDK_SELECTION_CLIPBOARD;
+  event->selection.target = gdk_atom_intern_static_string ("MULTIPLE");
+  event->selection.property = gdk_atom_intern_static_string ("REQUESTED_TARGETS");
+  event->selection.time = GDK_CURRENT_TIME;
+  event->selection.requestor = g_object_ref (window);
+
+  gdk_event_put (event);
+  gdk_event_free (event);
+}
+
+static void
+create_paste (GdkWindow     *window,
+              const GdkAtom *requested_targets,
+              gint           n_requested_targets)
+{
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+  GPtrArray *paste_formats;
+  GArray *paste_header;
+  GByteArray *paste_data;
+  gint sizes[4];
+  GdkMirProperty *mir_property;
+  const gchar *paste_format;
+  gint i;
+
+  paste_formats = g_ptr_array_new_full (n_requested_targets, g_free);
+  paste_header = g_array_sized_new (FALSE, FALSE, sizeof (gint), 1 + 4 * n_requested_targets);
+  paste_data = g_byte_array_new ();
+
+  g_array_append_val (paste_header, sizes[0]);
+
+  for (i = 0; i < n_requested_targets; i++)
+    {
+      if (requested_targets[i] == GDK_NONE)
+        continue;
+
+      mir_property = g_hash_table_lookup (impl->properties, requested_targets[i]);
+
+      if (!mir_property)
+        continue;
+
+      paste_format = _gdk_atom_name_const (mir_property->type);
+
+      /* skip non-MIME targets */
+      if (!strchr (paste_format, '/'))
+        {
+          g_hash_table_remove (impl->properties, requested_targets[i]);
+          continue;
+        }
+
+      sizes[0] = paste_data->len;
+      sizes[1] = strlen (paste_format);
+      sizes[2] = sizes[0] + sizes[1];
+      sizes[3] = mir_property->array->len * g_array_get_element_size (mir_property->array);
+
+      g_ptr_array_add (paste_formats, g_strdup (paste_format));
+      g_array_append_vals (paste_header, sizes, 4);
+      g_byte_array_append (paste_data, (const guint8 *) paste_format, sizes[1]);
+      g_byte_array_append (paste_data, (const guint8 *) mir_property->array->data, sizes[3]);
+
+      g_hash_table_remove (impl->properties, requested_targets[i]);
+    }
+
+  gdk_property_delete (window, gdk_atom_intern_static_string ("REQUESTED_TARGETS"));
+
+  g_array_index (paste_header, gint, 0) = paste_formats->len;
+
+  for (i = 0; i < paste_formats->len; i++)
+    {
+      g_array_index (paste_header, gint, 1 + 4 * i) += paste_header->len * sizeof (gint);
+      g_array_index (paste_header, gint, 3 + 4 * i) += paste_header->len * sizeof (gint);
+    }
+
+  g_byte_array_prepend (paste_data,
+                        (const guint8 *) paste_header->data,
+                        paste_header->len * g_array_get_element_size (paste_header));
+
+  g_ptr_array_add (paste_formats, NULL);
+
+  _gdk_mir_display_create_paste (gdk_window_get_display (window),
+                                 (const gchar * const *) paste_formats->pdata,
+                                 paste_data->data,
+                                 paste_data->len);
+
+  g_byte_array_unref (paste_data);
+  g_array_unref (paste_header);
+  g_ptr_array_unref (paste_formats);
 }
 
 static void
@@ -1504,16 +2040,79 @@ gdk_mir_window_impl_change_property (GdkWindow    *window,
                                      gint          format,
                                      GdkPropMode   mode,
                                      const guchar *data,
-                                     gint          nelements)
+                                     gint          n_elements)
 {
-  //g_printerr ("gdk_mir_window_impl_change_property window=%p\n", window);
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+  GdkMirProperty *mir_property;
+  gboolean existed;
+  GdkEvent *event;
+
+  /* ICCCM 2.7: ATOMs and ATOM_PAIRs have format 32, but GdkAtoms can be 64-bit */
+  if (type == GDK_SELECTION_TYPE_ATOM || type == gdk_atom_intern_static_string ("ATOM_PAIR"))
+    format = 8 * sizeof (GdkAtom);
+
+  if (mode != GDK_PROP_MODE_REPLACE)
+    {
+      mir_property = g_hash_table_lookup (impl->properties, property);
+      existed = mir_property != NULL;
+    }
+  else
+    {
+      mir_property = NULL;
+      existed = g_hash_table_contains (impl->properties, property);
+    }
+
+  if (!mir_property)
+    {
+      /* format is measured in bits, but we need to know this in bytes */
+      mir_property = gdk_mir_property_new (type, format / 8, n_elements);
+      g_hash_table_insert (impl->properties, property, mir_property);
+    }
+
+  /* format is measured in bits, but we need to know this in bytes */
+  if (type != mir_property->type || format / 8 != g_array_get_element_size (mir_property->array))
+    return;
+
+  if (mode == GDK_PROP_MODE_PREPEND)
+    g_array_prepend_vals (mir_property->array, data, n_elements);
+  else
+    g_array_append_vals (mir_property->array, data, n_elements);
+
+  event = gdk_event_new (GDK_PROPERTY_NOTIFY);
+  event->property.window = g_object_ref (window);
+  event->property.send_event = FALSE;
+  event->property.atom = property;
+  event->property.time = GDK_CURRENT_TIME;
+  event->property.state = GDK_PROPERTY_NEW_VALUE;
+
+  gdk_event_put (event);
+  gdk_event_free (event);
+
+  if (property == gdk_atom_intern_static_string ("AVAILABLE_TARGETS"))
+    request_targets (window, (const GdkAtom *) data, n_elements);
+  else if (property == gdk_atom_intern_static_string ("REQUESTED_TARGETS") && existed)
+    create_paste (window, (const GdkAtom *) data, n_elements);
 }
 
 static void
 gdk_mir_window_impl_delete_property (GdkWindow *window,
                                      GdkAtom    property)
 {
-  //g_printerr ("gdk_mir_window_impl_delete_property window=%p\n", window);
+  GdkMirWindowImpl *impl = GDK_MIR_WINDOW_IMPL (window->impl);
+  GdkEvent *event;
+
+  if (g_hash_table_remove (impl->properties, property))
+    {
+      event = gdk_event_new (GDK_PROPERTY_NOTIFY);
+      event->property.window = g_object_ref (window);
+      event->property.send_event = FALSE;
+      event->property.atom = property;
+      event->property.time = GDK_CURRENT_TIME;
+      event->property.state = GDK_PROPERTY_DELETE;
+
+      gdk_event_put (event);
+      gdk_event_free (event);
+    }
 }
 
 static gint

@@ -934,13 +934,9 @@ _gdk_win32_enable_hidpi (GdkWin32Display *display)
                     break;
                 }
             }
-
-          /* Should not get here! */
-          if (status == DPI_STATUS_PENDING)
+          else
             {
-              g_assert_not_reached ();
-              display->dpi_aware_type = PROCESS_DPI_UNAWARE;
-              status = DPI_STATUS_FAILED;
+              check_for_dpi_awareness = TRUE;
             }
         }
       else
@@ -1112,10 +1108,10 @@ gdk_win32_display_get_monitor (GdkDisplay *display,
 {
   GdkWin32Display *win32_display = GDK_WIN32_DISPLAY (display);
 
-  if (0 <= monitor_num || monitor_num < win32_display->monitors->len)
-    return (GdkMonitor *) g_ptr_array_index (win32_display->monitors, monitor_num);
+  if (monitor_num < 0 || monitor_num >= win32_display->monitors->len)
+    return NULL;
 
-  return NULL;
+  return (GdkMonitor *) g_ptr_array_index (win32_display->monitors, monitor_num);
 }
 
 static GdkMonitor *

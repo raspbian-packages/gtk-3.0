@@ -240,9 +240,15 @@ generate_focus_event (GdkWindow *window, gboolean focused)
   GdkEvent *event;
 
   if (focused)
-    gdk_synthesize_window_state (window, 0, GDK_WINDOW_STATE_FOCUSED);
+    {
+      gdk_synthesize_window_state (window, 0, GDK_WINDOW_STATE_FOCUSED);
+      _gdk_mir_display_focus_window (gdk_window_get_display (window), window);
+    }
   else
-    gdk_synthesize_window_state (window, GDK_WINDOW_STATE_FOCUSED, 0);
+    {
+      gdk_synthesize_window_state (window, GDK_WINDOW_STATE_FOCUSED, 0);
+      _gdk_mir_display_unfocus_window (gdk_window_get_display (window), window);
+    }
 
   event = gdk_event_new (GDK_FOCUS_CHANGE);
   event->focus_change.send_event = FALSE;
@@ -535,6 +541,13 @@ handle_surface_output_event (GdkWindow                  *window,
   _gdk_mir_window_set_surface_output (window, mir_surface_output_event_get_scale (event));
 }
 
+static void
+handle_surface_placement_event (GdkWindow                      *window,
+                                const MirSurfacePlacementEvent *event)
+{
+  _gdk_mir_window_set_final_rect (window, mir_surface_placement_get_relative_position (event));
+}
+
 typedef struct
 {
   GdkWindow *window;
@@ -565,6 +578,8 @@ gdk_mir_event_source_queue_event (GdkDisplay     *display,
         case mir_input_event_type_pointer:
           handle_motion_event (window, input_event);
           break;
+        default:
+          break;
         }
 
       break;
@@ -591,6 +606,9 @@ gdk_mir_event_source_queue_event (GdkDisplay     *display,
       break;
     case mir_event_type_surface_output:
       handle_surface_output_event (window, mir_event_get_surface_output_event (event));
+      break;
+    case mir_event_type_surface_placement:
+      handle_surface_placement_event (window, mir_event_get_surface_placement_event (event));
       break;
     default:
       g_warning ("Ignoring unknown Mir event %d", mir_event_get_type (event));
