@@ -227,6 +227,7 @@ struct _GdkWaylandSeat
   guint32 repeat_key;
   guint32 repeat_count;
   gint64 repeat_deadline;
+  gint32 nkeys;
   GSettings *keyboard_settings;
   uint32_t keyboard_time;
   uint32_t keyboard_key_serial;
@@ -307,7 +308,8 @@ struct _GdkWaylandDeviceManagerClass
 static void deliver_key_event (GdkWaylandSeat       *seat,
                                uint32_t              time_,
                                uint32_t              key,
-                               uint32_t              state);
+                               uint32_t              state,
+                               gboolean              from_key_repeat);
 GType gdk_wayland_device_manager_get_type (void);
 
 G_DEFINE_TYPE (GdkWaylandDeviceManager,
@@ -1867,6 +1869,7 @@ keyboard_handle_enter (void               *data,
 
   seat->keyboard_focus = wl_surface_get_user_data (surface);
   g_object_ref (seat->keyboard_focus);
+  seat->nkeys = 0;
 
   event = gdk_event_new (GDK_FOCUS_CHANGE);
   event->focus_change.window = g_object_ref (seat->keyboard_focus);
@@ -1923,6 +1926,7 @@ keyboard_handle_leave (void               *data,
 
   g_object_unref (seat->keyboard_focus);
   seat->keyboard_focus = NULL;
+  seat->nkeys = 0;
 
   GDK_NOTE (EVENTS,
             g_message ("focus out, seat %p surface %p",
@@ -2077,7 +2081,8 @@ static void
 deliver_key_event (GdkWaylandSeat *seat,
                    uint32_t        time_,
                    uint32_t        key,
-                   uint32_t        state)
+                   uint32_t        state,
+                   gboolean        from_key_repeat)
 {
   GdkEvent *event;
   struct xkb_state *xkb_state;
@@ -2125,17 +2130,30 @@ deliver_key_event (GdkWaylandSeat *seat,
                        event->key.hardware_keycode, event->key.keyval,
                        event->key.string, event->key.state));
 
-  if (state == 0)
-    return;
-
   if (!xkb_keymap_key_repeats (xkb_keymap, key))
     return;
 
   if (!get_key_repeat (seat, &delay, &interval))
     return;
 
+  if (!from_key_repeat)
+    {
+      if (state) /* Another key is pressed */
+        {
+          seat->repeat_key = key;
+          seat->nkeys++;
+        }
+      else /* a key is released */
+        {
+          /* The compositor may send us more key releases than key presses */
+          seat->nkeys = MAX (0, seat->nkeys - 1);
+        }
+    }
+
+  if (seat->nkeys == 0)
+    return;
+
   seat->repeat_count++;
-  seat->repeat_key = key;
 
   interval *= 1000L;
   delay *= 1000L;
@@ -2165,8 +2183,7 @@ sync_after_repeat_callback (void               *data,
   GdkWaylandSeat *seat = data;
 
   g_clear_pointer (&seat->repeat_callback, wl_callback_destroy);
-
-  deliver_key_event (seat, seat->keyboard_time, seat->repeat_key, 1);
+  deliver_key_event (seat, seat->keyboard_time, seat->repeat_key, 1, TRUE);
 }
 
 static const struct wl_callback_listener sync_after_repeat_callback_listener = {
@@ -2213,7 +2230,8 @@ keyboard_handle_key (void               *data,
   seat->keyboard_key_serial = serial;
   seat->repeat_count = 0;
   _gdk_wayland_display_update_serial (display, serial);
-  deliver_key_event (data, time, key + 8, state_w);
+  deliver_key_event (data, time, key + 8, state_w, FALSE);
+
 }
 
 static void

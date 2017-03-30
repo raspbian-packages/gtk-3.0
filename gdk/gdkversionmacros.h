@@ -26,7 +26,7 @@
 
 #define GDK_MAJOR_VERSION (3)
 #define GDK_MINOR_VERSION (22)
-#define GDK_MICRO_VERSION (8)
+#define GDK_MICRO_VERSION (9)
 
 #ifndef _GDK_EXTERN
 #define _GDK_EXTERN extern

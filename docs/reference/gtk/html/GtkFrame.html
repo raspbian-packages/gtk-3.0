@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkFrame: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="Ornaments.html" title="Ornaments">
 <link rel="prev" href="Ornaments.html" title="Ornaments">
@@ -259,7 +259,9 @@ be specified without specifying a &lt;child&gt; type attribute.</p>
 <p></p>
 <p>GtkFrame has a main CSS node with name frame and a subnode with
 name border. The border node is used to render the visible border.
-The style class .flat can appear with the main node.</p>
+The main frame node can be given the style class .flat, which disables
+drawing of the border, equivalent to calling <a class="link" href="GtkFrame.html#gtk-frame-set-shadow-type" title="gtk_frame_set_shadow_type ()"><code class="function">gtk_frame_set_shadow_type()</code></a> with
+GTK_SHADOW_NONE.</p>
 </div>
 </div>
 <div class="refsect1">
@@ -298,9 +300,9 @@ If <em class="parameter"><code>label</code></em>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_frame_set_label (<em class="parameter"><code><a class="link" href="GtkFrame.html" title="GtkFrame"><span class="type">GtkFrame</span></a> *frame</code></em>,
                      <em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
-<p>Sets the text of the label. If <em class="parameter"><code>label</code></em>
- is <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>,
-the current label is removed.</p>
+<p>Removes the current <a class="link" href="GtkFrame.html#GtkFrame--label-widget" title="The “label-widget” property"><span class="type">“label-widget”</span></a>. If <em class="parameter"><code>label</code></em>
+ is not <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, creates a
+new <a class="link" href="GtkLabel.html" title="GtkLabel"><span class="type">GtkLabel</span></a> with that text and adds it as the <a class="link" href="GtkFrame.html#GtkFrame--label-widget" title="The “label-widget” property"><span class="type">“label-widget”</span></a>.</p>
 <div class="refsect3">
 <a name="gtk-frame-set-label.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -330,9 +332,8 @@ the current label is removed.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_frame_set_label_widget (<em class="parameter"><code><a class="link" href="GtkFrame.html" title="GtkFrame"><span class="type">GtkFrame</span></a> *frame</code></em>,
                             <em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *label_widget</code></em>);</pre>
-<p>Sets the label widget for the frame. This is the widget that
-will appear embedded in the top edge of the frame as a
-title.</p>
+<p>Sets the <a class="link" href="GtkFrame.html#GtkFrame--label-widget" title="The “label-widget” property"><span class="type">“label-widget”</span></a> for the frame. This is the widget that
+will appear embedded in the top edge of the frame as a title.</p>
 <div class="refsect3">
 <a name="gtk-frame-set-label-widget.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -404,8 +405,11 @@ will be completely above or below the frame.</p></td>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_frame_set_shadow_type (<em class="parameter"><code><a class="link" href="GtkFrame.html" title="GtkFrame"><span class="type">GtkFrame</span></a> *frame</code></em>,
                            <em class="parameter"><code><a class="link" href="gtk3-Standard-Enumerations.html#GtkShadowType" title="enum GtkShadowType"><span class="type">GtkShadowType</span></a> type</code></em>);</pre>
-<p>Sets the shadow type for <em class="parameter"><code>frame</code></em>
-.</p>
+<p>Sets the <a class="link" href="GtkFrame.html#GtkFrame--shadow-type" title="The “shadow-type” property"><span class="type">“shadow-type”</span></a> for <em class="parameter"><code>frame</code></em>
+, i.e. whether it is drawn without
+(GTK_SHADOW_NONE) or with (other values) a visible border. Values other than
+GTK_SHADOW_NONE are treated identically by <a class="link" href="GtkFrame.html" title="GtkFrame"><span class="type">GtkFrame</span></a>. The chosen type is
+applied by removing or adding the .flat class to the main CSS node, frame.</p>
 <div class="refsect3">
 <a name="gtk-frame-set-shadow-type.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

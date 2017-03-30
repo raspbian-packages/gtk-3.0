@@ -10,8 +10,8 @@
 
 m4_define([gtk_major_version], [3])
 m4_define([gtk_minor_version], [22])
-m4_define([gtk_micro_version], [8])
-m4_define([gtk_interface_age], [8])
+m4_define([gtk_micro_version], [9])
+m4_define([gtk_interface_age], [9])
 m4_define([gtk_binary_age],
           [m4_eval(100 * gtk_minor_version + gtk_micro_version)])
 m4_define([gtk_version],
@@ -1885,6 +1885,13 @@ if test "x${enable_Bsymbolic}" = "xyes" ; then
 fi
 AC_SUBST(GTK_LINK_FLAGS)
 
+dnl
+dnl Check whether MSVC toolset is explicitly set
+dnl
+
+AM_CONDITIONAL(MSVC_BASE_NO_TOOLSET_SET, [test x$MSVC_BASE_TOOLSET = x])
+AM_CONDITIONAL(MSVC_NO_TOOLSET_SET, [test x$MSVC_TOOLSET = x])
+
 AC_CONFIG_FILES([
 README
 INSTALL
@@ -1947,6 +1954,7 @@ build/win32/vs10/gtk3-version-paths.props
 build/win32/vs11/Makefile
 build/win32/vs12/Makefile
 build/win32/vs14/Makefile
+build/win32/vs15/Makefile
 gdk/Makefile
 gdk/broadway/Makefile
 gdk/x11/Makefile

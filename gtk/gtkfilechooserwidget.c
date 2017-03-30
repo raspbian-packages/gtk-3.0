@@ -134,7 +134,7 @@ profile_add_indent (int indent)
     g_error ("You screwed up your indentation");
 }
 
-void
+static void
 _gtk_file_chooser_profile_log (const char *func, int indent, const char *msg1, const char *msg2)
 {
   char *str;
@@ -1634,8 +1634,8 @@ rename_selected_cb (GtkTreeModel *model,
   gtk_tree_view_get_cell_area (GTK_TREE_VIEW (priv->browse_files_tree_view),
                                path, priv->list_name_column, &rect);
 
-  gtk_tree_view_convert_tree_to_widget_coords (GTK_TREE_VIEW (priv->browse_files_tree_view),
-                                               rect.x, rect.y, &rect.x, &rect.y);
+  gtk_tree_view_convert_bin_window_to_widget_coords (GTK_TREE_VIEW (priv->browse_files_tree_view),
+                                                     rect.x, rect.y, &rect.x, &rect.y);
 
   filename = g_file_get_basename (priv->rename_file_source_file);
   gtk_entry_set_text (GTK_ENTRY(priv->rename_file_name_entry), filename);
@@ -1776,6 +1776,7 @@ visit_file_cb (GSimpleAction *action,
   g_slist_free_full (files, g_object_unref);
 }
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 /* Callback used when the "Open this folder" menu item is activated */
 static void
 open_folder_cb (GSimpleAction *action,
@@ -1800,6 +1801,7 @@ open_folder_cb (GSimpleAction *action,
 
   g_slist_free_full (files, g_object_unref);
 }
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 /* callback used when the "Show Hidden Files" menu item is toggled */
 static void

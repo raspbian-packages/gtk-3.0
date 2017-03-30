@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkScale: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="NumericEntry.html" title="Numeric and Text Data Entry">
 <link rel="prev" href="GtkEntryCompletion.html" title="GtkEntryCompletion">
@@ -592,7 +592,8 @@ gtk_scale_set_value_pos (<em class="parameter"><code><a class="link" href="GtkSc
 <a name="gtk-scale-get-digits"></a><h3>gtk_scale_get_digits ()</h3>
 <pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>
 gtk_scale_get_digits (<em class="parameter"><code><a class="link" href="GtkScale.html" title="GtkScale"><span class="type">GtkScale</span></a> *scale</code></em>);</pre>
-<p>Gets the number of decimal places that are displayed in the value.</p>
+<p>Gets the number of decimal places to which the value is rounded on change.
+This number is also used by the default <a class="link" href="GtkScale.html#GtkScale-format-value" title="The “format-value” signal"><span class="type">“format-value”</span></a> handler.</p>
 <div class="refsect3">
 <a name="gtk-scale-get-digits.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -610,7 +611,7 @@ gtk_scale_get_digits (<em class="parameter"><code><a class="link" href="GtkScale
 </div>
 <div class="refsect3">
 <a name="gtk-scale-get-digits.returns"></a><h4>Returns</h4>
-<p> the number of decimal places that are displayed</p>
+<p> the number of decimal places</p>
 </div>
 </div>
 <hr>
@@ -856,7 +857,9 @@ gtk_scale_clear_marks (<em class="parameter"><code><a class="link" href="GtkScal
 <div class="refsect2">
 <a name="GtkScale--digits"></a><h3>The <code class="literal">“digits”</code> property</h3>
 <pre class="programlisting">  “digits”                   <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a></pre>
-<p>The number of decimal places that are displayed in the value.</p>
+<p>The number of decimal places to which the value is rounded when it is
+changed. This also sets the number of digits shown in the displayed value
+when using the default handler for the <a class="link" href="GtkScale.html#GtkScale-format-value" title="The “format-value” signal"><span class="type">“format-value”</span></a> signal.</p>
 <p>Flags: Read / Write</p>
 <p>Allowed values: [-1,64]</p>
 <p>Default value: 1</p>
@@ -929,6 +932,8 @@ Connect a signal handler which returns an allocated string representing
 
 <em class="parameter"><code>value</code></em>
 . That string will then be used to display the scale's value.</p>
+<p>If no user-provided handlers are installed, the value will be displayed on
+its own, rounded according to the value of the <a class="link" href="GtkScale.html#GtkScale--digits" title="The “digits” property"><span class="type">“digits”</span></a> property.</p>
 <p>Here's an example signal handler which displays a value 1.0 as
 with "--&gt;1.0&lt;--".</p>
 <div class="informalexample">

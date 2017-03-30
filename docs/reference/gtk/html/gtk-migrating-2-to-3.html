@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Migrating from GTK+ 2.x to GTK+ 3: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="migrating.html" title="Part V. Migrating from Previous Versions of GTK+">
 <link rel="prev" href="migrating.html" title="Part V. Migrating from Previous Versions of GTK+">
@@ -280,8 +280,9 @@
 <li class="listitem">If you are opening a document or URI by launching a command
         like <code class="literal">firefox http://my-favourite-website.com</code> or
         <code class="literal">gnome-open ghelp:epiphany</code>, it is best to just use
-        <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri" title="gtk_show_uri ()"><code class="function">gtk_show_uri()</code></a>; as an added benefit, your application will henceforth
-        respect the users preference for what application to use.</li>
+        <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri-on-window" title="gtk_show_uri_on_window ()"><code class="function">gtk_show_uri_on_window()</code></a>; as an added benefit, your application will
+        henceforth respect the users preference for what application to use and
+        correctly open links in sandboxed applications.</li>
 <li class="listitem">If you are launching a regular, installed application that
         has a desktop file, it is best to use GIOs <a href="https://developer.gnome.org/gio/unstable/GAppInfo.html#GAppInfo-struct"><span class="type">GAppInfo</span></a> with a suitable
         launch context.
@@ -389,8 +390,8 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
                  pixbuf<span class="gtkdoc opt">,</span>
                  <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span>
                  x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">,</span>
-                 <span class="function">gdk_pixbuf_get_width</span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
-                 <span class="function">gdk_pixbuf_get_height</span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
+                 <span class="function"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-width">gdk_pixbuf_get_width</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
+                 <span class="function"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-height">gdk_pixbuf_get_height</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
                  GDK_RGB_DITHER_NORMAL<span class="gtkdoc opt">,</span>
                  <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span></pre></td>
       </tr>

@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.8-1+rpi1) stretch-staging; urgency=medium
+gtk+3.0 (3.22.9-4+rpi1) stretch-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,38 @@ gtk+3.0 (3.22.8-1+rpi1) stretch-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Sat, 18 Mar 2017 00:10:48 +0000
+ -- Peter Michael Green <plugwash@raspbian.org>  Sun, 26 Mar 2017 15:13:30 +0000
+
+gtk+3.0 (3.22.9-4) unstable; urgency=medium
+
+  * Force update of GResource files so the changes to the CSS files are
+    actually applied.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 14 Mar 2017 01:38:30 +0100
+
+gtk+3.0 (3.22.9-3) unstable; urgency=medium
+
+  * Revert move of .flat from frame > border to frame as it broke existing
+    themes which relied on that behaviour.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 05 Mar 2017 21:40:15 +0100
+
+gtk+3.0 (3.22.9-2) unstable; urgency=medium
+
+  * Team upload
+  * d/p/wayland-make-sure-to-clear-up-the-number-of-keys.patch:
+    Add patch from upstream fixing unintended key repeats on Wayland
+    (Closes: #856478)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 01 Mar 2017 15:50:14 +0000
+
+gtk+3.0 (3.22.9-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop debian/patches/032_mips_treeview_row_separator_height.patch, no
+    longer needed.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 28 Feb 2017 18:48:39 +0100
 
 gtk+3.0 (3.22.8-1) unstable; urgency=medium
 

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkWidget: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="AbstractObjects.html" title="Abstract Base Classes">
 <link rel="prev" href="AbstractObjects.html" title="Abstract Base Classes">
@@ -821,7 +821,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">GdkPixbuf</span> *
+<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="GtkWidget.html#gtk-widget-render-icon" title="gtk_widget_render_icon ()">gtk_widget_render_icon</a> <span class="c_punctuation">()</span>
@@ -829,7 +829,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">GdkPixbuf</span> *
+<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="GtkWidget.html#gtk-widget-render-icon-pixbuf" title="gtk_widget_render_icon_pixbuf ()">gtk_widget_render_icon_pixbuf</a> <span class="c_punctuation">()</span>
@@ -7233,7 +7233,7 @@ on the widget.</p>
 <hr>
 <div class="refsect2">
 <a name="gtk-widget-render-icon"></a><h3>gtk_widget_render_icon ()</h3>
-<pre class="programlisting"><span class="returnvalue">GdkPixbuf</span> *
+<pre class="programlisting"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 gtk_widget_render_icon (<em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
                         <em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *stock_id</code></em>,
                         <em class="parameter"><code><a class="link" href="gtk3-Themeable-Stock-Images.html#GtkIconSize" title="enum GtkIconSize"><span class="type">GtkIconSize</span></a> size</code></em>,
@@ -7254,7 +7254,7 @@ should be a size such as <a class="link" href="gtk3-Themeable-Stock-Images.html#
 string that identifies the widget or code doing the rendering, so
 that theme engines can special-case rendering for that widget or
 code.</p>
-<p>The pixels in the returned <span class="type">GdkPixbuf</span> are shared with the rest of
+<p>The pixels in the returned <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> are shared with the rest of
 the application and should not be modified. The pixbuf should be
 freed after use with <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
 <div class="refsect3">
@@ -7301,7 +7301,7 @@ stock ID wasn’t known. </p>
 <hr>
 <div class="refsect2">
 <a name="gtk-widget-render-icon-pixbuf"></a><h3>gtk_widget_render_icon_pixbuf ()</h3>
-<pre class="programlisting"><span class="returnvalue">GdkPixbuf</span> *
+<pre class="programlisting"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 gtk_widget_render_icon_pixbuf (<em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
                                <em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *stock_id</code></em>,
                                <em class="parameter"><code><a class="link" href="gtk3-Themeable-Stock-Images.html#GtkIconSize" title="enum GtkIconSize"><span class="type">GtkIconSize</span></a> size</code></em>);</pre>
@@ -7318,7 +7318,7 @@ a pixbuf. <em class="parameter"><code>stock_id</code></em>
 <a class="link" href="gtk3-Stock-Items.html#GTK-STOCK-OPEN:CAPS" title="GTK_STOCK_OPEN"><span class="type">GTK_STOCK_OPEN</span></a> or <a class="link" href="gtk3-Stock-Items.html#GTK-STOCK-OK:CAPS" title="GTK_STOCK_OK"><span class="type">GTK_STOCK_OK</span></a>. <em class="parameter"><code>size</code></em>
  should be a size
 such as <a class="link" href="gtk3-Themeable-Stock-Images.html#GTK-ICON-SIZE-MENU:CAPS"><span class="type">GTK_ICON_SIZE_MENU</span></a>.</p>
-<p>The pixels in the returned <span class="type">GdkPixbuf</span> are shared with the rest of
+<p>The pixels in the returned <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> are shared with the rest of
 the application and should not be modified. The pixbuf should be freed
 after use with <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
 <div class="refsect3">
@@ -7674,12 +7674,6 @@ a composite child of its parent; see <a class="link" href="GtkWidget.html#gtk-wi
 gtk_widget_mnemonic_activate (<em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
                               <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> group_cycling</code></em>);</pre>
 <p>Emits the <a class="link" href="GtkWidget.html#GtkWidget-mnemonic-activate" title="The “mnemonic-activate” signal"><span class="type">“mnemonic-activate”</span></a> signal.</p>
-<p>The default handler for this signal activates the <em class="parameter"><code>widget</code></em>
- if
-<em class="parameter"><code>group_cycling</code></em>
- is <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, and just grabs the focus if <em class="parameter"><code>group_cycling</code></em>
-
-is <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.</p>
 <div class="refsect3">
 <a name="gtk-widget-mnemonic-activate.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -17263,8 +17257,14 @@ automatically for all new windows.</p>
 <a name="GtkWidget-mnemonic-activate"></a><h3>The <code class="literal">“mnemonic-activate”</code> signal</h3>
 <pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 user_function (<a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget,
-               <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>   arg1,
+               <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>   group_cycling,
                <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)</pre>
+<p>The default handler for this signal activates <em class="parameter"><code>widget</code></em>
+ if <em class="parameter"><code>group_cycling</code></em>
+
+is <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, or just makes <em class="parameter"><code>widget</code></em>
+ grab focus if <em class="parameter"><code>group_cycling</code></em>
+ is <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.</p>
 <div class="refsect3">
 <a name="GtkWidget-mnemonic-activate.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -17277,6 +17277,11 @@ user_function (<a class="link" href="GtkWidget.html" title="GtkWidget"><span cla
 <tr>
 <td class="parameter_name"><p>widget</p></td>
 <td class="parameter_description"><p>the object which received the signal.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>group_cycling</p></td>
+<td class="parameter_description"><p><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if there are other widgets with the same mnemonic</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>

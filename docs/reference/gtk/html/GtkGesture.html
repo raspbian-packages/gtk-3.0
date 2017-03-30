@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkGesture: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="Gestures.html" title="Gestures and event handling">
 <link rel="prev" href="GtkEventController.html" title="GtkEventController">
@@ -780,8 +780,8 @@ gtk_gesture_handles_sequence (<em class="parameter"><code><a class="link" href="
 </tr>
 <tr>
 <td class="parameter_name"><p>sequence</p></td>
-<td class="parameter_description"><p>a <a href="http://developer.gnome.org/gdk3/gdk4-Events.html#GdkEventSequence"><span class="type">GdkEventSequence</span></a></p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p> a <a href="http://developer.gnome.org/gdk3/gdk4-Events.html#GdkEventSequence"><span class="type">GdkEventSequence</span></a> or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>
@@ -790,7 +790,7 @@ gtk_gesture_handles_sequence (<em class="parameter"><code><a class="link" href="
 <a name="gtk-gesture-handles-sequence.returns"></a><h4>Returns</h4>
 <p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>gesture</code></em>
 is handling <em class="parameter"><code>sequence</code></em>
-</p>
+, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-3-14.html#api-index-3.14">3.14</a></p>
 </div>

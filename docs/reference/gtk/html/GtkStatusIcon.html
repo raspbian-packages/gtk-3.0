@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkStatusIcon: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="DeprecatedObjects.html" title="Deprecated">
 <link rel="prev" href="GtkArrow.html" title="GtkArrow">
@@ -140,7 +140,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">GdkPixbuf</span> *
+<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="GtkStatusIcon.html#gtk-status-icon-get-pixbuf" title="gtk_status_icon_get_pixbuf ()">gtk_status_icon_get_pixbuf</a> <span class="c_punctuation">()</span>
@@ -358,7 +358,7 @@
 </tr>
 <tr>
 <td class="property_type">
-<span class="type">GdkPixbuf</span> *</td>
+<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *</td>
 <td class="property_name"><a class="link" href="GtkStatusIcon.html#GtkStatusIcon--pixbuf" title="The “pixbuf” property">pixbuf</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
@@ -527,7 +527,7 @@ gtk_status_icon_new (<em class="parameter"><code><span class="type">void</span><
 <div class="refsect2">
 <a name="gtk-status-icon-new-from-pixbuf"></a><h3>gtk_status_icon_new_from_pixbuf ()</h3>
 <pre class="programlisting"><a class="link" href="GtkStatusIcon.html" title="GtkStatusIcon"><span class="returnvalue">GtkStatusIcon</span></a> *
-gtk_status_icon_new_from_pixbuf (<em class="parameter"><code><span class="type">GdkPixbuf</span> *pixbuf</code></em>);</pre>
+gtk_status_icon_new_from_pixbuf (<em class="parameter"><code><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *pixbuf</code></em>);</pre>
 <div class="warning">
 <p><code class="literal">gtk_status_icon_new_from_pixbuf</code> has been deprecated since version 3.14 and should not be used in newly-written code.</p>
 <p>Use notifications</p>
@@ -546,7 +546,7 @@ space in the notification area, if necessary.</p>
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>pixbuf</p></td>
-<td class="parameter_description"><p>a <span class="type">GdkPixbuf</span></p></td>
+<td class="parameter_description"><p>a <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a></p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -695,7 +695,7 @@ themed icon, it will be updated when the theme changes.</p>
 <a name="gtk-status-icon-set-from-pixbuf"></a><h3>gtk_status_icon_set_from_pixbuf ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_status_icon_set_from_pixbuf (<em class="parameter"><code><a class="link" href="GtkStatusIcon.html" title="GtkStatusIcon"><span class="type">GtkStatusIcon</span></a> *status_icon</code></em>,
-                                 <em class="parameter"><code><span class="type">GdkPixbuf</span> *pixbuf</code></em>);</pre>
+                                 <em class="parameter"><code><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *pixbuf</code></em>);</pre>
 <div class="warning">
 <p><code class="literal">gtk_status_icon_set_from_pixbuf</code> has been deprecated since version 3.14 and should not be used in newly-written code.</p>
 <p>Use notifications</p>
@@ -720,7 +720,7 @@ See <a class="link" href="GtkStatusIcon.html#gtk-status-icon-new-from-pixbuf" ti
 </tr>
 <tr>
 <td class="parameter_name"><p>pixbuf</p></td>
-<td class="parameter_description"><p> a <span class="type">GdkPixbuf</span> or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p> a <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -916,13 +916,13 @@ the return value will be <a class="link" href="GtkImage.html#GTK-IMAGE-EMPTY:CAP
 <hr>
 <div class="refsect2">
 <a name="gtk-status-icon-get-pixbuf"></a><h3>gtk_status_icon_get_pixbuf ()</h3>
-<pre class="programlisting"><span class="returnvalue">GdkPixbuf</span> *
+<pre class="programlisting"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 gtk_status_icon_get_pixbuf (<em class="parameter"><code><a class="link" href="GtkStatusIcon.html" title="GtkStatusIcon"><span class="type">GtkStatusIcon</span></a> *status_icon</code></em>);</pre>
 <div class="warning">
 <p><code class="literal">gtk_status_icon_get_pixbuf</code> has been deprecated since version 3.14 and should not be used in newly-written code.</p>
 <p>Use notifications</p>
 </div>
-<p>Gets the <span class="type">GdkPixbuf</span> being displayed by the <a class="link" href="GtkStatusIcon.html" title="GtkStatusIcon"><span class="type">GtkStatusIcon</span></a>.
+<p>Gets the <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> being displayed by the <a class="link" href="GtkStatusIcon.html" title="GtkStatusIcon"><span class="type">GtkStatusIcon</span></a>.
 The storage type of the status icon must be <a class="link" href="GtkImage.html#GTK-IMAGE-EMPTY:CAPS"><code class="literal">GTK_IMAGE_EMPTY</code></a> or
 <a class="link" href="GtkImage.html#GTK-IMAGE-PIXBUF:CAPS"><code class="literal">GTK_IMAGE_PIXBUF</code></a> (see <a class="link" href="GtkStatusIcon.html#gtk-status-icon-get-storage-type" title="gtk_status_icon_get_storage_type ()"><code class="function">gtk_status_icon_get_storage_type()</code></a>).
 The caller of this function does not own a reference to the
@@ -1844,7 +1844,7 @@ is embedded.</p>
 <hr>
 <div class="refsect2">
 <a name="GtkStatusIcon--pixbuf"></a><h3>The <code class="literal">“pixbuf”</code> property</h3>
-<pre class="programlisting">  “pixbuf”                   <span class="type">GdkPixbuf</span> *</pre>
+<pre class="programlisting">  “pixbuf”                   <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *</pre>
 <p>A GdkPixbuf to display.</p>
 <p>Flags: Read / Write</p>
 </div>

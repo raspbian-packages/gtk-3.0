@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkOffscreenWindow: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="WindowWidgets.html" title="Windows">
 <link rel="prev" href="GtkInvisible.html" title="GtkInvisible">
@@ -59,7 +59,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">GdkPixbuf</span> *
+<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="GtkOffscreenWindow.html#gtk-offscreen-window-get-pixbuf" title="gtk_offscreen_window_get_pixbuf ()">gtk_offscreen_window_get_pixbuf</a> <span class="c_punctuation">()</span>
@@ -118,7 +118,7 @@ snapshots of a full window with it since you cannot pack a toplevel
 widget in another toplevel.</p>
 <p>The idea is to take a widget and manually set the state of it,
 add it to a GtkOffscreenWindow and then retrieve the snapshot
-as a <span class="type">cairo_surface_t</span> or <span class="type">GdkPixbuf</span>.</p>
+as a <span class="type">cairo_surface_t</span> or <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a>.</p>
 <p>GtkOffscreenWindow derives from <a class="link" href="GtkWindow.html" title="GtkWindow"><span class="type">GtkWindow</span></a> only as an implementation
 detail.  Applications should not use any API specific to <a class="link" href="GtkWindow.html" title="GtkWindow"><span class="type">GtkWindow</span></a>
 to operate on this object.  It should be treated as a <a class="link" href="GtkBin.html" title="GtkBin"><span class="type">GtkBin</span></a> that
@@ -174,10 +174,10 @@ surface, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Mac
 <hr>
 <div class="refsect2">
 <a name="gtk-offscreen-window-get-pixbuf"></a><h3>gtk_offscreen_window_get_pixbuf ()</h3>
-<pre class="programlisting"><span class="returnvalue">GdkPixbuf</span> *
+<pre class="programlisting"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="returnvalue">GdkPixbuf</span></a> *
 gtk_offscreen_window_get_pixbuf (<em class="parameter"><code><a class="link" href="GtkOffscreenWindow.html" title="GtkOffscreenWindow"><span class="type">GtkOffscreenWindow</span></a> *offscreen</code></em>);</pre>
 <p>Retrieves a snapshot of the contained widget in the form of
-a <span class="type">GdkPixbuf</span>.  This is a new pixbuf with a reference count of 1,
+a <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a>.  This is a new pixbuf with a reference count of 1,
 and the application should unreference it once it is no longer
 needed.</p>
 <div class="refsect3">
@@ -197,7 +197,7 @@ needed.</p>
 </div>
 <div class="refsect3">
 <a name="gtk-offscreen-window-get-pixbuf.returns"></a><h4>Returns</h4>
-<p> A <span class="type">GdkPixbuf</span> pointer, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p>
+<p> A <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> pointer, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p>
 <p><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: 2.20</p>

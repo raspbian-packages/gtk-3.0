@@ -164,6 +164,10 @@ clean:: debian/control
 	rm -rf debian/build debian/install
 	sed -i s/optional=nowayland/arch=linux-any/ debian/libgtk-3-0.symbols
 	rm -rf debian/build debian/install
+	# The build system does not automatically update the GResource files
+	# when resources change. Force an update since we modify CSS files in
+	# Revert-move-of-.flat-from-frame-border-to-frame.patch.
+	rm -f gtk/gtkresources.c gtk/gtkresources.h
 
 pre-build::
 	sed -i s/arch=linux-any/optional=nowayland/ debian/libgtk-3-0.symbols

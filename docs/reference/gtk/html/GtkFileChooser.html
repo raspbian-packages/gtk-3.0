@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkFileChooser: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="SelectorWidgets.html" title="Selector Widgets and Dialogs">
 <link rel="prev" href="GtkColorChooserDialog.html" title="GtkColorChooserDialog">
@@ -800,7 +800,7 @@ generate a preview.</p>
   preview <span class="gtkdoc opt">=</span> <span class="function">GTK_WIDGET</span> <span class="gtkdoc opt">(</span>data<span class="gtkdoc opt">);</span>
   filename <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkFileChooser.html#gtk-file-chooser-get-preview-filename">gtk_file_chooser_get_preview_filename</a></span> <span class="gtkdoc opt">(</span>file_chooser<span class="gtkdoc opt">);</span>
 
-  pixbuf <span class="gtkdoc opt">=</span> <span class="function">gdk_pixbuf_new_from_file_at_size</span> <span class="gtkdoc opt">(</span>filename<span class="gtkdoc opt">,</span> <span class="number">128</span><span class="gtkdoc opt">,</span> <span class="number">128</span><span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
+  pixbuf <span class="gtkdoc opt">=</span> <span class="function"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-File-Loading.html#gdk-pixbuf-new-from-file-at-size">gdk_pixbuf_new_from_file_at_size</a></span> <span class="gtkdoc opt">(</span>filename<span class="gtkdoc opt">,</span> <span class="number">128</span><span class="gtkdoc opt">,</span> <span class="number">128</span><span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
   have_preview <span class="gtkdoc opt">= (</span>pixbuf <span class="gtkdoc opt">!=</span> NULL<span class="gtkdoc opt">);</span>
   <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>filename<span class="gtkdoc opt">);</span>
 

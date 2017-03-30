@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GtkLinkButton: GTK+ 3 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GTK+ 3 Reference Manual">
 <link rel="up" href="ButtonWidgets.html" title="Buttons and Toggles">
 <link rel="prev" href="GtkToggleButton.html" title="GtkToggleButton">
@@ -182,7 +182,7 @@ to show quick links to resources.</p>
 to the constructor is used as a label for the widget.</p>
 <p>The URI bound to a GtkLinkButton can be set specifically using
 <a class="link" href="GtkLinkButton.html#gtk-link-button-set-uri" title="gtk_link_button_set_uri ()"><code class="function">gtk_link_button_set_uri()</code></a>, and retrieved using <a class="link" href="GtkLinkButton.html#gtk-link-button-get-uri" title="gtk_link_button_get_uri ()"><code class="function">gtk_link_button_get_uri()</code></a>.</p>
-<p>By default, GtkLinkButton calls <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri" title="gtk_show_uri ()"><code class="function">gtk_show_uri()</code></a> when the button is
+<p>By default, GtkLinkButton calls <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri-on-window" title="gtk_show_uri_on_window ()"><code class="function">gtk_show_uri_on_window()</code></a> when the button is
 clicked. This behaviour can be overridden by connecting to the
 <a class="link" href="GtkLinkButton.html#GtkLinkButton-activate-link" title="The “activate-link” signal"><span class="type">“activate-link”</span></a> signal and returning <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> from the
 signal handler.</p>
@@ -444,7 +444,7 @@ user_function (<a class="link" href="GtkLinkButton.html" title="GtkLinkButton"><
                <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>       user_data)</pre>
 <p>The ::activate-link signal is emitted each time the <a class="link" href="GtkLinkButton.html" title="GtkLinkButton"><span class="type">GtkLinkButton</span></a>
 has been clicked.</p>
-<p>The default handler will call <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri" title="gtk_show_uri ()"><code class="function">gtk_show_uri()</code></a> with the URI stored inside
+<p>The default handler will call <a class="link" href="gtk3-Filesystem-utilities.html#gtk-show-uri-on-window" title="gtk_show_uri_on_window ()"><code class="function">gtk_show_uri_on_window()</code></a> with the URI stored inside
 the <a class="link" href="GtkLinkButton.html#GtkLinkButton--uri" title="The “uri” property"><span class="type">“uri”</span></a> property.</p>
 <p>To override the default behavior, you can connect to the ::activate-link
 signal and stop the propagation of the signal by returning <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> from

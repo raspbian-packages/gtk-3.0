@@ -735,6 +735,9 @@ gtk_scale_class_init (GtkScaleClass *class)
    * Connect a signal handler which returns an allocated string representing 
    * @value. That string will then be used to display the scale's value.
    *
+   * If no user-provided handlers are installed, the value will be displayed on
+   * its own, rounded according to the value of the #GtkScale:digits property.
+   *
    * Here's an example signal handler which displays a value 1.0 as
    * with "-->1.0<--".
    * |[<!-- language="C" -->
@@ -759,10 +762,17 @@ gtk_scale_class_init (GtkScaleClass *class)
                   G_TYPE_STRING, 1,
                   G_TYPE_DOUBLE);
 
+  /**
+   * GtkScale:digits:
+   *
+   * The number of decimal places to which the value is rounded when it is
+   * changed. This also sets the number of digits shown in the displayed value
+   * when using the default handler for the #GtkScale::format-value signal.
+   */
   properties[PROP_DIGITS] =
       g_param_spec_int ("digits",
                         P_("Digits"),
-                        P_("The number of decimal places that are displayed in the value"),
+                        P_("The number of decimal places to which the value is rounded"),
                         -1, MAX_DIGITS,
                         1,
                         GTK_PARAM_READWRITE|G_PARAM_EXPLICIT_NOTIFY);
@@ -1151,9 +1161,10 @@ gtk_scale_set_digits (GtkScale *scale,
  * gtk_scale_get_digits:
  * @scale: a #GtkScale
  *
- * Gets the number of decimal places that are displayed in the value.
+ * Gets the number of decimal places to which the value is rounded on change.
+ * This number is also used by the default #GtkScale::format-value handler.
  *
- * Returns: the number of decimal places that are displayed
+ * Returns: the number of decimal places
  */
 gint
 gtk_scale_get_digits (GtkScale *scale)
@@ -1948,8 +1959,7 @@ weed_out_neg_zero (gchar *str,
 }
 
 /*
- * Emits #GtkScale::format-value signal to format the value,
- * if no user signal handlers, falls back to a default format.
+ * Emits the #GtkScale::format-value signal.
  *
  * Returns: formatted value
  */

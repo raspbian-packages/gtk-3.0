@@ -616,6 +616,8 @@ struct _GtkStateData
 {
   guint         flags_to_set;
   guint         flags_to_unset;
+
+  gint          old_scale_factor;
 };
 
 /* --- prototypes --- */
@@ -2010,7 +2012,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   /**
    * GtkWidget::mnemonic-activate:
    * @widget: the object which received the signal.
-   * @arg1:
+   * @group_cycling: %TRUE if there are other widgets with the same mnemonic
+   *
+   * The default handler for this signal activates @widget if @group_cycling
+   * is %FALSE, or just makes @widget grab focus if @group_cycling is %TRUE.
    *
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    * %FALSE to propagate the event further.
@@ -6839,13 +6844,9 @@ _gtk_widget_get_accel_path (GtkWidget *widget,
 /**
  * gtk_widget_mnemonic_activate:
  * @widget: a #GtkWidget
- * @group_cycling:  %TRUE if there are other widgets with the same mnemonic
+ * @group_cycling: %TRUE if there are other widgets with the same mnemonic
  *
  * Emits the #GtkWidget::mnemonic-activate signal.
- *
- * The default handler for this signal activates the @widget if
- * @group_cycling is %FALSE, and just grabs the focus if @group_cycling
- * is %TRUE.
  *
  * Returns: %TRUE if the signal has been handled
  */
@@ -8779,6 +8780,7 @@ gtk_widget_update_state_flags (GtkWidget     *widget,
     {
       GtkStateData data;
 
+      data.old_scale_factor = gtk_widget_get_scale_factor (widget);
       data.flags_to_set = flags_to_set;
       data.flags_to_unset = flags_to_unset;
 
@@ -9437,6 +9439,8 @@ gtk_widget_set_sensitive (GtkWidget *widget,
     {
       GtkStateData data;
 
+      data.old_scale_factor = gtk_widget_get_scale_factor (widget);
+
       if (sensitive)
         {
           data.flags_to_set = 0;
@@ -9531,6 +9535,8 @@ gtk_widget_set_parent (GtkWidget *widget,
       g_warning ("Can't set a parent on a toplevel widget");
       return;
     }
+
+  data.old_scale_factor = gtk_widget_get_scale_factor (widget);
 
   /* keep this function in sync with gtk_menu_attach_to_widget()
    */
@@ -12792,6 +12798,7 @@ gtk_widget_propagate_state (GtkWidget    *widget,
   GtkWidgetPrivate *priv = widget->priv;
   GtkStateFlags new_flags, old_flags = priv->state_flags;
   GtkStateType old_state;
+  gint new_scale_factor = gtk_widget_get_scale_factor (widget);
 
   G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   old_state = gtk_widget_get_state (widget);
@@ -12815,6 +12822,9 @@ gtk_widget_propagate_state (GtkWidget    *widget,
     }
 
   new_flags = priv->state_flags;
+
+  if (data->old_scale_factor != new_scale_factor)
+    _gtk_widget_scale_changed (widget);
 
   if (old_flags != new_flags)
     {
@@ -12873,6 +12883,7 @@ gtk_widget_propagate_state (GtkWidget    *widget,
           GtkStateData child_data;
 
           /* Make sure to only propagate the right states further */
+          child_data.old_scale_factor = new_scale_factor;
           child_data.flags_to_set = data->flags_to_set & GTK_STATE_FLAGS_DO_PROPAGATE;
           child_data.flags_to_unset = data->flags_to_unset & GTK_STATE_FLAGS_DO_PROPAGATE;
 
