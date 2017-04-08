@@ -1,0 +1,41 @@
+From: Raspbian forward porter <root@raspbian.org>
+Subject: Automatically generated patch (3.22.11-1+rpi1)
+
+Last (up to) 3 git changes, FYI:
+
+commit bbd9d41abb4e27ecfc2cd7bd15f11332f36883bf
+Merge: 8dc1994 b5996af
+Author: Peter Michael Green <plugwash@raspbian.org>
+Date:   Sat Apr 8 14:51:40 2017 +0000
+
+    Manual merge of version 3.22.9-4+rpi1 and 3.22.11-1 to produce 3.22.11-1+rpi1
+
+commit 8dc19947087b7f92ada55db0d61b47f2e8856918
+Author: Peter Michael Green <plugwash@raspbian.org>
+Date:   Thu Mar 30 18:23:22 2017 +0000
+
+    Commit Debian 3.0 (quilt) metadata
+    
+    [dgit (3.10) quilt-fixup]
+
+commit 537bcf2d325d5c0caae20681a9735d5a10edd506
+Author: Peter Michael Green <plugwash@raspbian.org>
+Date:   Thu Mar 30 18:21:47 2017 +0000
+
+    Apply changes resulting from build process.
+---
+
+--- gtk+3.0-3.22.11.orig/gtk/gtkresources.h
++++ /dev/null
+@@ -1,11 +0,0 @@
+-#ifndef __RESOURCE__gtk_H__
+-#define __RESOURCE__gtk_H__
+-
+-#include <gio/gio.h>
+-
+-extern GResource *_gtk_get_resource (void);
+-
+-extern void _gtk_register_resource (void);
+-extern void _gtk_unregister_resource (void);
+-
+-#endif
