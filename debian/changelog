@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.9-4+rpi1) stretch-staging; urgency=medium
+gtk+3.0 (3.22.11-1+rpi1) stretch-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,14 @@ gtk+3.0 (3.22.9-4+rpi1) stretch-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Peter Michael Green <plugwash@raspbian.org>  Sun, 26 Mar 2017 15:13:30 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Fri, 07 Apr 2017 03:45:05 +0000
+
+gtk+3.0 (3.22.11-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop patches which have been merged upstream.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 24 Mar 2017 02:27:48 +0100
 
 gtk+3.0 (3.22.9-4) unstable; urgency=medium
 

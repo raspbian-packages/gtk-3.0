@@ -74,6 +74,7 @@
 {
   GdkWindow *window = [[self contentView] gdkWindow];
 
+  gdk_synthesize_window_state (window, 0, GDK_WINDOW_STATE_FOCUSED);
   _gdk_quartz_events_update_focus_window (window, TRUE);
 }
 
@@ -82,6 +83,7 @@
   GdkWindow *window = [[self contentView] gdkWindow];
 
   _gdk_quartz_events_update_focus_window (window, FALSE);
+  gdk_synthesize_window_state (window, GDK_WINDOW_STATE_FOCUSED, 0);
 }
 
 -(void)windowDidBecomeMain:(NSNotification *)aNotification
@@ -836,6 +838,21 @@ update_context_from_dragging_info (id <NSDraggingInfo> sender)
 -(void)windowDidEndLiveResize:(NSNotification *)aNotification
 {
   inMaximizeTransition = NO;
+}
+
+-(NSSize)window:(NSWindow *)window willUseFullScreenContentSize:(NSSize)proposedSize
+{
+  return [[window screen] frame].size;
+}
+
+-(void)windowWillEnterFullScreen:(NSNotification *)aNotification
+{
+  lastUnfullscreenFrame = [self frame];
+}
+
+-(void)windowWillExitFullScreen:(NSNotification *)aNotification
+{
+  [self setFrame:lastUnfullscreenFrame display:YES];
 }
 
 @end

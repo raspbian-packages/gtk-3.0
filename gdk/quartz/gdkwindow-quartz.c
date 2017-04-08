@@ -2422,7 +2422,10 @@ gdk_quartz_window_set_decorations (GdkWindow       *window,
         }
 
       if (new_mask == NSBorderlessWindowMask)
-        [impl->toplevel setContentSize:rect.size];
+        {
+          [impl->toplevel setContentSize:rect.size];
+          [impl->toplevel setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+        }
       else
         [impl->toplevel setFrame:rect display:YES];
 
@@ -2471,9 +2474,47 @@ static void
 gdk_quartz_window_set_functions (GdkWindow    *window,
                                  GdkWMFunction functions)
 {
+  GdkWindowImplQuartz *impl;
+  gboolean min, max, close;
+
   g_return_if_fail (GDK_IS_WINDOW (window));
 
-  /* FIXME: Implement */
+  impl = GDK_WINDOW_IMPL_QUARTZ (window->impl);
+
+  if (functions & GDK_FUNC_ALL)
+    {
+      min = !(functions & GDK_FUNC_MINIMIZE);
+      max = !(functions & GDK_FUNC_MAXIMIZE);
+      close = !(functions & GDK_FUNC_CLOSE);
+    }
+  else
+    {
+      min = (functions & GDK_FUNC_MINIMIZE);
+      max = (functions & GDK_FUNC_MAXIMIZE);
+      close = (functions & GDK_FUNC_CLOSE);
+    }
+
+  if (impl->toplevel)
+    {
+      NSUInteger mask = [impl->toplevel styleMask];
+
+      if (min)
+        mask = mask | NSMiniaturizableWindowMask;
+      else
+        mask = mask & ~NSMiniaturizableWindowMask;
+
+      if (max)
+        mask = mask | NSResizableWindowMask;
+      else
+        mask = mask & ~NSResizableWindowMask;
+
+      if (close)
+        mask = mask | NSClosableWindowMask;
+      else
+        mask = mask & ~NSClosableWindowMask;
+
+      [impl->toplevel setStyleMask:mask];
+    }
 }
 
 static void

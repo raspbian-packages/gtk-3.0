@@ -752,11 +752,20 @@ background<span class="gtkdoc opt">-</span>color<span class="gtkdoc opt">:</span
 
 </div>
 <br class="example-break"><p>
-      GTK+ also allows to form color expressions, which can be nested and
-      provide a rich language to define colors which are derived from a
-      set of base colors.
+      GTK+ also supports color expressions, which allow colors to be transformed
+      to new ones and can be nested, providing a rich language to define colors.
+      Color expressions resemble functions, taking 1 or more colors and in some
+      cases a number as arguments.
     </p>
-<div class="literallayout"><p><code class="code">〈color expression〉 = lighter(〈color〉) | darker(〈color〉) | shade(〈number〉,〈color〉) | alpha(〈number〉,〈color〉) | mix(〈number〉,〈color〉,〈color〉)</code><br>
+<p>
+      shade() leaves the color unchanged when the number is 1 and transforms it
+      to black or white as the number approaches 0 or 2 respectively. For mix(),
+      0 or 1 return the unaltered 1st or 2nd color respectively; numbers between
+      0 and 1 return blends of the two; and numbers below 0 or above 1 intensify
+      the RGB components of the 1st or 2nd color respectively. alpha() takes a
+      number from 0 to 1 and applies that as the opacity of the supplied color.
+    </p>
+<div class="literallayout"><p><code class="code">〈color expression〉 = lighter(〈color〉) | darker(〈color〉) | shade(〈color〉,〈number〉) | alpha(〈color〉,〈number〉) | mix(〈color〉,〈color〉,〈number〉)</code><br>
 </p></div>
 <p>
       On Windows, GTK+ allows to refer to system colors, as follows:

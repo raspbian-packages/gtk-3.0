@@ -491,26 +491,6 @@ gdk_owner_change_get_type (void)
     return etype;
 }
 
-/* enumerations from "gdkmonitor.h" */
-GType
-gdk_subpixel_layout_get_type (void)
-{
-    static GType etype = 0;
-    if (G_UNLIKELY(etype == 0)) {
-        static const GEnumValue values[] = {
-            { GDK_SUBPIXEL_LAYOUT_UNKNOWN, "GDK_SUBPIXEL_LAYOUT_UNKNOWN", "unknown" },
-            { GDK_SUBPIXEL_LAYOUT_NONE, "GDK_SUBPIXEL_LAYOUT_NONE", "none" },
-            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB", "horizontal-rgb" },
-            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR", "horizontal-bgr" },
-            { GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB, "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB", "vertical-rgb" },
-            { GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR, "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR", "vertical-bgr" },
-            { 0, NULL, NULL }
-        };
-        etype = g_enum_register_static (g_intern_static_string ("GdkSubpixelLayout"), values);
-    }
-    return etype;
-}
-
 /* enumerations from "gdkframeclock.h" */
 GType
 gdk_frame_clock_phase_get_type (void)
@@ -529,6 +509,26 @@ gdk_frame_clock_phase_get_type (void)
             { 0, NULL, NULL }
         };
         etype = g_flags_register_static (g_intern_static_string ("GdkFrameClockPhase"), values);
+    }
+    return etype;
+}
+
+/* enumerations from "gdkmonitor.h" */
+GType
+gdk_subpixel_layout_get_type (void)
+{
+    static GType etype = 0;
+    if (G_UNLIKELY(etype == 0)) {
+        static const GEnumValue values[] = {
+            { GDK_SUBPIXEL_LAYOUT_UNKNOWN, "GDK_SUBPIXEL_LAYOUT_UNKNOWN", "unknown" },
+            { GDK_SUBPIXEL_LAYOUT_NONE, "GDK_SUBPIXEL_LAYOUT_NONE", "none" },
+            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB", "horizontal-rgb" },
+            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR", "horizontal-bgr" },
+            { GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB, "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB", "vertical-rgb" },
+            { GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR, "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR", "vertical-bgr" },
+            { 0, NULL, NULL }
+        };
+        etype = g_enum_register_static (g_intern_static_string ("GdkSubpixelLayout"), values);
     }
     return etype;
 }

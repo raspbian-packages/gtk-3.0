@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gtk+ 3.22.9\n"
+"Project-Id-Version: gtk+ 3.22.11\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtk"
 "%2B\n"
-"POT-Creation-Date: 2017-02-27 16:39-0500\n"
+"POT-Creation-Date: 2017-03-19 12:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,11 +80,11 @@ msgstr ""
 msgid "GDK debugging flags to unset"
 msgstr ""
 
-#: gdk/gdkwindow.c:2818
+#: gdk/gdkwindow.c:2826
 msgid "GL support disabled via GDK_DEBUG"
 msgstr ""
 
-#: gdk/gdkwindow.c:2829
+#: gdk/gdkwindow.c:2837
 msgid "The current backend does not support OpenGL"
 msgstr ""
 
@@ -430,7 +430,7 @@ msgctxt "keyboard label"
 msgid "Suspend"
 msgstr ""
 
-#: gdk/mir/gdkmirglcontext.c:48 gdk/mir/gdkmirwindowimpl.c:2230
+#: gdk/mir/gdkmirglcontext.c:48 gdk/mir/gdkmirwindowimpl.c:2207
 #: gdk/wayland/gdkglcontext-wayland.c:468 gdk/win32/gdkglcontext-win32.c:796
 #: gdk/x11/gdkglcontext-x11.c:1274
 msgid "No GL implementation is available"
@@ -442,14 +442,14 @@ msgstr ""
 msgid "Unable to create a GL context"
 msgstr ""
 
-#: gdk/mir/gdkmirwindowimpl.c:2192 gdk/mir/gdkmirwindowimpl.c:2202
+#: gdk/mir/gdkmirwindowimpl.c:2169 gdk/mir/gdkmirwindowimpl.c:2179
 #: gdk/wayland/gdkglcontext-wayland.c:418
 #: gdk/wayland/gdkglcontext-wayland.c:428 gdk/win32/gdkglcontext-win32.c:702
 #: gdk/x11/gdkglcontext-x11.c:968
 msgid "No available configurations for the given pixel format"
 msgstr ""
 
-#: gdk/mir/gdkmirwindowimpl.c:2238
+#: gdk/mir/gdkmirwindowimpl.c:2215
 msgid "3.2 core GL profile is not available on EGL implementation"
 msgstr ""
 
@@ -2125,40 +2125,40 @@ msgstr ""
 msgid "Paper Margins"
 msgstr ""
 
-#: gtk/gtkentry.c:9508 gtk/gtklabel.c:6665 gtk/gtktextview.c:9442
+#: gtk/gtkentry.c:9508 gtk/gtklabel.c:6665 gtk/gtktextview.c:9443
 msgid "Cu_t"
 msgstr ""
 
-#: gtk/gtkentry.c:9512 gtk/gtklabel.c:6666 gtk/gtktextview.c:9446
+#: gtk/gtkentry.c:9512 gtk/gtklabel.c:6666 gtk/gtktextview.c:9447
 msgid "_Copy"
 msgstr ""
 
-#: gtk/gtkentry.c:9516 gtk/gtklabel.c:6667 gtk/gtktextview.c:9448
+#: gtk/gtkentry.c:9516 gtk/gtklabel.c:6667 gtk/gtktextview.c:9449
 msgid "_Paste"
 msgstr ""
 
 #: gtk/gtkentry.c:9519 gtk/gtkfilechooserwidget.c:1478
-#: gtk/gtkfilechooserwidget.c:2278 gtk/gtklabel.c:6669 gtk/gtktextview.c:9451
+#: gtk/gtkfilechooserwidget.c:2278 gtk/gtklabel.c:6669 gtk/gtktextview.c:9452
 msgid "_Delete"
 msgstr ""
 
-#: gtk/gtkentry.c:9530 gtk/gtklabel.c:6678 gtk/gtktextview.c:9465
+#: gtk/gtkentry.c:9530 gtk/gtklabel.c:6678 gtk/gtktextview.c:9466
 msgid "Select _All"
 msgstr ""
 
-#: gtk/gtkentry.c:9703 gtk/gtktextview.c:9690
+#: gtk/gtkentry.c:9703 gtk/gtktextview.c:9691
 msgid "Select all"
 msgstr ""
 
-#: gtk/gtkentry.c:9706 gtk/gtktextview.c:9693
+#: gtk/gtkentry.c:9706 gtk/gtktextview.c:9694
 msgid "Cut"
 msgstr ""
 
-#: gtk/gtkentry.c:9709 gtk/gtktextview.c:9696
+#: gtk/gtkentry.c:9709 gtk/gtktextview.c:9697
 msgid "Copy"
 msgstr ""
 
-#: gtk/gtkentry.c:9712 gtk/gtktextview.c:9699
+#: gtk/gtkentry.c:9712 gtk/gtktextview.c:9700
 msgid "Paste"
 msgstr ""
 
@@ -2188,7 +2188,7 @@ msgstr ""
 
 #. Open item is always present
 #: gtk/gtkfilechoosernative.c:515 gtk/gtkfilechoosernative.c:600
-#: gtk/gtkplacessidebar.c:3412 gtk/gtkplacesview.c:1643
+#: gtk/gtkplacessidebar.c:3412 gtk/gtkplacesview.c:1640
 msgid "_Open"
 msgstr ""
 
@@ -2996,11 +2996,11 @@ msgstr ""
 msgid "Unable to poll “%s” for media changes"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:3415 gtk/gtkplacesview.c:1653
+#: gtk/gtkplacessidebar.c:3415 gtk/gtkplacesview.c:1650
 msgid "Open in New _Tab"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:3418 gtk/gtkplacesview.c:1664
+#: gtk/gtkplacessidebar.c:3418 gtk/gtkplacesview.c:1661
 msgid "Open in New _Window"
 msgstr ""
 
@@ -3016,11 +3016,11 @@ msgstr ""
 msgid "Rename…"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:3428 gtk/gtkplacesview.c:1698
+#: gtk/gtkplacessidebar.c:3428 gtk/gtkplacesview.c:1695
 msgid "_Mount"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:3429 gtk/gtkplacesview.c:1688
+#: gtk/gtkplacessidebar.c:3429 gtk/gtkplacesview.c:1685
 msgid "_Unmount"
 msgstr ""
 
@@ -3032,55 +3032,55 @@ msgstr ""
 msgid "_Detect Media"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:3877 gtk/gtkplacesview.c:1081
+#: gtk/gtkplacessidebar.c:3877 gtk/gtkplacesview.c:1078
 msgid "Computer"
 msgstr ""
 
-#: gtk/gtkplacesview.c:892
+#: gtk/gtkplacesview.c:889
 msgid "Searching for network locations"
 msgstr ""
 
-#: gtk/gtkplacesview.c:899
+#: gtk/gtkplacesview.c:896
 msgid "No network locations found"
 msgstr ""
 
 #. if it wasn't cancelled show a dialog
-#: gtk/gtkplacesview.c:1192 gtk/gtkplacesview.c:1267
+#: gtk/gtkplacesview.c:1189 gtk/gtkplacesview.c:1264
 msgid "Unable to access location"
 msgstr ""
 
 #. Restore from Cancel to Connect
-#: gtk/gtkplacesview.c:1210 gtk/ui/gtkplacesview.ui:449
+#: gtk/gtkplacesview.c:1207 gtk/ui/gtkplacesview.ui:449
 msgid "Con_nect"
 msgstr ""
 
 #. if it wasn't cancelled show a dialog
-#: gtk/gtkplacesview.c:1330
+#: gtk/gtkplacesview.c:1327
 msgid "Unable to unmount volume"
 msgstr ""
 
 #. Allow to cancel the operation
-#: gtk/gtkplacesview.c:1431
+#: gtk/gtkplacesview.c:1428
 msgid "Cance_l"
 msgstr ""
 
-#: gtk/gtkplacesview.c:1688
+#: gtk/gtkplacesview.c:1685
 msgid "_Disconnect"
 msgstr ""
 
-#: gtk/gtkplacesview.c:1698
+#: gtk/gtkplacesview.c:1695
 msgid "_Connect"
 msgstr ""
 
-#: gtk/gtkplacesview.c:1839
+#: gtk/gtkplacesview.c:1836
 msgid "Unable to get remote server location"
 msgstr ""
 
-#: gtk/gtkplacesview.c:1978 gtk/gtkplacesview.c:1987
+#: gtk/gtkplacesview.c:1975 gtk/gtkplacesview.c:1984
 msgid "Networks"
 msgstr ""
 
-#: gtk/gtkplacesview.c:1978 gtk/gtkplacesview.c:1987
+#: gtk/gtkplacesview.c:1975 gtk/gtkplacesview.c:1984
 msgid "On This Computer"
 msgstr ""
 
@@ -3425,19 +3425,19 @@ msgctxt "recent menu label"
 msgid "%d. %s"
 msgstr ""
 
-#: gtk/gtkrecentmanager.c:1053 gtk/gtkrecentmanager.c:1066
-#: gtk/gtkrecentmanager.c:1203 gtk/gtkrecentmanager.c:1213
-#: gtk/gtkrecentmanager.c:1265 gtk/gtkrecentmanager.c:1274
+#: gtk/gtkrecentmanager.c:1055 gtk/gtkrecentmanager.c:1068
+#: gtk/gtkrecentmanager.c:1205 gtk/gtkrecentmanager.c:1215
+#: gtk/gtkrecentmanager.c:1267 gtk/gtkrecentmanager.c:1276
 #, c-format
 msgid "Unable to find an item with URI '%s'"
 msgstr ""
 
-#: gtk/gtkrecentmanager.c:1289
+#: gtk/gtkrecentmanager.c:1291
 #, c-format
 msgid "Unable to move the item with URI '%s' to '%s'"
 msgstr ""
 
-#: gtk/gtkrecentmanager.c:2507
+#: gtk/gtkrecentmanager.c:2509
 #, c-format
 msgid "No registered application with name '%s' for item with URI '%s' found"
 msgstr ""
