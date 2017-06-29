@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<book xmlns="http://www.devhelp.net/book" title="GDK 3 Reference Manual" link="index.html" author="" name="gdk3" version="2" language="c" online="http://developer.gnome.org/gdk3/">
+<book xmlns="http://www.devhelp.net/book" title="GDK 3 Reference Manual" link="index.html" author="" name="gdk3" version="2" language="c" online="https://developer.gnome.org/gdk3/">
   <chapters>
     <sub name="API Reference" link="reference.html">
       <sub name="General" link="gdk3-General.html"/>

@@ -427,6 +427,58 @@ treeview entry {
   }
 }
 
+.entry-tag {
+  // sizing
+  padding: 5px;
+
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+  // side margins: compensate the entry padding with a negative margin
+  // then the negative margin itself
+  :dir(ltr) & {
+    margin-left: 8px;
+    margin-right: -5px;
+  }
+  :dir(rtl) & {
+    margin-left: -5px;
+    margin-right: 8px;
+  }
+
+  border-style: none;
+
+  $_entry_tag_color: if($variant=='light', $selected_fg_color, $base_color);
+  color: $_entry_tag_color;
+
+  $_entry_tag_bg: if($variant=='light', $selected_bg_color, mix($fg_color, $base_color, 50%));
+  background-color: $_entry_tag_bg;
+
+  &:hover {
+    background-color: lighten($_entry_tag_bg, 10%);
+  }
+
+  :backdrop & {
+    color: $backdrop_base_color;
+    background-color: if($variant=='light', $selected_bg_color,
+                                            mix($backdrop_fg_color, $backdrop_base_color, 50%));
+  }
+
+  &.button {
+    background-color: transparent;
+    color: transparentize($_entry_tag_color, 0.3);
+  }
+
+  :not(:backdrop) &.button {
+    &:hover {
+      border: 1px solid $_entry_tag_bg;
+      color: $_entry_tag_color;
+    }
+    &:active {
+      background-color: $_entry_tag_bg;
+      color: transparentize($_entry_tag_color, 0.3);
+    }
+  }
+}
 
 /***********
  * Buttons *
@@ -1535,8 +1587,14 @@ headerbar {
     }
   }
 
+  // squared corners when the window is maximized, tiled, or fullscreen
   .tiled &,
-  .maximized & { &:backdrop, & { border-radius: 0; }} // squared corners when the window is maximized or tiled
+  .maximized &,
+  .fullscreen & {
+    &:backdrop, & {
+      border-radius: 0;
+    }
+  }
 
   &.default-decoration {
     min-height: 28px;
@@ -1586,10 +1644,10 @@ headerbar {
 }
 
 headerbar { // headerbar border rounding
-  window:not(.tiled):not(.maximized):not(.solid-csd) separator:first-child + &, // tackles the paned container case
-  window:not(.tiled):not(.maximized):not(.solid-csd) &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-  window:not(.tiled):not(.maximized):not(.solid-csd) &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
-  window:not(.tiled):not(.maximized):not(.solid-csd) stack & { // tackles the stacked headerbars case
+  window:not(.tiled):not(.maximized):not(.fullscreen):not(.solid-csd) separator:first-child + &, // tackles the paned container case
+  window:not(.tiled):not(.maximized):not(.fullscreen):not(.solid-csd) &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
+  window:not(.tiled):not(.maximized):not(.fullscreen):not(.solid-csd) &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
+  window:not(.tiled):not(.maximized):not(.fullscreen):not(.solid-csd) stack & { // tackles the stacked headerbars case
     &:first-child, &:last-child {
       &:backdrop, & {
         border-top-left-radius: 7px;
@@ -1826,8 +1884,6 @@ treeview.view {
         transition: none; //I shouldn't need this
       }
     }
-
-    button:last-child { &:backdrop, & { border-right-style: none; }}
   }
 
   button.dnd,
@@ -1873,6 +1929,8 @@ treeview.view {
       background-image: none;
     }
   }
+
+  &:last-child { &:backdrop, & { border-right-style: none; }}
 }
 
 
@@ -1906,7 +1964,7 @@ menubar,
 menu,
 .menu,
 .context-menu {
-  margin: 4px;
+  margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 2px 0px;
   background-color: $menu_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
@@ -2639,6 +2697,19 @@ radio {
   margin: 0 4px;
 
   &:only-child { margin: 0; }
+
+  popover & { // when in a popover add more space between the label and the check, reset the other side margin.
+              // See https://bugzilla.gnome.org/show_bug.cgi?id=779570 for details.
+    &.left:dir(rtl) {
+      margin-left: 0;
+      margin-right: 12px;
+    }
+
+    &.right:dir(ltr) {
+      margin-left: 12px;
+      margin-right: 0;
+    }
+  }
 
   min-height: 14px;
   min-width: 14px;

@@ -1197,6 +1197,7 @@ POSUB = @POSUB@
 RANLIB = @RANLIB@
 REST_CFLAGS = @REST_CFLAGS@
 REST_LIBS = @REST_LIBS@
+SASSC = @SASSC@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -2335,36 +2336,46 @@ gesture_sources = \
 	gesture/gesture-two-finger-swipe-left-symbolic.svg	\
 	gesture/gesture-two-finger-swipe-right-symbolic.svg
 
-theme_sources = \
-	theme/win32/gtk.css	 		\
-	theme/win32/gtk-win32-base.css 		\
-	theme/Adwaita/assets.txt 		\
-	theme/Adwaita/assets.svg 		\
+adwaita_theme_scss = \
 	theme/Adwaita/_colors-public.scss 	\
 	theme/Adwaita/_colors.scss 		\
 	theme/Adwaita/_common.scss 		\
 	theme/Adwaita/_drawing.scss 		\
 	theme/Adwaita/gtk-contained-dark.scss 	\
 	theme/Adwaita/gtk-contained.scss 	\
-	theme/Adwaita/parse-sass.sh 		\
-	theme/Adwaita/render-assets.sh 		\
-	theme/Adwaita/Gemfile 			\
-	theme/Adwaita/README 			\
-	theme/Adwaita/gtk-contained.css 	\
-	theme/Adwaita/gtk-contained-dark.css 	\
-	theme/Adwaita/gtk.css 			\
-	theme/Adwaita/gtk-dark.css 		\
+	$()
+
+highcontrast_theme_scss = \
 	theme/HighContrast/_colors.scss 	\
 	theme/HighContrast/_common.scss 	\
 	theme/HighContrast/_drawing.scss 	\
 	theme/HighContrast/gtk-contained-inverse.scss \
 	theme/HighContrast/gtk-contained.scss 	\
-	theme/HighContrast/Gemfile 		\
+	$()
+
+
+# If we have sassc then we can rebuild the theme CSS as soon as the SCSS
+# files have been changed
+@REBUILD_SCSS_TRUE@scss_verbose = $(scss_verbose_@AM_V@)
+@REBUILD_SCSS_TRUE@scss_verbose_ = $(scss_verbose_@AM_DEFAULT_V@)
+@REBUILD_SCSS_TRUE@scss_verbose_0 = @echo "  SCSS     $@";
+@REBUILD_SCSS_TRUE@SASSC_OPTS = -a -M -t compact
+theme_sources = \
+	theme/win32/gtk.css	 		\
+	theme/win32/gtk-win32-base.css 		\
+	$(adwaita_theme_scss)			\
+	theme/Adwaita/assets.txt 		\
+	theme/Adwaita/assets.svg 		\
+	theme/Adwaita/README 			\
+	theme/Adwaita/gtk-contained.css 	\
+	theme/Adwaita/gtk-contained-dark.css 	\
+	theme/Adwaita/gtk.css 			\
+	theme/Adwaita/gtk-dark.css 		\
+	$(highcontrast_theme_scss)		\
 	theme/HighContrast/gtk-contained.css 	\
 	theme/HighContrast/gtk-contained-inverse.css \
 	theme/HighContrast/gtk.css 		\
 	theme/HighContrast/gtk-inverse.css 	\
-	theme/HighContrast/parse-sass.sh 	\
 	theme/Raleigh/gtk-default.css
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(builddir)/gtk.gresource.xml)
@@ -7740,14 +7751,20 @@ $(gtk_dbus_built_sources) : Makefile.am gtkdbusinterfaces.xml
 gtkmarshalers.h: stamp-gtkmarshalers.h
 	@true
 stamp-gtkmarshalers.h: gtkmarshalers.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=_gtk_marshal $(srcdir)/gtkmarshalers.list --header --valist-marshallers >> xgen-gmlh \
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) \
+		--prefix=_gtk_marshal \
+		--header \
+		--valist-marshallers \
+		$(srcdir)/gtkmarshalers.list >> xgen-gmlh \
 	&& (cmp -s xgen-gmlh gtkmarshalers.h || cp xgen-gmlh gtkmarshalers.h) \
 	&& rm -f xgen-gmlh \
 	&& echo timestamp > $(@F)
 gtkmarshalers.c: gtkmarshalers.list
-	$(AM_V_GEN) (echo "#include \"gtkmarshalers.h\""; \
-	 echo "#undef G_ENABLE_DEBUG"; \
-	 $(GLIB_GENMARSHAL) --prefix=_gtk_marshal $(srcdir)/gtkmarshalers.list --body  --valist-marshallers) >> xgen-gmlc \
+	$(AM_V_GEN) (echo "#undef G_ENABLE_DEBUG"; \
+	 $(GLIB_GENMARSHAL) \
+	 	--prefix=_gtk_marshal \
+		--body \
+		--valist-marshallers $(srcdir)/gtkmarshalers.list) >> xgen-gmlc \
 	&& cp xgen-gmlc gtkmarshalers.c \
 	&& rm -f xgen-gmlc
 
@@ -7827,6 +7844,18 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	echo "    <file>inspector/logo.png</file>" >> $@; \
 	echo "  </gresource>" >> $@; \
 	echo "</gresources>" >> $@;
+
+@REBUILD_SCSS_TRUE@theme/Adwaita/gtk-contained.css: $(top_srcdir)/gtk/theme/Adwaita/gtk-contained.scss $(adwaita_theme_scss)
+@REBUILD_SCSS_TRUE@	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+@REBUILD_SCSS_TRUE@theme/Adwaita/gtk-contained-dark.css: $(top_srcdir)/gtk/theme/Adwaita/gtk-contained-dark.scss $(adwaita_theme_scss)
+@REBUILD_SCSS_TRUE@	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+@REBUILD_SCSS_TRUE@theme/HighContrast/gtk-contained.css: $(top_srcdir)/gtk/theme/HighContrast/gtk-contained.scss $(highcontrast_theme_scss)
+@REBUILD_SCSS_TRUE@	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+@REBUILD_SCSS_TRUE@theme/HighContrast/gtk-contained-inverse.css: $(top_srcdir)/gtk/theme/HighContrast/gtk-contained-inverse.scss $(highcontrast_theme_scss)
+@REBUILD_SCSS_TRUE@	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
 
 gtkresources.h: gtk.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< \

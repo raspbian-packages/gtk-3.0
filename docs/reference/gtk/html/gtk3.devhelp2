@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<book xmlns="http://www.devhelp.net/book" title="GTK+ 3 Reference Manual" link="index.html" author="" name="gtk3" version="2" language="c" online="http://developer.gnome.org/gtk3/">
+<book xmlns="http://www.devhelp.net/book" title="GTK+ 3 Reference Manual" link="index.html" author="" name="gtk3" version="2" language="c" online="https://developer.gnome.org/gtk3/">
   <chapters>
     <sub name="GTK+ Overview" link="gtk.html">
       <sub name="Getting Started with GTK+" link="gtk-getting-started.html">
@@ -7101,6 +7101,7 @@
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_ABOVE" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-ABOVE:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_BELOW_TEXT" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-BELOW-TEXT:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_ABOVE_TEXT" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-ABOVE-TEXT:CAPS"/>
+    <keyword type="constant" name="GTK_TEXT_WINDOW_PRIVATE" link="GtkTextView.html#GTK-TEXT-WINDOW-PRIVATE:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_WIDGET" link="GtkTextView.html#GTK-TEXT-WINDOW-WIDGET:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_TEXT" link="GtkTextView.html#GTK-TEXT-WINDOW-TEXT:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_LEFT" link="GtkTextView.html#GTK-TEXT-WINDOW-LEFT:CAPS"/>

@@ -1,4 +1,3 @@
-#include "gdkmarshalers.h"
 
 #include	<glib-object.h>
 
@@ -55,6 +54,12 @@
 /* VOID:BOOLEAN (./gdkmarshalers.list:2) */
 
 /* VOID:POINTER,POINTER,POINTER (./gdkmarshalers.list:3) */
+extern void _gdk_marshal_VOID__POINTER_POINTER_POINTER (GClosure     *closure,
+                                                        GValue       *return_value,
+                                                        guint         n_param_values,
+                                                        const GValue *param_values,
+                                                        gpointer      invocation_hint,
+                                                        gpointer      marshal_data);
 void
 _gdk_marshal_VOID__POINTER_POINTER_POINTER (GClosure     *closure,
                                             GValue       *return_value G_GNUC_UNUSED,
@@ -94,9 +99,15 @@ _gdk_marshal_VOID__POINTER_POINTER_POINTER (GClosure     *closure,
 }
 
 /* OBJECT:VOID (./gdkmarshalers.list:4) */
+extern void _gdk_marshal_OBJECT__VOID (GClosure     *closure,
+                                       GValue       *return_value,
+                                       guint         n_param_values,
+                                       const GValue *param_values,
+                                       gpointer      invocation_hint,
+                                       gpointer      marshal_data);
 void
 _gdk_marshal_OBJECT__VOID (GClosure     *closure,
-                           GValue       *return_value G_GNUC_UNUSED,
+                           GValue       *return_value,
                            guint         n_param_values,
                            const GValue *param_values,
                            gpointer      invocation_hint G_GNUC_UNUSED,
@@ -131,9 +142,15 @@ _gdk_marshal_OBJECT__VOID (GClosure     *closure,
 }
 
 /* OBJECT:DOUBLE,DOUBLE (./gdkmarshalers.list:5) */
+extern void _gdk_marshal_OBJECT__DOUBLE_DOUBLE (GClosure     *closure,
+                                                GValue       *return_value,
+                                                guint         n_param_values,
+                                                const GValue *param_values,
+                                                gpointer      invocation_hint,
+                                                gpointer      marshal_data);
 void
 _gdk_marshal_OBJECT__DOUBLE_DOUBLE (GClosure     *closure,
-                                    GValue       *return_value G_GNUC_UNUSED,
+                                    GValue       *return_value,
                                     guint         n_param_values,
                                     const GValue *param_values,
                                     gpointer      invocation_hint G_GNUC_UNUSED,
@@ -172,9 +189,15 @@ _gdk_marshal_OBJECT__DOUBLE_DOUBLE (GClosure     *closure,
 }
 
 /* BOXED:INT,INT (./gdkmarshalers.list:6) */
+extern void _gdk_marshal_BOXED__INT_INT (GClosure     *closure,
+                                         GValue       *return_value,
+                                         guint         n_param_values,
+                                         const GValue *param_values,
+                                         gpointer      invocation_hint,
+                                         gpointer      marshal_data);
 void
 _gdk_marshal_BOXED__INT_INT (GClosure     *closure,
-                             GValue       *return_value G_GNUC_UNUSED,
+                             GValue       *return_value,
                              guint         n_param_values,
                              const GValue *param_values,
                              gpointer      invocation_hint G_GNUC_UNUSED,
@@ -213,6 +236,12 @@ _gdk_marshal_BOXED__INT_INT (GClosure     *closure,
 }
 
 /* VOID:DOUBLE,DOUBLE,POINTER,POINTER (./gdkmarshalers.list:7) */
+extern void _gdk_marshal_VOID__DOUBLE_DOUBLE_POINTER_POINTER (GClosure     *closure,
+                                                              GValue       *return_value,
+                                                              guint         n_param_values,
+                                                              const GValue *param_values,
+                                                              gpointer      invocation_hint,
+                                                              gpointer      marshal_data);
 void
 _gdk_marshal_VOID__DOUBLE_DOUBLE_POINTER_POINTER (GClosure     *closure,
                                                   GValue       *return_value G_GNUC_UNUSED,
@@ -254,6 +283,12 @@ _gdk_marshal_VOID__DOUBLE_DOUBLE_POINTER_POINTER (GClosure     *closure,
 }
 
 /* VOID:POINTER,POINTER,BOOLEAN,BOOLEAN (./gdkmarshalers.list:8) */
+extern void _gdk_marshal_VOID__POINTER_POINTER_BOOLEAN_BOOLEAN (GClosure     *closure,
+                                                                GValue       *return_value,
+                                                                guint         n_param_values,
+                                                                const GValue *param_values,
+                                                                gpointer      invocation_hint,
+                                                                gpointer      marshal_data);
 void
 _gdk_marshal_VOID__POINTER_POINTER_BOOLEAN_BOOLEAN (GClosure     *closure,
                                                     GValue       *return_value G_GNUC_UNUSED,

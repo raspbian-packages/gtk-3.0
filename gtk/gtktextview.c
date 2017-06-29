@@ -43,7 +43,6 @@
 #include "gtkselectionprivate.h"
 #include "gtktextbufferrichtext.h"
 #include "gtktextdisplay.h"
-#include "gtktextiterprivate.h"
 #include "gtktextview.h"
 #include "gtkimmulticontext.h"
 #include "gtkprivate.h"
@@ -6417,15 +6416,21 @@ move_cursor (GtkTextView       *text_view,
 }
 
 static gboolean
-iter_line_is_rtl (GtkTextIter *iter, GtkTextLayout *layout)
+iter_line_is_rtl (const GtkTextIter *iter)
 {
-  GtkTextLine *line = _gtk_text_iter_get_text_line (iter);
-  GtkTextLineDisplay *display = gtk_text_layout_get_line_display (layout, line, FALSE);
-  GtkTextDirection direction = display->direction;
+  GtkTextIter start, end;
+  char *text;
+  PangoDirection direction;
 
-  gtk_text_layout_free_line_display (layout, display);
+  start = end = *iter;
+  gtk_text_iter_set_line_offset (&start, 0);
+  gtk_text_iter_forward_line (&end);
+  text = gtk_text_iter_get_visible_text (&start, &end);
+  direction = pango_find_base_dir (text, -1);
 
-  return direction == GTK_TEXT_DIR_RTL;
+  g_free (text);
+
+  return direction == PANGO_DIRECTION_RTL;
 }
 
 static void
@@ -6528,7 +6533,7 @@ gtk_text_view_move_cursor (GtkTextView     *text_view,
       gtk_text_buffer_get_iter_at_mark (get_buffer (text_view), &sel_bound,
                                         gtk_text_buffer_get_selection_bound (get_buffer (text_view)));
 
-      if (iter_line_is_rtl (&insert, priv->layout))
+      if (iter_line_is_rtl (&insert))
         move_forward = !move_forward;
 
       /* if we move forward, assume the cursor is at the end of the selection;
@@ -6566,7 +6571,7 @@ gtk_text_view_move_cursor (GtkTextView     *text_view,
       break;
 
     case GTK_MOVEMENT_WORDS:
-      if (iter_line_is_rtl (&newplace, priv->layout))
+      if (iter_line_is_rtl (&newplace))
         count *= -1;
 
       if (count < 0)
@@ -10349,9 +10354,9 @@ gtk_text_view_get_css_node (GtkTextView       *text_view,
  * @window: a window type
  *
  * Usually used to find out which window an event corresponds to.
+ *
  * If you connect to an event signal on @text_view, this function
- * should be called on `event->window` to
- * see which window it was.
+ * should be called on `event->window` to see which window it was.
  *
  * Returns: the window type.
  **/
@@ -10361,8 +10366,8 @@ gtk_text_view_get_window_type (GtkTextView *text_view,
 {
   GtkTextWindow *win;
 
-  g_return_val_if_fail (GTK_IS_TEXT_VIEW (text_view), 0);
-  g_return_val_if_fail (GDK_IS_WINDOW (window), 0);
+  g_return_val_if_fail (GTK_IS_TEXT_VIEW (text_view), GTK_TEXT_WINDOW_PRIVATE);
+  g_return_val_if_fail (GDK_IS_WINDOW (window), GTK_TEXT_WINDOW_PRIVATE);
 
   if (window == gtk_widget_get_window (GTK_WIDGET (text_view)))
     return GTK_TEXT_WINDOW_WIDGET;
@@ -10372,10 +10377,8 @@ gtk_text_view_get_window_type (GtkTextView *text_view,
 
   if (win)
     return win->type;
-  else
-    {
-      return GTK_TEXT_WINDOW_PRIVATE;
-    }
+
+  return GTK_TEXT_WINDOW_PRIVATE;
 }
 
 static void
@@ -10443,7 +10446,7 @@ buffer_to_text_window (GtkTextView   *text_view,
 /**
  * gtk_text_view_buffer_to_window_coords:
  * @text_view: a #GtkTextView
- * @win: a #GtkTextWindowType except #GTK_TEXT_WINDOW_PRIVATE
+ * @win: a #GtkTextWindowType, except %GTK_TEXT_WINDOW_PRIVATE
  * @buffer_x: buffer x coordinate
  * @buffer_y: buffer y coordinate
  * @window_x: (out) (allow-none): window x coordinate return location or %NULL
@@ -10466,6 +10469,7 @@ gtk_text_view_buffer_to_window_coords (GtkTextView      *text_view,
   GtkTextViewPrivate *priv = text_view->priv;
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (text_view));
+  g_return_if_fail (win != GTK_TEXT_WINDOW_PRIVATE);
 
   switch (win)
     {
@@ -10587,7 +10591,7 @@ text_window_to_buffer (GtkTextView   *text_view,
 /**
  * gtk_text_view_window_to_buffer_coords:
  * @text_view: a #GtkTextView
- * @win: a #GtkTextWindowType except #GTK_TEXT_WINDOW_PRIVATE
+ * @win: a #GtkTextWindowType except %GTK_TEXT_WINDOW_PRIVATE
  * @window_x: window x coordinate
  * @window_y: window y coordinate
  * @buffer_x: (out) (allow-none): buffer x coordinate return location or %NULL
@@ -10610,6 +10614,7 @@ gtk_text_view_window_to_buffer_coords (GtkTextView      *text_view,
   GtkTextViewPrivate *priv = text_view->priv;
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (text_view));
+  g_return_if_fail (win != GTK_TEXT_WINDOW_PRIVATE);
 
   switch (win)
     {
@@ -10750,9 +10755,9 @@ set_window_height (GtkTextView      *text_view,
  * or the height of %GTK_TEXT_WINDOW_TOP or %GTK_TEXT_WINDOW_BOTTOM.
  * Automatically destroys the corresponding window if the size is set
  * to 0, and creates the window if the size is set to non-zero.  This
- * function can only be used for the “border windows,” it doesn’t work
- * with #GTK_TEXT_WINDOW_WIDGET, #GTK_TEXT_WINDOW_TEXT, or
- * #GTK_TEXT_WINDOW_PRIVATE.
+ * function can only be used for the “border windows”, and it won’t
+ * work with %GTK_TEXT_WINDOW_WIDGET, %GTK_TEXT_WINDOW_TEXT, or
+ * %GTK_TEXT_WINDOW_PRIVATE.
  **/
 void
 gtk_text_view_set_border_window_size (GtkTextView      *text_view,
@@ -10762,6 +10767,7 @@ gtk_text_view_set_border_window_size (GtkTextView      *text_view,
   GtkTextViewPrivate *priv = text_view->priv;
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (text_view));
+  g_return_if_fail (type != GTK_TEXT_WINDOW_PRIVATE);
   g_return_if_fail (size >= 0);
 
   switch (type)

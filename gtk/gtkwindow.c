@@ -130,8 +130,9 @@
  * # CSS nodes
  *
  * |[<!-- language="plain" -->
- * window
+ * window.background
  * ├── decoration
+ * ├── <titlebar child>.titlebar [.default-decoration]
  * ╰── <child>
  * ]|
  *
@@ -6014,7 +6015,8 @@ update_csd_visibility (GtkWindow *window)
   if (priv->title_box == NULL)
     return FALSE;
 
-  visible = !priv->fullscreen &&
+  visible = priv->decorated &&
+            !priv->fullscreen &&
             !(priv->titlebar == priv->title_box &&
               priv->maximized &&
               priv->hide_titlebar_when_maximized);
@@ -12663,8 +12665,6 @@ wayland_window_handle_exported (GdkWindow  *window,
   handle_str = g_strdup_printf ("wayland:%s", wayland_handle_str);
   data->callback (data->window, handle_str, data->user_data);
   g_free (handle_str);
-
-  g_free (data);
 }
 #endif
 

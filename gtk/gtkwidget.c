@@ -6083,7 +6083,6 @@ gtk_widget_size_allocate_with_baseline (GtkWidget     *widget,
                  G_OBJECT_TYPE_NAME (widget), widget,
                  real_allocation.x, real_allocation.y, real_allocation.width, real_allocation.height,
                  adjusted_allocation.x, adjusted_allocation.y, adjusted_allocation.width, adjusted_allocation.height);
-      adjusted_allocation = real_allocation; /* veto it */
     }
   else
     {
@@ -7892,7 +7891,8 @@ gtk_widget_reparent (GtkWidget *widget,
  * gtk_widget_intersect:
  * @widget: a #GtkWidget
  * @area: a rectangle
- * @intersection: (nullable): rectangle to store intersection of @widget and @area
+ * @intersection: (out caller-allocates) (optional): rectangle to store
+ *   intersection of @widget and @area
  *
  * Computes the intersection of a @widget’s area and @area, storing
  * the intersection in @intersection, and returns %TRUE if there was
@@ -14348,7 +14348,7 @@ style_start_element (GMarkupParseContext  *context,
           return;
         }
 
-      data->classes = g_slist_append (data->classes, g_strdup (name));
+      data->classes = g_slist_prepend (data->classes, g_strdup (name));
     }
   else if (strcmp (element_name, "style") == 0)
     {
@@ -15998,8 +15998,6 @@ gtk_widget_update_alpha (GtkWidget *widget)
   guint8 alpha;
 
   priv = widget->priv;
-
-  alpha = priv->user_alpha;
 
   context = _gtk_widget_get_style_context (widget);
   opacity =

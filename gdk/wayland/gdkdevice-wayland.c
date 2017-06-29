@@ -227,7 +227,6 @@ struct _GdkWaylandSeat
   guint32 repeat_key;
   guint32 repeat_count;
   gint64 repeat_deadline;
-  gint32 nkeys;
   GSettings *keyboard_settings;
   uint32_t keyboard_time;
   uint32_t keyboard_key_serial;
@@ -1869,7 +1868,7 @@ keyboard_handle_enter (void               *data,
 
   seat->keyboard_focus = wl_surface_get_user_data (surface);
   g_object_ref (seat->keyboard_focus);
-  seat->nkeys = 0;
+  seat->repeat_key = 0;
 
   event = gdk_event_new (GDK_FOCUS_CHANGE);
   event->focus_change.window = g_object_ref (seat->keyboard_focus);
@@ -1926,7 +1925,7 @@ keyboard_handle_leave (void               *data,
 
   g_object_unref (seat->keyboard_focus);
   seat->keyboard_focus = NULL;
-  seat->nkeys = 0;
+  seat->repeat_key = 0;
 
   GDK_NOTE (EVENTS,
             g_message ("focus out, seat %p surface %p",
@@ -2125,8 +2124,10 @@ deliver_key_event (GdkWaylandSeat *seat,
   _gdk_wayland_display_deliver_event (seat->display, event);
 
   GDK_NOTE (EVENTS,
-            g_message ("keyboard event, code %d, sym %d, "
+            g_message ("keyboard %s event%s, code %d, sym %d, "
                        "string %s, mods 0x%x",
+                       (state ? "press" : "release"),
+                       (from_key_repeat ? " (repeat)" : ""),
                        event->key.hardware_keycode, event->key.keyval,
                        event->key.string, event->key.state));
 
@@ -2141,16 +2142,14 @@ deliver_key_event (GdkWaylandSeat *seat,
       if (state) /* Another key is pressed */
         {
           seat->repeat_key = key;
-          seat->nkeys++;
         }
-      else /* a key is released */
+      else if (seat->repeat_key == key) /* Repeated key is released */
         {
-          /* The compositor may send us more key releases than key presses */
-          seat->nkeys = MAX (0, seat->nkeys - 1);
+          seat->repeat_key = 0;
         }
     }
 
-  if (seat->nkeys == 0)
+  if (!seat->repeat_key)
     return;
 
   seat->repeat_count++;
@@ -2867,6 +2866,10 @@ tablet_handle_done (void                 *data,
     GDK_WAYLAND_DEVICE_MANAGER (seat->device_manager);
   GdkDevice *master, *stylus_device, *eraser_device;
   gchar *master_name, *eraser_name;
+  gchar *vid, *pid;
+
+  vid = g_strdup_printf ("%.4x", tablet->vid);
+  pid = g_strdup_printf ("%.4x", tablet->pid);
 
   master_name = g_strdup_printf ("Master pointer for %s", tablet->name);
   master = g_object_new (GDK_TYPE_WAYLAND_DEVICE,
@@ -2892,6 +2895,8 @@ tablet_handle_done (void                 *data,
                                 "display", display,
                                 "device-manager", device_manager,
                                 "seat", seat,
+                                "vendor-id", vid,
+                                "product-id", pid,
                                 NULL);
 
   eraser_device = g_object_new (GDK_TYPE_WAYLAND_DEVICE,
@@ -2903,6 +2908,8 @@ tablet_handle_done (void                 *data,
                                 "display", display,
                                 "device-manager", device_manager,
                                 "seat", seat,
+                                "vendor-id", vid,
+                                "product-id", pid,
                                 NULL);
 
   tablet->master = master;
@@ -2926,6 +2933,8 @@ tablet_handle_done (void                 *data,
 
   g_free (eraser_name);
   g_free (master_name);
+  g_free (vid);
+  g_free (pid);
 }
 
 static void
