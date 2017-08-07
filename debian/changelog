@@ -1,3 +1,9 @@
+gtk+3.0 (3.22.17-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 26 Jul 2017 18:59:22 +0200
+
 gtk+3.0 (3.22.16-1+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]

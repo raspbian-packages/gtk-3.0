@@ -466,7 +466,7 @@ am__libgtk_3_la_SOURCES_DIST = a11y/gtkaccessibility.c \
 	gtkapplication-dbus.c gtkwin32embed.c gtkwin32embedwidget.c \
 	gtkmountoperation-stub.c gtksearchenginequartz.c \
 	gtkapplication-quartz.c gtkapplication-quartz-menu.c \
-	gtkquartz.c
+	gtkfilechoosernativequartz.c gtkquartz.c
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = a11y/libgtk_3_la-gtkaccessibility.lo \
 	a11y/libgtk_3_la-gtkaccessibilitymisc.lo \
@@ -873,6 +873,7 @@ am__objects_19 = libgtk_3_la-gtksearchenginequartz.lo \
 	libgtk_3_la-gtkmountoperation-stub.lo \
 	libgtk_3_la-gtkapplication-quartz.lo \
 	libgtk_3_la-gtkapplication-quartz-menu.lo \
+	libgtk_3_la-gtkfilechoosernativequartz.lo \
 	libgtk_3_la-gtkquartz.lo
 @USE_QUARTZ_TRUE@am__objects_20 = $(am__objects_19)
 am__objects_21 = libgtk_3_la-gtkmountoperation-stub.lo
@@ -2195,6 +2196,7 @@ gtk_use_quartz_c_sources = \
 	gtkmountoperation-stub.c \
 	gtkapplication-quartz.c \
 	gtkapplication-quartz-menu.c \
+	gtkfilechoosernativequartz.c \
 	gtkquartz.c
 
 gtk_use_stub_c_sources = \
@@ -3188,6 +3190,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechooserentry.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechoosernative.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechoosernativeportal.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechoosernativequartz.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechoosernativewin32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechooserutils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgtk_3_la-gtkfilechooserwidget.Plo@am__quote@
@@ -7200,6 +7203,13 @@ libgtk_3_la-gtkapplication-quartz-menu.lo: gtkapplication-quartz-menu.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtkapplication-quartz-menu.c' object='libgtk_3_la-gtkapplication-quartz-menu.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgtk_3_la_CFLAGS) $(CFLAGS) -c -o libgtk_3_la-gtkapplication-quartz-menu.lo `test -f 'gtkapplication-quartz-menu.c' || echo '$(srcdir)/'`gtkapplication-quartz-menu.c
+
+libgtk_3_la-gtkfilechoosernativequartz.lo: gtkfilechoosernativequartz.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgtk_3_la_CFLAGS) $(CFLAGS) -MT libgtk_3_la-gtkfilechoosernativequartz.lo -MD -MP -MF $(DEPDIR)/libgtk_3_la-gtkfilechoosernativequartz.Tpo -c -o libgtk_3_la-gtkfilechoosernativequartz.lo `test -f 'gtkfilechoosernativequartz.c' || echo '$(srcdir)/'`gtkfilechoosernativequartz.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgtk_3_la-gtkfilechoosernativequartz.Tpo $(DEPDIR)/libgtk_3_la-gtkfilechoosernativequartz.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtkfilechoosernativequartz.c' object='libgtk_3_la-gtkfilechoosernativequartz.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgtk_3_la_CFLAGS) $(CFLAGS) -c -o libgtk_3_la-gtkfilechoosernativequartz.lo `test -f 'gtkfilechoosernativequartz.c' || echo '$(srcdir)/'`gtkfilechoosernativequartz.c
 
 libgtk_3_la-gtkquartz.lo: gtkquartz.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgtk_3_la_CFLAGS) $(CFLAGS) -MT libgtk_3_la-gtkquartz.lo -MD -MP -MF $(DEPDIR)/libgtk_3_la-gtkquartz.Tpo -c -o libgtk_3_la-gtkquartz.lo `test -f 'gtkquartz.c' || echo '$(srcdir)/'`gtkquartz.c

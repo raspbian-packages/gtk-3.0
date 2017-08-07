@@ -90,8 +90,8 @@
 <p><span class="type">GtkFileChooserNative</span> is an abstraction of a dialog box suitable
 for use with “File/Open” or “File/Save as” commands. By default, this
 just uses a <a class="link" href="GtkFileChooserDialog.html" title="GtkFileChooserDialog"><span class="type">GtkFileChooserDialog</span></a> to implement the actual dialog.
-However, on certain platforms, such as Windows, the native platform
-file chooser is uses instead. When the application is running in a
+However, on certain platforms, such as Windows and macOS, the native platform
+file chooser is used instead. When the application is running in a
 sandboxed environment without direct filesystem access (such as Flatpak),
 <span class="type">GtkFileChooserNative</span> may call the proper APIs (portals) to let the user
 choose a file and make it available to the application.</p>
@@ -287,6 +287,20 @@ supported and will be silently ignored:</p>
 <li class="listitem"><p>Extra widgets added with <a class="link" href="GtkFileChooser.html#gtk-file-chooser-set-extra-widget" title="gtk_file_chooser_set_extra_widget ()"><code class="function">gtk_file_chooser_set_extra_widget()</code></a>.</p></li>
 <li class="listitem"><p>Use of custom previews by connecting to <a class="link" href="GtkFileChooser.html#GtkFileChooser-update-preview" title="The “update-preview” signal"><span class="type">“update-preview”</span></a>.</p></li>
 <li class="listitem"><p>Any <a class="link" href="GtkFileFilter.html" title="GtkFileFilter"><span class="type">GtkFileFilter</span></a> added with a custom filter.</p></li>
+</ul></div>
+</div>
+<div class="refsect3">
+<a name="gtkfilechooserdialognative-macos"></a><h4>macOS details</h4>
+<p>On macOS the NSSavePanel and NSOpenPanel classes are used to provide native
+file chooser dialogs. Some features provided by <a class="link" href="GtkFileChooserDialog.html" title="GtkFileChooserDialog"><span class="type">GtkFileChooserDialog</span></a> are
+not supported:</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem"><p>Extra widgets added with <a class="link" href="GtkFileChooser.html#gtk-file-chooser-set-extra-widget" title="gtk_file_chooser_set_extra_widget ()"><code class="function">gtk_file_chooser_set_extra_widget()</code></a>, unless the
+widget is an instance of GtkLabel, in which case the label text will be used
+to set the NSSavePanel message instance property.</p></li>
+<li class="listitem"><p>Use of custom previews by connecting to <a class="link" href="GtkFileChooser.html#GtkFileChooser-update-preview" title="The “update-preview” signal"><span class="type">“update-preview”</span></a>.</p></li>
+<li class="listitem"><p>Any <a class="link" href="GtkFileFilter.html" title="GtkFileFilter"><span class="type">GtkFileFilter</span></a> added with a custom filter.</p></li>
+<li class="listitem"><p>Shortcut folders.</p></li>
 </ul></div>
 </div>
 </div>
