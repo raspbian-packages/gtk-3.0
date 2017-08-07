@@ -1,3 +1,7 @@
+gtk+3.0 (3.22.17-1+rpi1) buster-staging; urgency=medium
+
+ -- Raspbian forward porter <root@raspbian.org>  Mon, 07 Aug 2017 05:42:50 +0000
+
 gtk+3.0 (3.22.17-1) unstable; urgency=medium
 
   * New upstream release.
