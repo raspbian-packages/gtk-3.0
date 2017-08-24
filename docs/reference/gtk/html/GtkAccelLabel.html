@@ -170,17 +170,17 @@ GtkAccelLabel implements
 <div class="refsect1">
 <a name="GtkAccelLabel.description"></a><h2>Description</h2>
 <p>The <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> widget is a subclass of <a class="link" href="GtkLabel.html" title="GtkLabel"><span class="type">GtkLabel</span></a> that also displays an
-accelerator key on the right of the label text, e.g. “Ctl+S”.
+accelerator key on the right of the label text, e.g. “Ctrl+S”.
 It is commonly used in menus to show the keyboard short-cuts for commands.</p>
 <p>The accelerator key to display is typically not set explicitly (although it
 can be, with <a class="link" href="GtkAccelLabel.html#gtk-accel-label-set-accel" title="gtk_accel_label_set_accel ()"><code class="function">gtk_accel_label_set_accel()</code></a>). Instead, the <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> displays
 the accelerators which have been added to a particular widget. This widget is
 set by calling <a class="link" href="GtkAccelLabel.html#gtk-accel-label-set-accel-widget" title="gtk_accel_label_set_accel_widget ()"><code class="function">gtk_accel_label_set_accel_widget()</code></a>.</p>
 <p>For example, a <a class="link" href="GtkMenuItem.html" title="GtkMenuItem"><span class="type">GtkMenuItem</span></a> widget may have an accelerator added to emit
-the “activate” signal when the “Ctl+S” key combination is pressed.
+the “activate” signal when the “Ctrl+S” key combination is pressed.
 A <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> is created and added to the <a class="link" href="GtkMenuItem.html" title="GtkMenuItem"><span class="type">GtkMenuItem</span></a>, and
 <a class="link" href="GtkAccelLabel.html#gtk-accel-label-set-accel-widget" title="gtk_accel_label_set_accel_widget ()"><code class="function">gtk_accel_label_set_accel_widget()</code></a> is called with the <a class="link" href="GtkMenuItem.html" title="GtkMenuItem"><span class="type">GtkMenuItem</span></a> as the
-second argument. The <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> will now display “Ctl+S” after its label.</p>
+second argument. The <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> will now display “Ctrl+S” after its label.</p>
 <p>Note that creating a <a class="link" href="GtkMenuItem.html" title="GtkMenuItem"><span class="type">GtkMenuItem</span></a> with <a class="link" href="GtkMenuItem.html#gtk-menu-item-new-with-label" title="gtk_menu_item_new_with_label ()"><code class="function">gtk_menu_item_new_with_label()</code></a> (or
 one of the similar functions for <a class="link" href="GtkCheckMenuItem.html" title="GtkCheckMenuItem"><span class="type">GtkCheckMenuItem</span></a> and <a class="link" href="GtkRadioMenuItem.html" title="GtkRadioMenuItem"><span class="type">GtkRadioMenuItem</span></a>)
 automatically adds a <a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> to the <a class="link" href="GtkMenuItem.html" title="GtkMenuItem"><span class="type">GtkMenuItem</span></a> and calls
@@ -294,7 +294,11 @@ gtk_accel_label_new (<em class="parameter"><code>const <a href="../glib/glib-Bas
 gtk_accel_label_set_accel_closure (<em class="parameter"><code><a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> *accel_label</code></em>,
                                    <em class="parameter"><code><a href="../gobject/gobject-Closures.html#GClosure"><span class="type">GClosure</span></a> *accel_closure</code></em>);</pre>
 <p>Sets the closure to be monitored by this accelerator label. The closure
-must be connected to an accelerator group; see <a class="link" href="gtk3-Keyboard-Accelerators.html#gtk-accel-group-connect" title="gtk_accel_group_connect ()"><code class="function">gtk_accel_group_connect()</code></a>.</p>
+must be connected to an accelerator group; see <a class="link" href="gtk3-Keyboard-Accelerators.html#gtk-accel-group-connect" title="gtk_accel_group_connect ()"><code class="function">gtk_accel_group_connect()</code></a>.
+Passing <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> for <em class="parameter"><code>accel_closure</code></em>
+ will dissociate <em class="parameter"><code>accel_label</code></em>
+ from its
+current closure, if any.</p>
 <div class="refsect3">
 <a name="gtk-accel-label-set-accel-closure.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -311,8 +315,9 @@ must be connected to an accelerator group; see <a class="link" href="gtk3-Keyboa
 </tr>
 <tr>
 <td class="parameter_name"><p>accel_closure</p></td>
-<td class="parameter_description"><p>the closure to monitor for accelerator changes.</p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p> the closure to monitor for accelerator changes,
+or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>
@@ -352,7 +357,10 @@ gtk_accel_label_get_accel_widget (<em class="parameter"><code><a class="link" hr
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_accel_label_set_accel_widget (<em class="parameter"><code><a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> *accel_label</code></em>,
                                   <em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *accel_widget</code></em>);</pre>
-<p>Sets the widget to be monitored by this accelerator label.</p>
+<p>Sets the widget to be monitored by this accelerator label. Passing <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> for
+<em class="parameter"><code>accel_widget</code></em>
+ will dissociate <em class="parameter"><code>accel_label</code></em>
+ from its current widget, if any.</p>
 <div class="refsect3">
 <a name="gtk-accel-label-set-accel-widget.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -369,8 +377,8 @@ gtk_accel_label_set_accel_widget (<em class="parameter"><code><a class="link" hr
 </tr>
 <tr>
 <td class="parameter_name"><p>accel_widget</p></td>
-<td class="parameter_description"><p>the widget to be monitored.</p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p> the widget to be monitored, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>
@@ -410,7 +418,7 @@ be needed by applications.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_accel_label_set_accel (<em class="parameter"><code><a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> *accel_label</code></em>,
                            <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> accelerator_key</code></em>,
-                           <em class="parameter"><code><a href="../gdk4/gdk4-Windows.html#GdkModifierType"><span class="type">GdkModifierType</span></a> accelerator_mods</code></em>);</pre>
+                           <em class="parameter"><code><a href="../html/gdk3-Windows.html#GdkModifierType"><span class="type">GdkModifierType</span></a> accelerator_mods</code></em>);</pre>
 <p>Manually sets a keyval and modifier mask as the accelerator rendered
 by <em class="parameter"><code>accel_label</code></em>
 .</p>
@@ -453,7 +461,7 @@ used regardless of any associated accel closure or widget.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_accel_label_get_accel (<em class="parameter"><code><a class="link" href="GtkAccelLabel.html" title="GtkAccelLabel"><span class="type">GtkAccelLabel</span></a> *accel_label</code></em>,
                            <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> *accelerator_key</code></em>,
-                           <em class="parameter"><code><a href="../gdk4/gdk4-Windows.html#GdkModifierType"><span class="type">GdkModifierType</span></a> *accelerator_mods</code></em>);</pre>
+                           <em class="parameter"><code><a href="../html/gdk3-Windows.html#GdkModifierType"><span class="type">GdkModifierType</span></a> *accelerator_mods</code></em>);</pre>
 <p>Gets the keyval and modifier mask set with
 <a class="link" href="GtkAccelLabel.html#gtk-accel-label-set-accel" title="gtk_accel_label_set_accel ()"><code class="function">gtk_accel_label_set_accel()</code></a>.</p>
 <div class="refsect3">

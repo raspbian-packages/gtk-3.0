@@ -5959,9 +5959,9 @@ gtk_widget_size_allocate_with_baseline (GtkWidget     *widget,
   gint min_width, min_height;
   gint old_baseline;
 
-  priv = widget->priv;
-
   g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  priv = widget->priv;
 
   if (!priv->visible && !_gtk_widget_is_toplevel (widget))
     return;
@@ -10658,9 +10658,10 @@ gtk_widget_set_parent_window (GtkWidget *widget,
  * gtk_widget_get_parent_window:
  * @widget: a #GtkWidget.
  *
- * Gets @widget’s parent window.
+ * Gets @widget’s parent window, or %NULL if it does not have one.
  *
- * Returns: (transfer none): the parent window of @widget.
+ * Returns: (transfer none) (nullable): the parent window of @widget, or %NULL
+ * if it does not have a parent window.
  **/
 GdkWindow *
 gtk_widget_get_parent_window (GtkWidget *widget)

@@ -1,14 +1,4 @@
-gtk+3.0 (3.22.17-1+rpi1) buster-staging; urgency=medium
-
- -- Raspbian forward porter <root@raspbian.org>  Mon, 07 Aug 2017 05:42:50 +0000
-
-gtk+3.0 (3.22.17-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 26 Jul 2017 18:59:22 +0200
-
-gtk+3.0 (3.22.16-1+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.22.18-1+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -19,7 +9,26 @@ gtk+3.0 (3.22.16-1+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Thu, 29 Jun 2017 02:45:52 +0000
+ -- Peter Michael Green <plugwash@raspbian.org>  Thu, 24 Aug 2017 20:14:39 +0000
+
+gtk+3.0 (3.22.18-1) unstable; urgency=medium
+
+  * Hi from Debconf
+  * New upstream release!
+    + Support entering emoji by name, using Ctrl-Shift-E (note there is a
+      whitelist for this currently - see GtkImContext docs)
+    + Wayland:
+     - Add support for the shortcut inhibitor protocol
+     - Support Wacome tablet wheel scrolling
+  * debian/control{,.in}: Bump wayland-protocols to 1.9, per upstream.
+
+ -- Iain Lane <laney@debian.org>  Thu, 10 Aug 2017 16:34:47 +0100
+
+gtk+3.0 (3.22.17-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 26 Jul 2017 18:59:22 +0200
 
 gtk+3.0 (3.22.16-1) unstable; urgency=medium
 

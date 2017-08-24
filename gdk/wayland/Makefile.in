@@ -125,7 +125,9 @@ am__objects_1 = pointer-gestures-unstable-v1-protocol.lo \
 	xdg-shell-unstable-v6-protocol.lo \
 	xdg-foreign-unstable-v1-protocol.lo \
 	gtk-primary-selection-protocol.lo \
-	tablet-unstable-v2-protocol.lo gtk-shell-protocol.lo
+	tablet-unstable-v2-protocol.lo \
+	keyboard-shortcuts-inhibit-unstable-v1-protocol.lo \
+	gtk-shell-protocol.lo
 nodist_libgdk_wayland_la_OBJECTS = $(am__objects_1)
 libgdk_wayland_la_OBJECTS = $(am_libgdk_wayland_la_OBJECTS) \
 	$(nodist_libgdk_wayland_la_OBJECTS)
@@ -559,6 +561,8 @@ BUILT_SOURCES = \
 	gtk-primary-selection-protocol.c			\
 	tablet-unstable-v2-client-protocol.h	\
 	tablet-unstable-v2-protocol.c		\
+	keyboard-shortcuts-inhibit-unstable-v1-client-protocol.h \
+	keyboard-shortcuts-inhibit-unstable-v1-protocol.c	\
 	gtk-shell-client-protocol.h		\
 	gtk-shell-protocol.c
 
@@ -671,6 +675,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdkwindow-wayland.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk-primary-selection-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk-shell-protocol.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/keyboard-shortcuts-inhibit-unstable-v1-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pointer-gestures-unstable-v1-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tablet-unstable-v2-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wm-button-layout-translation.Plo@am__quote@

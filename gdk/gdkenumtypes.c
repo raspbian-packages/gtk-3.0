@@ -3,7 +3,6 @@
 
 #include "config.h"
 #include "gdk.h"
-
 /* enumerations from "gdkcursor.h" */
 GType
 gdk_cursor_type_get_type (void)
@@ -97,7 +96,6 @@ gdk_cursor_type_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkdevice.h" */
 GType
 gdk_input_source_get_type (void)
@@ -120,7 +118,6 @@ gdk_input_source_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_input_mode_get_type (void)
 {
@@ -136,7 +133,6 @@ gdk_input_mode_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_device_type_get_type (void)
 {
@@ -152,7 +148,6 @@ gdk_device_type_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkdevicepad.h" */
 GType
 gdk_device_pad_feature_get_type (void)
@@ -169,7 +164,6 @@ gdk_device_pad_feature_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkdevicetool.h" */
 GType
 gdk_device_tool_type_get_type (void)
@@ -191,7 +185,6 @@ gdk_device_tool_type_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkdnd.h" */
 GType
 gdk_drag_action_get_type (void)
@@ -211,7 +204,6 @@ gdk_drag_action_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_drag_cancel_reason_get_type (void)
 {
@@ -227,7 +219,6 @@ gdk_drag_cancel_reason_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_drag_protocol_get_type (void)
 {
@@ -248,7 +239,6 @@ gdk_drag_protocol_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkevents.h" */
 GType
 gdk_filter_return_get_type (void)
@@ -265,7 +255,6 @@ gdk_filter_return_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_event_type_get_type (void)
 {
@@ -329,7 +318,6 @@ gdk_event_type_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_visibility_state_get_type (void)
 {
@@ -345,7 +333,6 @@ gdk_visibility_state_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_touchpad_gesture_phase_get_type (void)
 {
@@ -362,7 +349,6 @@ gdk_touchpad_gesture_phase_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_scroll_direction_get_type (void)
 {
@@ -380,7 +366,6 @@ gdk_scroll_direction_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_notify_type_get_type (void)
 {
@@ -399,7 +384,6 @@ gdk_notify_type_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_crossing_mode_get_type (void)
 {
@@ -421,7 +405,6 @@ gdk_crossing_mode_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_property_state_get_type (void)
 {
@@ -436,7 +419,6 @@ gdk_property_state_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_state_get_type (void)
 {
@@ -458,7 +440,6 @@ gdk_window_state_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_setting_action_get_type (void)
 {
@@ -474,7 +455,6 @@ gdk_setting_action_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_owner_change_get_type (void)
 {
@@ -490,7 +470,25 @@ gdk_owner_change_get_type (void)
     }
     return etype;
 }
-
+/* enumerations from "gdkmonitor.h" */
+GType
+gdk_subpixel_layout_get_type (void)
+{
+    static GType etype = 0;
+    if (G_UNLIKELY(etype == 0)) {
+        static const GEnumValue values[] = {
+            { GDK_SUBPIXEL_LAYOUT_UNKNOWN, "GDK_SUBPIXEL_LAYOUT_UNKNOWN", "unknown" },
+            { GDK_SUBPIXEL_LAYOUT_NONE, "GDK_SUBPIXEL_LAYOUT_NONE", "none" },
+            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB", "horizontal-rgb" },
+            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR", "horizontal-bgr" },
+            { GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB, "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB", "vertical-rgb" },
+            { GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR, "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR", "vertical-bgr" },
+            { 0, NULL, NULL }
+        };
+        etype = g_enum_register_static (g_intern_static_string ("GdkSubpixelLayout"), values);
+    }
+    return etype;
+}
 /* enumerations from "gdkframeclock.h" */
 GType
 gdk_frame_clock_phase_get_type (void)
@@ -512,27 +510,6 @@ gdk_frame_clock_phase_get_type (void)
     }
     return etype;
 }
-
-/* enumerations from "gdkmonitor.h" */
-GType
-gdk_subpixel_layout_get_type (void)
-{
-    static GType etype = 0;
-    if (G_UNLIKELY(etype == 0)) {
-        static const GEnumValue values[] = {
-            { GDK_SUBPIXEL_LAYOUT_UNKNOWN, "GDK_SUBPIXEL_LAYOUT_UNKNOWN", "unknown" },
-            { GDK_SUBPIXEL_LAYOUT_NONE, "GDK_SUBPIXEL_LAYOUT_NONE", "none" },
-            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB", "horizontal-rgb" },
-            { GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR, "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR", "horizontal-bgr" },
-            { GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB, "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB", "vertical-rgb" },
-            { GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR, "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR", "vertical-bgr" },
-            { 0, NULL, NULL }
-        };
-        etype = g_enum_register_static (g_intern_static_string ("GdkSubpixelLayout"), values);
-    }
-    return etype;
-}
-
 /* enumerations from "gdkproperty.h" */
 GType
 gdk_prop_mode_get_type (void)
@@ -549,7 +526,6 @@ gdk_prop_mode_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkseat.h" */
 GType
 gdk_seat_capabilities_get_type (void)
@@ -570,7 +546,6 @@ gdk_seat_capabilities_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdktypes.h" */
 GType
 gdk_byte_order_get_type (void)
@@ -586,7 +561,6 @@ gdk_byte_order_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_modifier_type_get_type (void)
 {
@@ -631,7 +605,6 @@ gdk_modifier_type_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_modifier_intent_get_type (void)
 {
@@ -651,7 +624,6 @@ gdk_modifier_intent_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_status_get_type (void)
 {
@@ -669,7 +641,6 @@ gdk_status_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_grab_status_get_type (void)
 {
@@ -688,7 +659,6 @@ gdk_grab_status_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_grab_ownership_get_type (void)
 {
@@ -704,7 +674,6 @@ gdk_grab_ownership_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_event_mask_get_type (void)
 {
@@ -743,7 +712,6 @@ gdk_event_mask_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_gl_error_get_type (void)
 {
@@ -759,7 +727,6 @@ gdk_gl_error_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_type_hint_get_type (void)
 {
@@ -786,7 +753,6 @@ gdk_window_type_hint_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_axis_use_get_type (void)
 {
@@ -810,7 +776,6 @@ gdk_axis_use_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_axis_flags_get_type (void)
 {
@@ -832,7 +797,6 @@ gdk_axis_flags_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkvisual.h" */
 GType
 gdk_visual_type_get_type (void)
@@ -852,7 +816,6 @@ gdk_visual_type_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gdkwindow.h" */
 GType
 gdk_window_window_class_get_type (void)
@@ -868,7 +831,6 @@ gdk_window_window_class_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_type_get_type (void)
 {
@@ -888,7 +850,6 @@ gdk_window_type_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_attributes_type_get_type (void)
 {
@@ -909,7 +870,6 @@ gdk_window_attributes_type_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_hints_get_type (void)
 {
@@ -931,7 +891,6 @@ gdk_window_hints_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_wm_decoration_get_type (void)
 {
@@ -951,7 +910,6 @@ gdk_wm_decoration_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_wm_function_get_type (void)
 {
@@ -970,7 +928,6 @@ gdk_wm_function_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_gravity_get_type (void)
 {
@@ -993,7 +950,6 @@ gdk_gravity_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_anchor_hints_get_type (void)
 {
@@ -1015,7 +971,6 @@ gdk_anchor_hints_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_window_edge_get_type (void)
 {
@@ -1036,7 +991,6 @@ gdk_window_edge_get_type (void)
     }
     return etype;
 }
-
 GType
 gdk_fullscreen_mode_get_type (void)
 {
@@ -1051,7 +1005,6 @@ gdk_fullscreen_mode_get_type (void)
     }
     return etype;
 }
-
  /**/
 
 /* Generated data ends here */

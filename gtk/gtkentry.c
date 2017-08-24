@@ -2917,6 +2917,8 @@ gtk_entry_dispose (GObject *object)
   gtk_entry_set_icon_tooltip_markup (entry, GTK_ENTRY_ICON_SECONDARY, NULL);
   gtk_entry_set_completion (entry, NULL);
 
+  priv->current_pos = 0;
+
   if (priv->buffer)
     {
       buffer_disconnect_signals (entry);
@@ -9005,14 +9007,11 @@ gtk_entry_get_icon_at_pos (GtkEntry *entry,
   for (i = 0; i < MAX_ICONS; i++)
     {
       EntryIconInfo *icon_info = priv->icons[i];
-      GtkAllocation allocation;
 
       if (icon_info == NULL)
         continue;
 
-      gtk_css_gadget_get_border_allocation (icon_info->gadget, &allocation, NULL);
-      if (x >= allocation.x && x < allocation.x + allocation.width &&
-          y >= allocation.y && y < allocation.y + allocation.height)
+      if (gtk_css_gadget_border_box_contains_point (icon_info->gadget, x, y))
         return i;
     }
 
@@ -9117,7 +9116,8 @@ gtk_entry_get_current_icon_drag_source (GtkEntry *entry)
  * entry in a draw callback.
  *
  * If the entry is not realized or has no icon at the given position,
- * @icon_area is filled with zeros.
+ * @icon_area is filled with zeros. Otherwise, @icon_area will be filled
+ * with the icon’s allocation, relative to @entry’s allocation.
  *
  * See also gtk_entry_get_text_area()
  *
@@ -9158,18 +9158,18 @@ gtk_entry_get_icon_area (GtkEntry             *entry,
 static void
 ensure_has_tooltip (GtkEntry *entry)
 {
-  GtkEntryPrivate *priv;
-  EntryIconInfo *icon_info;
-  int i;
-  gboolean has_tooltip = FALSE;
+  gboolean has_tooltip = gtk_widget_get_tooltip_text (GTK_WIDGET (entry)) != NULL;
 
-  priv = entry->priv;
-
-  for (i = 0; i < MAX_ICONS; i++)
+  if (!has_tooltip)
     {
-      if ((icon_info = priv->icons[i]) != NULL)
+      GtkEntryPrivate *priv = entry->priv;
+      int i;
+
+      for (i = 0; i < MAX_ICONS; i++)
         {
-          if (icon_info->tooltip != NULL)
+          EntryIconInfo *icon_info = priv->icons[i];
+
+          if (icon_info != NULL && icon_info->tooltip != NULL)
             {
               has_tooltip = TRUE;
               break;
@@ -9231,6 +9231,12 @@ gtk_entry_get_icon_tooltip_text (GtkEntry             *entry,
  *
  * See also gtk_widget_set_tooltip_text() and 
  * gtk_entry_set_icon_tooltip_markup().
+ *
+ * If you unset the widget tooltip via gtk_widget_set_tooltip_text() or
+ * gtk_widget_set_tooltip_markup(), this sets GtkWidget:has-tooltip to %FALSE,
+ * which suppresses icon tooltips too. You can resolve this by then calling
+ * gtk_widget_set_has_tooltip() to set GtkWidget:has-tooltip back to %TRUE, or
+ * setting at least one non-empty tooltip on any icon achieves the same result.
  *
  * Since: 2.16
  */

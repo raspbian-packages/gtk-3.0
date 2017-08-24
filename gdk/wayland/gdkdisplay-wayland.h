@@ -31,6 +31,7 @@
 #include <gdk/wayland/gtk-shell-client-protocol.h>
 #include <gdk/wayland/xdg-shell-unstable-v6-client-protocol.h>
 #include <gdk/wayland/xdg-foreign-unstable-v1-client-protocol.h>
+#include <gdk/wayland/keyboard-shortcuts-inhibit-unstable-v1-client-protocol.h>
 
 #include <glib.h>
 #include <gdk/gdkkeys.h>
@@ -77,6 +78,7 @@ struct _GdkWaylandDisplay
   struct zwp_tablet_manager_v2 *tablet_manager;
   struct zxdg_exporter_v1 *xdg_exporter;
   struct zxdg_importer_v1 *xdg_importer;
+  struct zwp_keyboard_shortcuts_inhibit_manager_v1 *keyboard_shortcuts_inhibit;
 
   GList *async_roundtrips;
 
@@ -109,6 +111,8 @@ struct _GdkWaylandDisplay
   GdkWaylandSelection *selection;
 
   GPtrArray *monitors;
+
+  gint64 last_bell_time_ms;
 
   /* egl info */
   EGLDisplay egl_display;

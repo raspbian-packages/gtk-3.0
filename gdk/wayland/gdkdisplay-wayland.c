@@ -80,6 +80,8 @@
  * ]|
  */
 
+#define MIN_SYSTEM_BELL_DELAY_MS 20
+
 static void _gdk_wayland_display_load_cursor_theme (GdkWaylandDisplay *display_wayland);
 
 G_DEFINE_TYPE (GdkWaylandDisplay, gdk_wayland_display, GDK_TYPE_DISPLAY)
@@ -446,6 +448,12 @@ gdk_registry_handle_global (void               *data,
         wl_registry_bind (display_wayland->wl_registry, id,
                           &zxdg_importer_v1_interface, 1);
     }
+  else if (strcmp (interface, "zwp_keyboard_shortcuts_inhibit_manager_v1") == 0)
+    {
+      display_wayland->keyboard_shortcuts_inhibit =
+        wl_registry_bind (display_wayland->wl_registry, id,
+                          &zwp_keyboard_shortcuts_inhibit_manager_v1_interface, 1);
+    }
   else
     handled = FALSE;
 
@@ -656,10 +664,13 @@ gdk_wayland_display_get_default_screen (GdkDisplay *display)
   return GDK_WAYLAND_DISPLAY (display)->screen;
 }
 
-static void
-gdk_wayland_display_beep (GdkDisplay *display)
+void
+gdk_wayland_display_system_bell (GdkDisplay *display,
+                                 GdkWindow  *window)
 {
   GdkWaylandDisplay *display_wayland;
+  struct gtk_surface1 *gtk_surface;
+  gint64 now_ms;
 
   g_return_if_fail (GDK_IS_DISPLAY (display));
 
@@ -668,7 +679,24 @@ gdk_wayland_display_beep (GdkDisplay *display)
   if (!display_wayland->gtk_shell)
     return;
 
-  gtk_shell1_system_bell (display_wayland->gtk_shell, NULL);
+  if (window)
+    gtk_surface = gdk_wayland_window_get_gtk_surface (window);
+  else
+    gtk_surface = NULL;
+
+  now_ms = g_get_monotonic_time () / 1000;
+  if (now_ms - display_wayland->last_bell_time_ms < MIN_SYSTEM_BELL_DELAY_MS)
+    return;
+
+  display_wayland->last_bell_time_ms = now_ms;
+
+  gtk_shell1_system_bell (display_wayland->gtk_shell, gtk_surface);
+}
+
+static void
+gdk_wayland_display_beep (GdkDisplay *display)
+{
+  gdk_wayland_display_system_bell (display, NULL);
 }
 
 static void
