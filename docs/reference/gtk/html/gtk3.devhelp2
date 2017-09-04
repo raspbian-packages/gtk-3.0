@@ -1846,6 +1846,7 @@
     <keyword type="property" name="The “secondary-icon-tooltip-text” property" link="GtkEntry.html#GtkEntry--secondary-icon-tooltip-text"/>
     <keyword type="property" name="The “selection-bound” property" link="GtkEntry.html#GtkEntry--selection-bound"/>
     <keyword type="property" name="The “shadow-type” property" link="GtkEntry.html#GtkEntry--shadow-type"/>
+    <keyword type="property" name="The “show-emoji-icon” property" link="GtkEntry.html#GtkEntry--show-emoji-icon"/>
     <keyword type="property" name="The “tabs” property" link="GtkEntry.html#GtkEntry--tabs"/>
     <keyword type="property" name="The “text” property" link="GtkEntry.html#GtkEntry--text"/>
     <keyword type="property" name="The “text-length” property" link="GtkEntry.html#GtkEntry--text-length"/>

@@ -9347,7 +9347,7 @@ using <a class="link" href="GtkWidget.html#gtk-widget-set-tooltip-window" title=
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_widget_set_tooltip_window (<em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
                                <em class="parameter"><code><a class="link" href="GtkWindow.html" title="GtkWindow"><span class="type">GtkWindow</span></a> *custom_window</code></em>);</pre>
-<p>Replaces the default, usually yellow, window used for displaying
+<p>Replaces the default window used for displaying
 tooltips with <em class="parameter"><code>custom_window</code></em>
 . GTK+ will take care of showing and
 hiding <em class="parameter"><code>custom_window</code></em>
@@ -9355,8 +9355,6 @@ hiding <em class="parameter"><code>custom_window</code></em>
 the default tooltip window. If <em class="parameter"><code>custom_window</code></em>
  is <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the default
 tooltip window will be used.</p>
-<p>If the custom window should have the default theming it needs to
-have the name “gtk-tooltip”, see <a class="link" href="GtkWidget.html#gtk-widget-set-name" title="gtk_widget_set_name ()"><code class="function">gtk_widget_set_name()</code></a>.</p>
 <div class="refsect3">
 <a name="gtk-widget-set-tooltip-window.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

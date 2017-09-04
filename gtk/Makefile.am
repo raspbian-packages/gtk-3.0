@@ -467,6 +467,7 @@ gtk_private_h_sources =		\
 	gtkcustompaperunixdialog.h \
 	gtkdialogprivate.h 	\
 	gtkdndprivate.h		\
+	gtkemojichooser.h	\
 	gtkentryprivate.h	\
 	gtkeventcontrollerprivate.h	\
 	gtkfilechooserembed.h	\
@@ -743,6 +744,7 @@ gtk_base_c_sources = 		\
 	gtkdragsource.c		\
 	gtkdrawingarea.c	\
 	gtkeditable.c		\
+	gtkemojichooser.c	\
 	gtkentry.c		\
 	gtkentrybuffer.c	\
 	gtkentrycompletion.c	\
@@ -1187,6 +1189,7 @@ templates =				\
 	ui/gtkcombobox.ui		\
 	ui/gtkdialog.ui		\
 	ui/gtkfilechooserbutton.ui	\
+	ui/gtkemojichooser.ui		\
 	ui/gtkfilechooserwidget.ui	\
 	ui/gtkfilechooserdialog.ui	\
 	ui/gtkfontbutton.ui		\
@@ -1319,6 +1322,7 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	  echo "    <file compressed='true'>inspector/$$n</file>" >> $@; \
 	done; \
 	echo "    <file>inspector/logo.png</file>" >> $@; \
+	echo "    <file>emoji/emoji.data</file>" >> $@; \
 	echo "  </gresource>" >> $@; \
 	echo "</gresources>" >> $@;
 
@@ -1705,6 +1709,7 @@ files:
 gsettings_SCHEMAS = \
 	org.gtk.Settings.FileChooser.gschema.xml \
 	org.gtk.Settings.ColorChooser.gschema.xml \
+	org.gtk.Settings.EmojiChooser.gschema.xml \
 	org.gtk.Settings.Debug.gschema.xml
 
 @GSETTINGS_RULES@
@@ -1714,6 +1719,8 @@ EXTRA_DIST +=                   \
 	$(gesture_sources)	\
 	$(theme_sources)	\
 	$(gsettings_SCHEMAS)	\
+	emoji/convert-emoji.c	\
+	emoji/emoji.json	\
 	a11y/Makefile.inc	\
 	deprecated/Makefile.inc	\
 	inspector/Makefile.inc	\

@@ -213,9 +213,9 @@ different in that it supports scrolling natively due to implementing
 <p>If you just want to draw, a <a class="link" href="GtkDrawingArea.html" title="GtkDrawingArea"><span class="type">GtkDrawingArea</span></a> is a better choice since it has
 lower overhead. If you just need to position child widgets at specific
 points, then <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> provides that functionality on its own.</p>
-<p>When handling expose events on a <a class="link" href="GtkLayout.html" title="GtkLayout"><span class="type">GtkLayout</span></a>, you must draw to
-GTK_LAYOUT (layout)-&gt;bin_window, rather than to
-GTK_WIDGET (layout)-&gt;window, as you would for a <a class="link" href="GtkDrawingArea.html" title="GtkDrawingArea"><span class="type">GtkDrawingArea</span></a>.</p>
+<p>When handling expose events on a <a class="link" href="GtkLayout.html" title="GtkLayout"><span class="type">GtkLayout</span></a>, you must draw to the <a href="../html/gdk3-Windows.html#GdkWindow-struct"><span class="type">GdkWindow</span></a>
+returned by <a class="link" href="GtkLayout.html#gtk-layout-get-bin-window" title="gtk_layout_get_bin_window ()"><code class="function">gtk_layout_get_bin_window()</code></a>, rather than to the one returned by
+<a class="link" href="GtkWidget.html#gtk-widget-get-window" title="gtk_widget_get_window ()"><code class="function">gtk_widget_get_window()</code></a> as you would for a <a class="link" href="GtkDrawingArea.html" title="GtkDrawingArea"><span class="type">GtkDrawingArea</span></a>.</p>
 </div>
 <div class="refsect1">
 <a name="GtkLayout.functions_details"></a><h2>Functions</h2>
