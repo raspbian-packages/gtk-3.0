@@ -311,7 +311,7 @@ GAppLaunchContext <span class="gtkdoc opt">*</span>context<span class="gtkdoc op
 GError <span class="gtkdoc opt">*</span>error <span class="gtkdoc opt">=</span> NULL<span class="gtkdoc opt">;</span>
 
 info <span class="gtkdoc opt">= (</span>GAppInfo<span class="gtkdoc opt">*)</span> <span class="function"><a href="../gio/gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new">g_desktop_app_info_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;epiphany.desktop&quot;</span><span class="gtkdoc opt">);</span>
-context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc opt">*)</span> <span class="function"><a href="../html/GdkDisplay.html#gdk-display-get-app-launch-context">gdk_display_get_app_launch_context</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">);</span>
+context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc opt">*)</span> <span class="function"><a href="../gdk4/GdkDisplay.html#gdk-display-get-app-launch-context">gdk_display_get_app_launch_context</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">);</span>
 <span class="function"><a href="../gio/GAppInfo.html#g-app-info-launch">g_app_info_launch</a></span> <span class="gtkdoc opt">(</span>info<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> context<span class="gtkdoc opt">, &amp;</span>error<span class="gtkdoc opt">);</span>
 
 <span class="keyword">if</span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">)</span>
@@ -337,7 +337,7 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
         with <a href="../gio/GAppInfo.html#g-app-info-create-from-commandline"><code class="function">g_app_info_create_from_commandline()</code></a>, or you can use the
         more lowlevel <code class="literal">g_spawn</code> family of functions
         (e.g. <a href="../glib/glib-Spawning-Processes.html#g-spawn-command-line-async"><code class="function">g_spawn_command_line_async()</code></a>), and pass <code class="envar">DISPLAY</code>
-        in the environment. <a href="../html/GdkScreen.html#gdk-screen-make-display-name"><code class="function">gdk_screen_make_display_name()</code></a> can be
+        in the environment. <code class="function">gdk_screen_make_display_name()</code> can be
         used to find the right value for the <code class="envar">DISPLAY</code>
         environment variable.
         </li>
@@ -410,8 +410,8 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting">cairo_t <span class="gtkdoc opt">*</span>cr <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-create">gdk_cairo_create</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
-<span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf">gdk_cairo_set_source_pixbuf</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
+        <td class="listing_code"><pre class="programlisting">cairo_t <span class="gtkdoc opt">*</span>cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf">gdk_cairo_set_source_pixbuf</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
 <span class="function">cairo_paint</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="function">cairo_destroy</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span></pre></td>
       </tr>
@@ -423,7 +423,7 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
            Note that very similar code can be used when porting code
            using GdkPixmap to <span class="type">cairo_surface_t</span> by calling
            <code class="function">cairo_set_source_surface()</code> instead of
-           <a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a>.
+           <a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a>.
          </p>
 </div>
 </div>
@@ -493,7 +493,7 @@ gc <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.h
 cairo_surface_t <span class="gtkdoc opt">*</span>surface<span class="gtkdoc opt">;</span>
 
 surface <span class="gtkdoc opt">= ...</span>
-cr <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-create">gdk_cairo_create</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
+cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
 <span class="function">cairo_set_source_surface</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> surface<span class="gtkdoc opt">,</span> x_origin<span class="gtkdoc opt">,</span> y_origin<span class="gtkdoc opt">);</span>
 <span class="function">cairo_pattern_set_extend</span> <span class="gtkdoc opt">(</span><span class="function">cairo_get_source</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">),</span> CAIRO_EXTEND_REPEAT<span class="gtkdoc opt">);</span>
 <span class="function">cairo_rectangle</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span> width<span class="gtkdoc opt">,</span> height<span class="gtkdoc opt">);</span>
@@ -508,7 +508,7 @@ cr <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/gdk
 The surface here can be either an image surface or a X surface,
 and can either be created on the spot or kept around for caching purposes.
 Another alternative is to use pixbufs instead of surfaces with
-<a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
+<a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
         </p>
 </div>
 </div>
@@ -576,15 +576,15 @@ GtkStateFlags flags<span class="gtkdoc opt">;</span>
 GdkRGBA rgba<span class="gtkdoc opt">;</span>
 cairo_t <span class="gtkdoc opt">*</span>cr<span class="gtkdoc opt">;</span>
 
-cr <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-create">gdk_cairo_create</a></span> <span class="gtkdoc opt">(</span>drawable<span class="gtkdoc opt">);</span>
+cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</span> <span class="gtkdoc opt">(</span>drawable<span class="gtkdoc opt">);</span>
 <span class="comment">/* clip */</span>
-<span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
 <span class="function">cairo_clip</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="comment">/* set the correct source color */</span>
 context <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-style-context">gtk_widget_get_style_context</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">));</span>
 state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-state-flags">gtk_widget_get_state_flags</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkStyleContext.html#gtk-style-context-get-color">gtk_style_context_get_color</a></span> <span class="gtkdoc opt">(</span>context<span class="gtkdoc opt">,</span> state<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
-<span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-rgba">gdk_cairo_set_source_rgba</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-rgba">gdk_cairo_set_source_rgba</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
 <span class="comment">/* draw the text */</span>
 <span class="function">cairo_move_to</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
 <span class="function"><a href="../pango/pango-Cairo-Rendering.html#pango-cairo-show-layout">pango_cairo_show_layout</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> layout<span class="gtkdoc opt">);</span>
@@ -597,7 +597,7 @@ state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidge
 <p>
           Clipping using <code class="function">cairo_clip()</code> is of course not restricted to text
           rendering and can be used everywhere where GC clips were used.
-          And using <a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-color"><code class="function">gdk_cairo_set_source_color()</code></a> with style colors should
+          And using <code class="function">gdk_cairo_set_source_color()</code> with style colors should
           be used in all the places where a style’s GC was used to achieve
           a particular color.
         </p>
@@ -718,7 +718,7 @@ state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidge
         <td class="listing_code"><pre class="programlisting">cairo_t <span class="gtkdoc opt">*</span>cr <span class="gtkdoc opt">=</span> <span class="function">cairo_create</span> <span class="gtkdoc opt">(</span>surface<span class="gtkdoc opt">);</span>
 <span class="comment">/* clipping restricts the intermediate surface&apos;s size, so it&apos;s a good idea</span>
 <span class="comment"> * to use it. */</span>
-<span class="function"><a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
 <span class="function">cairo_clip</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="comment">/* Now push a group to change the target */</span>
 <span class="function">cairo_push_group</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
@@ -737,7 +737,7 @@ state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidge
 The surface here can be either an image surface or a X surface,
 and can either be created on the spot or kept around for caching purposes.
 Another alternative is to use pixbufs instead of surfaces with
-<a href="../html/gdk3-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
+<a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
         
           The cairo developers plan to add self-copies in the future to allow
           exactly this effect, so you might want to keep up on cairo

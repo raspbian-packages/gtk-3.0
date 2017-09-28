@@ -7083,6 +7083,8 @@
     <keyword type="constant" name="GTK_INPUT_HINT_UPPERCASE_SENTENCES" link="GtkEntry.html#GTK-INPUT-HINT-UPPERCASE-SENTENCES:CAPS"/>
     <keyword type="constant" name="GTK_INPUT_HINT_INHIBIT_OSK" link="GtkEntry.html#GTK-INPUT-HINT-INHIBIT-OSK:CAPS"/>
     <keyword type="constant" name="GTK_INPUT_HINT_VERTICAL_WRITING" link="GtkEntry.html#GTK-INPUT-HINT-VERTICAL-WRITING:CAPS"/>
+    <keyword type="constant" name="GTK_INPUT_HINT_EMOJI" link="GtkEntry.html#GTK-INPUT-HINT-EMOJI:CAPS"/>
+    <keyword type="constant" name="GTK_INPUT_HINT_NO_EMOJI" link="GtkEntry.html#GTK-INPUT-HINT-NO-EMOJI:CAPS"/>
     <keyword type="constant" name="GTK_UPDATE_ALWAYS" link="GtkSpinButton.html#GTK-UPDATE-ALWAYS:CAPS"/>
     <keyword type="constant" name="GTK_UPDATE_IF_VALID" link="GtkSpinButton.html#GTK-UPDATE-IF-VALID:CAPS"/>
     <keyword type="constant" name="GTK_SPIN_STEP_FORWARD" link="GtkSpinButton.html#GTK-SPIN-STEP-FORWARD:CAPS"/>

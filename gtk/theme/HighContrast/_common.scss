@@ -1225,11 +1225,7 @@ headerbar {
     font-size: 80%;
     padding: 0 12px;
   }
-  & > GtkBox > separator.vertical {
-    border-width: 0 1px;
-    border-color: $fg_color;
-    border-style: solid;
-  }
+
   &.selection-mode {
     color: darken($selected_bg_color, 15%);
     text-shadow: 0 1px transparentize(black, 0.5);
@@ -2525,17 +2521,29 @@ levelbar {
       @include entry(backdrop);
     }
   }
-  & block {
-    min-width: 32px;
-    min-height: 1px;
-  }
-  &.vertical block {
-    min-width: 1px;
-    min-height: 32px;
+
+  &.horizontal {
+    block {
+      min-height: 1px;
+    }
+
+    &.discrete block {
+      margin: 0 1px;
+      min-width: 32px;
+    }
   }
 
-  &.horizontal.discrete block { margin: 0 1px; }
-  &.vertical.discrete block { margin: 1px 0; }
+  &.vertical {
+    block {
+      min-width: 1px;
+    }
+
+    &.discrete block {
+      margin: 1px 0;
+      min-height: 32px;
+    }
+  }
+
   & block.filled.low {
     border-color: darken($warning_color,10%);
     background-color: $warning_color;
@@ -3398,3 +3406,59 @@ stackswitcher button.circular {
   min-width: 0px;
 }
 
+
+/*********
+ * Emoji *
+ ********/
+
+popover.emoji-picker { padding-left: 0; padding-right: 0; }
+
+button.emoji-section,
+button.emoji-section:backdrop { /* Dodge stuff inherited from backdrop button */
+  border-color: transparent;
+  border-width: 3px;
+  border-style: none none solid;
+  border-radius: 0;
+
+  margin: 2px 4px 2px 4px;
+  padding: 3px 0 0;
+  min-width: 32px;
+  min-height: 28px;
+
+  /* reset props inherited from the button style */
+  background: none;
+  box-shadow: none;
+  text-shadow: none;
+
+  outline-offset: -5px;
+
+  &:backdrop:not(:checked) { border-color: transparent; }
+  &:hover { border-color: $borders_color; }
+  &:checked { border-color: $selected_bg_color; }
+
+  label {
+    padding: 0;
+
+    opacity: 0.55;
+  }
+
+  &:hover label { opacity: 0.775; }
+
+  &:checked label {
+    opacity: 1;
+
+    /* Dodge default inversion to white for non-flat, selected button */
+    color: $fg_color;
+  }
+}
+
+.emoji {
+  font-size: x-large;
+  padding: 6px;
+  border-radius: 6px;
+
+  :hover {
+    background: $selected_bg_color;
+    color: $selected_fg_color;
+  }
+}

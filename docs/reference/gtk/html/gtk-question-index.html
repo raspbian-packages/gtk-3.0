@@ -547,7 +547,7 @@ code:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../html/gdk3-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../gdk4/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
                        GDK_BUTTON_PRESS_MASK <span class="gtkdoc opt">|</span> GDK_BUTTON_RELEASE_MASK<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -563,7 +563,7 @@ while in C++ you must write:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../html/gdk3-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../gdk4/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
                        <span class="gtkdoc opt">(</span>GdkEventMask<span class="gtkdoc opt">)</span> GDK_BUTTON_PRESS_MASK <span class="gtkdoc opt">|</span> GDK_BUTTON_RELEASE_MASK<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -756,10 +756,10 @@ How do I create a transparent toplevel window ?
 <p>
 To make a window transparent, it needs to use a visual which supports that.
 This is done by getting the RGBA visual of the screen with
-<a href="../html/GdkScreen.html#gdk-screen-get-rgba-visual"><code class="function">gdk_screen_get_rgba_visual()</code></a> and setting it on the window. Note that
-<a href="../html/GdkScreen.html#gdk-screen-get-rgba-visual"><code class="function">gdk_screen_get_rgba_visual()</code></a> will return <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if transparent windows
+<code class="function">gdk_screen_get_rgba_visual()</code> and setting it on the window. Note that
+<code class="function">gdk_screen_get_rgba_visual()</code> will return <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if transparent windows
 are not supported on the screen, you should fall back to
-<a href="../html/GdkScreen.html#gdk-screen-get-system-visual"><code class="function">gdk_screen_get_system_visual()</code></a> in that case. Additionally, note that this
+<code class="function">gdk_screen_get_system_visual()</code> in that case. Additionally, note that this
 will change from screen to screen, so it needs to be repeated whenever the
 window is moved to a different screen.
 </p>
@@ -776,9 +776,9 @@ window is moved to a different screen.
 7</pre></td>
         <td class="listing_code"><pre class="programlisting">GdkVisual <span class="gtkdoc opt">*</span>visual<span class="gtkdoc opt">;</span>
 
-visual <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/GdkScreen.html#gdk-screen-get-rgba-visual">gdk_screen_get_rgba_visual</a></span> <span class="gtkdoc opt">(</span>screen<span class="gtkdoc opt">);</span>
+visual <span class="gtkdoc opt">=</span> <span class="function">gdk_screen_get_rgba_visual</span> <span class="gtkdoc opt">(</span>screen<span class="gtkdoc opt">);</span>
 <span class="keyword">if</span> <span class="gtkdoc opt">(</span>visual <span class="gtkdoc opt">==</span> NULL<span class="gtkdoc opt">)</span>
-  visual <span class="gtkdoc opt">=</span> <span class="function"><a href="../html/GdkScreen.html#gdk-screen-get-system-visual">gdk_screen_get_system_visual</a></span> <span class="gtkdoc opt">(</span>screen<span class="gtkdoc opt">);</span>
+  visual <span class="gtkdoc opt">=</span> <span class="function">gdk_screen_get_system_visual</span> <span class="gtkdoc opt">(</span>screen<span class="gtkdoc opt">);</span>
 
 <span class="function"><a href="GtkWidget.html#gtk-widget-set-visual">gtk_widget_set_visual</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_WIDGET</span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">),</span> visual<span class="gtkdoc opt">);</span></pre></td>
       </tr>

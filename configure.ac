@@ -10,8 +10,8 @@
 
 m4_define([gtk_major_version], [3])
 m4_define([gtk_minor_version], [22])
-m4_define([gtk_micro_version], [19])
-m4_define([gtk_interface_age], [19])
+m4_define([gtk_micro_version], [21])
+m4_define([gtk_interface_age], [21])
 m4_define([gtk_binary_age],
           [m4_eval(100 * gtk_minor_version + gtk_micro_version)])
 m4_define([gtk_version],
@@ -64,6 +64,7 @@ m4_define([wayland_protocols_required_version], [1.9])
 m4_define([mirclient_required_version], [0.22.0])
 m4_define([mircookie_required_version], [0.17.0])
 m4_define([epoxy_required_version], [1.0])
+m4_define([cloudproviders_required_version], [0.2.0])
 GLIB_REQUIRED_VERSION=glib_required_version
 PANGO_REQUIRED_VERSION=pango_required_version
 ATK_REQUIRED_VERSION=atk_required_version
@@ -345,6 +346,11 @@ AC_ARG_ENABLE(mir-backend,
               [AS_HELP_STRING([--enable-mir-backend],
                               [enable the Mir gdk backend])],
 			      [backend_set=yes])
+
+AC_ARG_ENABLE(cloudproviders,
+              [AS_HELP_STRING([--enable-cloudproviders],
+                              [enable libcloudproviders integration])],
+                              [cloudproviders_set=yes])
 
 if test -z "$backend_set"; then
   if test "$platform_win32" = yes; then
@@ -1341,11 +1347,26 @@ else
         LIBS="$gtk_save_LIBS"
 fi
 
+# Check for libcloudproviders
+
+CLOUDPROVIDER_PACKAGES=""
+if test "x$cloudproviders_set" = "xyes"; then
+  CLOUDPROVIDER_PACKAGES="cloudproviders >= cloudproviders_required_version"
+  if $PKG_CONFIG --exists $CLOUDPROVIDER_PACKAGES ; then
+    AC_DEFINE(HAVE_CLOUDPROVIDERS, [1],
+              [Define if libcloudproviders is available]
+              )
+  else
+    AC_MSG_ERROR([
+*** libcloudproviders not found.])
+  fi
+fi
+
 CFLAGS="$saved_cflags"
 LDFLAGS="$saved_ldflags"
 
 GDK_PACKAGES="$PANGO_PACKAGES gdk-pixbuf-2.0 >= gdk_pixbuf_required_version cairo >= cairo_required_version cairo-gobject >= cairo_required_version"
-GDK_PRIVATE_PACKAGES="$GDK_GIO_PACKAGE $X_PACKAGES $WAYLAND_PACKAGES $MIR_PACKAGES $cairo_backends epoxy >= epoxy_required_version"
+GDK_PRIVATE_PACKAGES="$GDK_GIO_PACKAGE $X_PACKAGES $WAYLAND_PACKAGES $MIR_PACKAGES $cairo_backends epoxy >= epoxy_required_version $CLOUDPROVIDER_PACKAGES"
 
 PKG_CHECK_MODULES(GDK_DEP, $GDK_PACKAGES $GDK_PRIVATE_PACKAGES)
 GDK_DEP_LIBS="$GDK_EXTRA_LIBS $GDK_DEP_LIBS $MATH_LIB"

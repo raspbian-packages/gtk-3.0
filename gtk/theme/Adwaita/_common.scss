@@ -1576,7 +1576,7 @@ headerbar {
         padding-left: 10px;
         padding-right: 10px;
 
-        GtkArrow { -GtkArrow-arrow-scaling: 1; }
+        arrow { -GtkArrow-arrow-scaling: 1; }
 
         .arrow {
           -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
@@ -2642,10 +2642,10 @@ switch {
 
       &:backdrop { border-color: $selected_borders_color; }
 
-      &.slider:dir(rtl) { border-left-color: $borders_color; }
-      &.slider:dir(ltr) { border-right-color: $borders_color; }
+      slider:dir(rtl) { border-left-color: $borders_color; }
+      slider:dir(ltr) { border-right-color: $borders_color; }
 
-      &.slider { &:checked, & { border-color: $selected_borders_color; } }
+      slider { &:checked, & { border-color: $selected_borders_color; } }
     }
   }
 }
@@ -3368,14 +3368,26 @@ progressbar {
  * Level Bar *
  *************/
 levelbar {
-  block {
-    min-width: 32px;
-    min-height: 1px;
+  &.horizontal {
+    block {
+      min-height: 1px;
+    }
+
+    &.discrete block {
+      margin: 0 1px;
+      min-width: 32px;
+    }
   }
 
-  &.vertical block {
-    min-width: 1px;
-    min-height: 32px;
+  &.vertical {
+    block {
+      min-width: 1px;
+    }
+
+    &.discrete block {
+      margin: 1px 0;
+      min-height: 32px;
+    }
   }
 
   &:backdrop { transition: $backdrop_transition; }
@@ -3388,10 +3400,6 @@ levelbar {
 
     &:backdrop { @include entry(backdrop); }
   }
-
-  &.horizontal.discrete block { margin: 0 1px; }
-
-  &.vertical.discrete block { margin: 1px 0; }
 
   block {
     border: 1px solid;
@@ -3797,6 +3805,10 @@ stacksidebar {
  ****************/
 $_placesidebar_icons_opacity: 0.7;
 
+row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
+                                                                  // see bug #786613 for details 
+                                                                  // on this oddity
+
 placessidebar {
   > viewport.frame { border-style: none; }
 
@@ -3822,8 +3834,6 @@ placessidebar {
     }
 
     image.sidebar-icon {
-      opacity: $_placesidebar_icons_opacity; // dim the device icons
-
       &:dir(ltr) { padding-right: 8px; }
       &:dir(rtl) { padding-left: 8px; }
     }
@@ -4414,6 +4424,11 @@ stackswitcher button.text-button.circular { // FIXME aggregate with buttons
   padding: 0;
 }
 
+
+/*********
+ * Emoji *
+ ********/
+
 popover.emoji-picker { padding-left: 0; padding-right: 0; }
 
 button.emoji-section {
@@ -4433,32 +4448,27 @@ button.emoji-section {
   text-shadow: none;
 
   outline-offset: -5px;
+
+  &:backdrop:not(:checked) { border-color: transparent; }
+  &:hover { border-color: $borders_color; }
+  &:checked { border-color: $selected_bg_color; }
+
+  label {
+    padding: 0;
+
+    opacity: 0.55;
+  }
+
+  &:hover label { opacity: 0.775; }
+  &:checked label { opacity: 1; }
 }
-
-button.emoji-section label { padding: 0; }
-
-button.emoji-section:hover { border-color: $borders_color; }
-
-button.emoji-section:checked { border-color: $selected_bg_color; }
-
-button.emoji-section:backdrop:not(:checked) { border-color: transparent; }
-
-button.emoji-section { color: $borders_color; }
-
-button.emoji-section:hover { color: mix($fg_color, $borders_color, 0.5); }
-
-button.emoji-section:checked { color: $fg_color; }
-
-button.emoji-section:backdrop { color: $backdrop_borders_color; }
-
-button.emoji-section:backdrop:checked { color: $backdrop_fg_color; }
 
 .emoji {
   font-size: x-large;
   padding: 6px;
   border-radius: 6px;
-}
 
-.emoji :hover {
-  background: $selected_bg_color;
+  :hover {
+    background: $selected_bg_color;
+  }
 }

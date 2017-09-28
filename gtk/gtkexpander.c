@@ -602,7 +602,7 @@ gtk_expander_destroy (GtkWidget *widget)
 static void
 gtk_expander_realize (GtkWidget *widget)
 {
-  GtkAllocation allocation;
+  GtkAllocation title_allocation;
   GtkExpanderPrivate *priv;
   GdkWindow *window;
   GdkWindowAttr attributes;
@@ -610,13 +610,13 @@ gtk_expander_realize (GtkWidget *widget)
 
   priv = GTK_EXPANDER (widget)->priv;
 
-  gtk_widget_get_allocation (widget, &allocation);
+  gtk_css_gadget_get_border_allocation (priv->title_gadget, &title_allocation, NULL);
 
   attributes.window_type = GDK_WINDOW_CHILD;
-  attributes.x = allocation.x;
-  attributes.y = allocation.y;
-  attributes.width = allocation.width;
-  attributes.height = allocation.height;
+  attributes.x = title_allocation.x;
+  attributes.y = title_allocation.y;
+  attributes.width = title_allocation.width;
+  attributes.height = title_allocation.height;
   attributes.wclass = GDK_INPUT_ONLY;
   attributes.event_mask = gtk_widget_get_events (widget)
                           | GDK_BUTTON_PRESS_MASK
@@ -1089,6 +1089,26 @@ gtk_expander_focus (GtkWidget        *widget,
 }
 
 static void
+gtk_expander_update_child_mapped (GtkExpander *expander,
+                                  GtkWidget   *child)
+{
+  /* If collapsing, we must unmap the child, as gtk_box_gadget_remove() does
+   * not, so otherwise the child is not drawn but still consumes input in-place.
+   */
+
+  if (expander->priv->expanded &&
+      gtk_widget_get_realized (child) &&
+      gtk_widget_get_visible (child))
+    {
+      gtk_widget_map (child);
+    }
+  else
+    {
+      gtk_widget_unmap (child);
+    }
+}
+
+static void
 gtk_expander_add (GtkContainer *container,
                   GtkWidget    *widget)
 {
@@ -1100,6 +1120,8 @@ gtk_expander_add (GtkContainer *container,
 
   if (expander->priv->expanded)
     gtk_box_gadget_insert_widget (GTK_BOX_GADGET (expander->priv->gadget), -1, widget);
+
+  gtk_expander_update_child_mapped (expander, widget);
 }
 
 static void
@@ -1274,6 +1296,8 @@ gtk_expander_set_expanded (GtkExpander *expander,
 
       gtk_widget_queue_resize (GTK_WIDGET (expander));
       gtk_expander_resize_toplevel (expander);
+
+      gtk_expander_update_child_mapped (expander, child);
     }
 
   g_object_notify (G_OBJECT (expander), "expanded");

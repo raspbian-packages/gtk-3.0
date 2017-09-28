@@ -9335,7 +9335,6 @@ native_response (GtkNativeDialog *self,
   GString *s;
   char *response;
   GtkFileFilter *filter;
-  GSList *filter_list = gtk_file_chooser_list_filters (GTK_FILE_CHOOSER (self));
 
   uris = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (self));
   filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (self));
@@ -10075,7 +10074,8 @@ main (int argc, char *argv[])
   gtk_css_provider_load_from_data (memory_provider,
                                    "#testgtk-version-label {\n"
                                    "  color: #f00;\n"
-                                   "  font: Sans 18;\n"
+                                   "  font-family: Sans;\n"
+                                   "  font-size: 18px;\n"
                                    "}",
                                    -1, NULL);
   gtk_style_context_add_provider_for_screen (screen, GTK_STYLE_PROVIDER (memory_provider),

@@ -405,37 +405,53 @@ populate_emoji_chooser (GtkEmojiChooser *chooser)
 }
 
 static void
-update_state (EmojiSection *section,
-              double        value)
-{
-  GtkAllocation alloc = { 0, 0, 0, 20 };
-
-  if (section->heading)
-    gtk_widget_get_allocation (section->heading, &alloc);
-
-  if (alloc.y <= value && value < alloc.y + alloc.height)
-    gtk_widget_set_state_flags (section->button, GTK_STATE_FLAG_CHECKED, FALSE);
-  else
-    gtk_widget_unset_state_flags (section->button, GTK_STATE_FLAG_CHECKED);
-}
-
-static void
 adj_value_changed (GtkAdjustment *adj,
                    gpointer       data)
 {
   GtkEmojiChooser *chooser = data;
   double value = gtk_adjustment_get_value (adj);
+  EmojiSection const *sections[] = {
+    &chooser->recent,
+    &chooser->people,
+    &chooser->body,
+    &chooser->nature,
+    &chooser->food,
+    &chooser->travel,
+    &chooser->activities,
+    &chooser->objects,
+    &chooser->symbols,
+    &chooser->flags,
+  };
+  EmojiSection const *select_section = sections[0];
+  gsize i;
 
-  update_state (&chooser->recent, value);
-  update_state (&chooser->people, value);
-  update_state (&chooser->body, value);
-  update_state (&chooser->nature, value);
-  update_state (&chooser->food, value);
-  update_state (&chooser->travel, value);
-  update_state (&chooser->activities, value);
-  update_state (&chooser->objects, value);
-  update_state (&chooser->symbols, value);
-  update_state (&chooser->flags, value);
+  /* Figure out which section the current scroll position is within */
+  for (i = 0; i < G_N_ELEMENTS (sections); ++i)
+    {
+      EmojiSection const *section = sections[i];
+      GtkAllocation alloc;
+
+      if (section->heading)
+        gtk_widget_get_allocation (section->heading, &alloc);
+      else
+        gtk_widget_get_allocation (section->box, &alloc);
+
+      if (value < alloc.y)
+        break;
+
+      select_section = section;
+    }
+
+  /* Un/Check the section buttons accordingly */
+  for (i = 0; i < G_N_ELEMENTS (sections); ++i)
+    {
+      EmojiSection const *section = sections[i];
+
+      if (section == select_section)
+        gtk_widget_set_state_flags (section->button, GTK_STATE_FLAG_CHECKED, FALSE);
+      else
+        gtk_widget_unset_state_flags (section->button, GTK_STATE_FLAG_CHECKED);
+    }
 }
 
 static gboolean
@@ -482,14 +498,23 @@ static void
 update_headings (GtkEmojiChooser *chooser)
 {
   gtk_widget_set_visible (chooser->people.heading, !chooser->people.empty);
+  gtk_widget_set_visible (chooser->people.box, !chooser->people.empty);
   gtk_widget_set_visible (chooser->body.heading, !chooser->body.empty);
+  gtk_widget_set_visible (chooser->body.box, !chooser->body.empty);
   gtk_widget_set_visible (chooser->nature.heading, !chooser->nature.empty);
+  gtk_widget_set_visible (chooser->nature.box, !chooser->nature.empty);
   gtk_widget_set_visible (chooser->food.heading, !chooser->food.empty);
+  gtk_widget_set_visible (chooser->food.box, !chooser->food.empty);
   gtk_widget_set_visible (chooser->travel.heading, !chooser->travel.empty);
+  gtk_widget_set_visible (chooser->travel.box, !chooser->travel.empty);
   gtk_widget_set_visible (chooser->activities.heading, !chooser->activities.empty);
+  gtk_widget_set_visible (chooser->activities.box, !chooser->activities.empty);
   gtk_widget_set_visible (chooser->objects.heading, !chooser->objects.empty);
+  gtk_widget_set_visible (chooser->objects.box, !chooser->objects.empty);
   gtk_widget_set_visible (chooser->symbols.heading, !chooser->symbols.empty);
+  gtk_widget_set_visible (chooser->symbols.box, !chooser->symbols.empty);
   gtk_widget_set_visible (chooser->flags.heading, !chooser->flags.empty);
+  gtk_widget_set_visible (chooser->flags.box, !chooser->flags.empty);
 
   if (chooser->recent.empty && chooser->people.empty &&
       chooser->body.empty && chooser->nature.empty &&
@@ -580,6 +605,9 @@ gtk_emoji_chooser_init (GtkEmojiChooser *chooser)
 
   populate_emoji_chooser (chooser);
   populate_recent_section (chooser);
+
+  /* We scroll to the top on show, so check the right button for the 1st time */
+  gtk_widget_set_state_flags (chooser->recent.button, GTK_STATE_FLAG_CHECKED, FALSE);
 }
 
 static void
@@ -588,12 +616,12 @@ gtk_emoji_chooser_show (GtkWidget *widget)
   GtkEmojiChooser *chooser = GTK_EMOJI_CHOOSER (widget);
   GtkAdjustment *adj;
 
+  GTK_WIDGET_CLASS (gtk_emoji_chooser_parent_class)->show (widget);
+
   adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (chooser->scrolled_window));
   gtk_adjustment_set_value (adj, 0);
 
   gtk_entry_set_text (GTK_ENTRY (chooser->search_entry), "");
-
-  GTK_WIDGET_CLASS (gtk_emoji_chooser_parent_class)->show (widget);
 }
 
 static void

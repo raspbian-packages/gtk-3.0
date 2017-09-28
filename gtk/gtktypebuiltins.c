@@ -1149,6 +1149,8 @@ gtk_input_hints_get_type (void)
             { GTK_INPUT_HINT_UPPERCASE_SENTENCES, "GTK_INPUT_HINT_UPPERCASE_SENTENCES", "uppercase-sentences" },
             { GTK_INPUT_HINT_INHIBIT_OSK, "GTK_INPUT_HINT_INHIBIT_OSK", "inhibit-osk" },
             { GTK_INPUT_HINT_VERTICAL_WRITING, "GTK_INPUT_HINT_VERTICAL_WRITING", "vertical-writing" },
+            { GTK_INPUT_HINT_EMOJI, "GTK_INPUT_HINT_EMOJI", "emoji" },
+            { GTK_INPUT_HINT_NO_EMOJI, "GTK_INPUT_HINT_NO_EMOJI", "no-emoji" },
             { 0, NULL, NULL }
         };
         etype = g_flags_register_static (g_intern_static_string ("GtkInputHints"), values);

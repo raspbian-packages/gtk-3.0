@@ -48,6 +48,7 @@ typedef struct {
 
   NSSavePanel *panel;
   NSWindow *parent;
+  NSWindow *key_window;
   gboolean skip_response;
   gboolean save;
   gboolean folder;
@@ -67,8 +68,8 @@ typedef struct {
   GFile *current_file;
   char *current_name;
 
-  NSMutableArray<NSArray<NSString *> *> *filters;
-  NSMutableArray<NSString *> *filter_names;
+  NSMutableArray *filters;
+  NSMutableArray *filter_names;
   NSComboBox *filter_combo_box;
 
   GSList *files;
@@ -94,7 +95,7 @@ typedef struct {
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification
 {
   NSInteger selected_index = [data->filter_combo_box indexOfSelectedItem];
-  NSArray<NSString *> *filter = [data->filters objectAtIndex:selected_index];
+  NSArray *filter = [data->filters objectAtIndex:selected_index];
   // check for empty strings in filter -> indicates all filetypes should be allowed!
   if ([filter containsObject:@""])
     [data->panel setAllowedFileTypes:nil];
@@ -207,6 +208,10 @@ filechooser_quartz_data_free (FileChooserQuartzData *data)
   g_free (data->message);
   g_free (data);
 }
+
+@protocol CanSetAccessoryViewDisclosed
+- (void)setAccessoryViewDisclosed:(BOOL)val;
+@end
 
 static gboolean
 filechooser_quartz_launch (FileChooserQuartzData *data)
@@ -325,14 +330,11 @@ filechooser_quartz_launch (FileChooserQuartzData *data)
         }
       [data->filter_combo_box setToolTip:[NSString stringWithUTF8String:_("Select which types of files are shown")]];
       [data->panel setAccessoryView:data->filter_combo_box];
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER
-      if (!data->save)
+      if ([data->panel isKindOfClass:[NSOpenPanel class]] && [data->panel respondsToSelector:@selector(setAccessoryViewDisclosed:)])
         {
-          [(NSOpenPanel *) data->panel setAccessoryViewDisclosed:YES];
+          [(id<CanSetAccessoryViewDisclosed>) data->panel setAccessoryViewDisclosed:YES];
         }
-#endif
     }
-
   data->response = GTK_RESPONSE_CANCEL;
 
   
@@ -349,6 +351,16 @@ filechooser_quartz_launch (FileChooserQuartzData *data)
 
     self->mode_data = NULL;
 
+    if (data->parent)
+      {
+        [data->panel orderOut:nil];
+        [data->parent makeKeyAndOrderFront:nil];
+      }
+    else
+      {
+        [data->key_window makeKeyAndOrderFront:nil];
+      }
+
     if (!data->skip_response)
       {
         g_slist_free_full (self->custom_files, g_object_unref);
@@ -364,12 +376,10 @@ filechooser_quartz_launch (FileChooserQuartzData *data)
 
   if (data->parent != NULL && data->modal)
     {
-      [data->panel setLevel:NSModalPanelWindowLevel];
       [data->panel beginSheetModalForWindow:data->parent completionHandler:handler];
     }
   else
     {
-      [data->panel setLevel:NSModalPanelWindowLevel];
       [data->panel beginWithCompletionHandler:handler];
     }
 
@@ -400,11 +410,11 @@ strip_mnemonic (const gchar *s)
 
 static gboolean
 file_filter_to_quartz (GtkFileFilter *file_filter,
-                       NSMutableArray<NSArray<NSString *> *> *filters,
-		       NSMutableArray<NSString *> *filter_names)
+                       NSMutableArray *filters,
+		       NSMutableArray *filter_names)
 {
   const char *name;
-  NSArray<NSString *> *pattern_nsstrings;
+  NSArray *pattern_nsstrings;
 
   pattern_nsstrings = _gtk_file_filter_get_as_pattern_nsstrings (file_filter);
   if (pattern_nsstrings == NULL)
@@ -462,9 +472,9 @@ gtk_file_chooser_native_quartz_show (GtkFileChooserNative *self)
   n_filters = g_slist_length (filters);
   if (n_filters > 0)
     {
-      data->filters = [NSMutableArray<NSArray<NSString *> *> arrayWithCapacity:n_filters];
+      data->filters = [NSMutableArray arrayWithCapacity:n_filters];
       [data->filters retain];
-      data->filter_names = [NSMutableArray<NSString *> arrayWithCapacity:n_filters];
+      data->filter_names = [NSMutableArray arrayWithCapacity:n_filters];
       [data->filter_names retain];
 
       for (l = filters, i = 0; l != NULL; l = l->next, i++)
@@ -542,6 +552,8 @@ gtk_file_chooser_native_quartz_show (GtkFileChooserNative *self)
         data->current_name = g_strdup (self->current_name);
     }
 
+  data->key_window = [NSApp keyWindow];
+
   return filechooser_quartz_launch(data);
 }
 
@@ -559,8 +571,15 @@ gtk_file_chooser_native_quartz_hide (GtkFileChooserNative *self)
 
   [data->panel orderBack:nil];
   [data->panel close];
+
   if (data->parent)
-    [data->parent orderFront:nil];
+    {
+      [data->parent makeKeyAndOrderFront:nil];
+    }
+  else
+    {
+      [data->key_window makeKeyAndOrderFront:nil];
+    }
   data->panel = NULL;
 }
 
