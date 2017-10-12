@@ -125,9 +125,12 @@ struct _GtkPlacesSidebar {
   GtkWidget *new_bookmark_row;
 
   GtkBookmarksManager     *bookmarks_manager;
+
 #ifdef HAVE_CLOUDPROVIDERS
   CloudProviders *cloud_manager;
+  GList *cloud_rows;
 #endif
+
   GVolumeMonitor    *volume_monitor;
   GtkTrashMonitor   *trash_monitor;
   GtkSettings       *gtk_settings;
@@ -156,8 +159,6 @@ struct _GtkPlacesSidebar {
   GtkWidget *row_placeholder;
   DropState drop_state;
   GtkGesture *long_press_gesture;
-
-  GList *cloud_rows;
 
   /* volume mounting - delayed open process */
   GtkPlacesOpenFlags go_to_after_mount_open_flags;
@@ -4312,6 +4313,10 @@ gtk_places_sidebar_dispose (GObject *object)
 
   g_slist_free_full (sidebar->shortcuts, g_object_unref);
   sidebar->shortcuts = NULL;
+
+#ifdef HAVE_CLOUDPROVIDERS
+  g_clear_object (&sidebar->cloud_manager);
+#endif
 
   G_OBJECT_CLASS (gtk_places_sidebar_parent_class)->dispose (object);
 }

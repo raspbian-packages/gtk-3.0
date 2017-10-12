@@ -6,4 +6,7 @@
 no-accessibility-dump.patch
 reftest-known-fail.patch
 gdk-x11-Check-if-we-have-access-to-GL-before-using-G.patch
+0001-Adwaita-Fix-typo-.backgrounf-.background.patch
+0002-theme-Fix-Adwaita-headerbars.patch
+0003-display-x11-Unset-tiled-state-if-_GTK_EDGE_CONSTRAIN.patch
 auto-3.22.11-1+rpi1-bbd9d41abb4e27ecfc2cd7bd15f11332f36883bf-1491663248

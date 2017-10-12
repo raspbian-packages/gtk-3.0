@@ -5575,8 +5575,15 @@ gtk_window_get_application (<em class="parameter"><code><a class="link" href="Gt
 gtk_window_set_application (<em class="parameter"><code><a class="link" href="GtkWindow.html" title="GtkWindow"><span class="type">GtkWindow</span></a> *window</code></em>,
                             <em class="parameter"><code><a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a> *application</code></em>);</pre>
 <p>Sets or unsets the <a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a> associated with the window.</p>
-<p>The application will be kept alive for at least as long as the window
-is open.</p>
+<p>The application will be kept alive for at least as long as it has any windows
+associated with it (see <a href="../gio/GApplication.html#g-application-hold"><code class="function">g_application_hold()</code></a> for a way to keep it alive
+without windows).</p>
+<p>Normally, the connection between the application and the window will remain
+until the window is destroyed, but you can explicitly remove it by setting
+the <em class="parameter"><code>application</code></em>
+ to <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</p>
+<p>This is equivalent to calling <a class="link" href="GtkApplication.html#gtk-application-remove-window" title="gtk_application_remove_window ()"><code class="function">gtk_application_remove_window()</code></a> and/or
+<a class="link" href="GtkApplication.html#gtk-application-add-window" title="gtk_application_add_window ()"><code class="function">gtk_application_add_window()</code></a> on the old/new applications as relevant.</p>
 <div class="refsect3">
 <a name="gtk-window-set-application.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -5593,7 +5600,7 @@ is open.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>application</p></td>
-<td class="parameter_description"><p> a <a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a>, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p> a <a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a>, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to unset. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>

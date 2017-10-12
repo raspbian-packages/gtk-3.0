@@ -456,8 +456,8 @@ specified without specifying a &lt;child&gt; type attribute.</p>
 
 <p></p>
 <p>GtkExpander has three CSS nodes, the main node with the name expander,
-a subnode with name title and node below it with name arrow. Neither of
-them is using any style classes.</p>
+a subnode with name title and node below it with name arrow. The arrow of an
+expander that is showing its child gets the :checked pseudoclass added to it.</p>
 </div>
 </div>
 <div class="refsect1">
@@ -478,8 +478,8 @@ gtk_expander_new (<em class="parameter"><code>const <a href="../glib/glib-Basic-
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>label</p></td>
-<td class="parameter_description"><p>the text of the label</p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p> the text of the label. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr></tbody>
 </table></div>
 </div>
@@ -514,7 +514,7 @@ Pressing Alt and that key activates the button.</p>
 <td class="parameter_name"><p>label</p></td>
 <td class="parameter_description"><p> the text of the label with an underscore
 in front of the mnemonic character. </p></td>
-<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr></tbody>
 </table></div>
 </div>
@@ -680,7 +680,7 @@ gtk_expander_set_label (<em class="parameter"><code><a class="link" href="GtkExp
 <tr>
 <td class="parameter_name"><p>label</p></td>
 <td class="parameter_description"><p> a string. </p></td>
-<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>
@@ -720,7 +720,8 @@ widget.</p>
 <div class="refsect3">
 <a name="gtk-expander-get-label.returns"></a><h4>Returns</h4>
 <p> The text of the label widget. This string is owned
-by the widget and must not be modified or freed.</p>
+by the widget and must not be modified or freed. </p>
+<p><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></p>
 </div>
 <p class="since">Since: 2.4</p>
 </div>
@@ -872,7 +873,7 @@ that will appear embedded alongside the expander arrow.</p>
 <tr>
 <td class="parameter_name"><p>label_widget</p></td>
 <td class="parameter_description"><p> the new label widget. </p></td>
-<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>

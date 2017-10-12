@@ -729,7 +729,7 @@ gtk3_demo_application_SOURCES = \
 	demo_resources.c
 
 gtk3_demo_application_LDADD = $(LDADDS)
-resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(builddir)/demo.gresource.xml)
+resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/demo.gresource.xml)
 iconthemedir = $(datadir)/icons/hicolor
 appsicon16dir = $(iconthemedir)/16x16/apps
 appsicon22dir = $(iconthemedir)/22x22/apps

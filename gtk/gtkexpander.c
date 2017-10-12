@@ -99,8 +99,8 @@
  * ]|
  *
  * GtkExpander has three CSS nodes, the main node with the name expander,
- * a subnode with name title and node below it with name arrow. Neither of
- * them is using any style classes.
+ * a subnode with name title and node below it with name arrow. The arrow of an
+ * expander that is showing its child gets the :checked pseudoclass added to it.
  */
 
 #include "config.h"
@@ -1215,7 +1215,7 @@ gtk_expander_get_preferred_height_for_width (GtkWidget *widget,
 
 /**
  * gtk_expander_new:
- * @label: the text of the label
+ * @label: (nullable): the text of the label
  *
  * Creates a new expander using @label as the text of the label.
  *
@@ -1231,7 +1231,7 @@ gtk_expander_new (const gchar *label)
 
 /**
  * gtk_expander_new_with_mnemonic:
- * @label: (allow-none): the text of the label with an underscore
+ * @label: (nullable): the text of the label with an underscore
  *     in front of the mnemonic character
  *
  * Creates a new expander using @label as the text of the label.
@@ -1376,7 +1376,7 @@ gtk_expander_get_spacing (GtkExpander *expander)
 /**
  * gtk_expander_set_label:
  * @expander: a #GtkExpander
- * @label: (allow-none): a string
+ * @label: (nullable): a string
  *
  * Sets the text of the label of the expander to @label.
  *
@@ -1425,12 +1425,12 @@ gtk_expander_set_label (GtkExpander *expander,
  * be avoided by fetching the label text directly from the label
  * widget.
  *
- * Returns: The text of the label widget. This string is owned
+ * Returns: (nullable): The text of the label widget. This string is owned
  *     by the widget and must not be modified or freed.
  *
  * Since: 2.4
  */
-const char *
+const gchar *
 gtk_expander_get_label (GtkExpander *expander)
 {
   GtkExpanderPrivate *priv;
@@ -1555,7 +1555,7 @@ gtk_expander_get_use_markup (GtkExpander *expander)
 /**
  * gtk_expander_set_label_widget:
  * @expander: a #GtkExpander
- * @label_widget: (allow-none): the new label widget
+ * @label_widget: (nullable): the new label widget
  *
  * Set the label widget for the expander. This is the widget
  * that will appear embedded alongside the expander arrow.

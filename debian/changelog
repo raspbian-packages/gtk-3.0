@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.21-1+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.22.24-1+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,24 @@ gtk+3.0 (3.22.21-1+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Peter Michael Green <plugwash@raspbian.org>  Thu, 28 Sep 2017 01:13:20 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 12 Oct 2017 12:10:43 +0000
+
+gtk+3.0 (3.22.24-1) unstable; urgency=low
+
+  * New upstream release (LP: #1712011, #1719047)
+  * Cherry-pick fixes committed after the 3.22.24 release:
+    - 0001-Adwaita-Fix-typo-.backgrounf-.background.patch
+    - 0002-theme-Fix-Adwaita-headerbars.patch
+    - 0003-display-x11-Unset-tiled-state-if-_GTK_EDGE_CONSTRAIN.patch
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 04 Oct 2017 19:07:15 -0400
+
+gtk+3.0 (3.22.22-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/copyright: Mark Scheme Widget Library as SWL rather than 'other'.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 03 Oct 2017 20:02:52 +0200
 
 gtk+3.0 (3.22.21-1) unstable; urgency=medium
 

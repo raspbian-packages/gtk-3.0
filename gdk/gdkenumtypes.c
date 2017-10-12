@@ -434,6 +434,14 @@ gdk_window_state_get_type (void)
             { GDK_WINDOW_STATE_BELOW, "GDK_WINDOW_STATE_BELOW", "below" },
             { GDK_WINDOW_STATE_FOCUSED, "GDK_WINDOW_STATE_FOCUSED", "focused" },
             { GDK_WINDOW_STATE_TILED, "GDK_WINDOW_STATE_TILED", "tiled" },
+            { GDK_WINDOW_STATE_TOP_TILED, "GDK_WINDOW_STATE_TOP_TILED", "top-tiled" },
+            { GDK_WINDOW_STATE_TOP_RESIZABLE, "GDK_WINDOW_STATE_TOP_RESIZABLE", "top-resizable" },
+            { GDK_WINDOW_STATE_RIGHT_TILED, "GDK_WINDOW_STATE_RIGHT_TILED", "right-tiled" },
+            { GDK_WINDOW_STATE_RIGHT_RESIZABLE, "GDK_WINDOW_STATE_RIGHT_RESIZABLE", "right-resizable" },
+            { GDK_WINDOW_STATE_BOTTOM_TILED, "GDK_WINDOW_STATE_BOTTOM_TILED", "bottom-tiled" },
+            { GDK_WINDOW_STATE_BOTTOM_RESIZABLE, "GDK_WINDOW_STATE_BOTTOM_RESIZABLE", "bottom-resizable" },
+            { GDK_WINDOW_STATE_LEFT_TILED, "GDK_WINDOW_STATE_LEFT_TILED", "left-tiled" },
+            { GDK_WINDOW_STATE_LEFT_RESIZABLE, "GDK_WINDOW_STATE_LEFT_RESIZABLE", "left-resizable" },
             { 0, NULL, NULL }
         };
         etype = g_flags_register_static (g_intern_static_string ("GdkWindowState"), values);
