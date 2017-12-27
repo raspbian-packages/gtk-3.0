@@ -736,8 +736,8 @@ the label is inside a button:</p>
 3
 4</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc slc">// Pressing Alt+H will activate this button</span>
-button <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkButton.html#gtk-button-new">gtk_button_new</a></span> <span class="gtkdoc opt">();</span>
-label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new-with-mnemonic">gtk_label_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span>
+GtkWidget <span class="gtkdoc opt">*</span>button <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkButton.html#gtk-button-new">gtk_button_new</a></span> <span class="gtkdoc opt">();</span>
+GtkWidget <span class="gtkdoc opt">*</span>label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new-with-mnemonic">gtk_label_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkContainer.html#gtk-container-add">gtk_container_add</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_CONTAINER</span> <span class="gtkdoc opt">(</span>button<span class="gtkdoc opt">),</span> label<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -754,7 +754,7 @@ already inside:</p>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc slc">// Pressing Alt+H will activate this button</span>
-button <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkButton.html#gtk-button-new-with-mnemonic">gtk_button_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span></pre></td>
+GtkWidget <span class="gtkdoc opt">*</span>button <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkButton.html#gtk-button-new-with-mnemonic">gtk_button_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -773,8 +773,8 @@ button <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkButt
 3
 4</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc slc">// Pressing Alt+H will focus the entry</span>
-entry <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkEntry.html#gtk-entry-new">gtk_entry_new</a></span> <span class="gtkdoc opt">();</span>
-label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new-with-mnemonic">gtk_label_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span>
+GtkWidget <span class="gtkdoc opt">*</span>entry <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkEntry.html#gtk-entry-new">gtk_entry_new</a></span> <span class="gtkdoc opt">();</span>
+GtkWidget <span class="gtkdoc opt">*</span>label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new-with-mnemonic">gtk_label_new_with_mnemonic</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;_Hello&quot;</span><span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkLabel.html#gtk-label-set-mnemonic-widget">gtk_label_set_mnemonic_widget</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_LABEL</span> <span class="gtkdoc opt">(</span>label<span class="gtkdoc opt">),</span> entry<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -796,7 +796,7 @@ markup format.</p>
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting">label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new">gtk_label_new</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">);</span>
+        <td class="listing_code"><pre class="programlisting">GtkWidget <span class="gtkdoc opt">*</span>label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new">gtk_label_new</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkLabel.html#gtk-label-set-markup">gtk_label_set_markup</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_LABEL</span> <span class="gtkdoc opt">(</span>label<span class="gtkdoc opt">),</span> <span class="string">&quot;&lt;small&gt;Small text&lt;/small&gt;&quot;</span><span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -870,12 +870,14 @@ text. The “title“ attribute is displayed as a tooltip on the link.</p>
 2
 3
 4
-5</pre></td>
+5
+6</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">const</span> gchar <span class="gtkdoc opt">*</span>text <span class="gtkdoc opt">=</span>
 <span class="string">&quot;Go to the&quot;</span>
-<span class="string">&quot;&lt;a href=</span><span class="gtkdoc esc">\&quot;</span><span class="string">http://www.gtk.org title=&quot;</span><span class="gtkdoc opt">&amp;</span>lt<span class="gtkdoc opt">;</span>i<span class="gtkdoc opt">&amp;</span>gt<span class="gtkdoc opt">;</span>Our<span class="gtkdoc opt">&amp;</span>lt<span class="gtkdoc opt">;/</span>i<span class="gtkdoc opt">&amp;</span>gt<span class="gtkdoc opt">;</span> website<span class="gtkdoc esc">\&quot;</span><span class="gtkdoc opt">&gt;</span><span class="string">&quot;</span>
-<span class="string">&quot;</span>GTK<span class="gtkdoc opt">+</span> website<span class="gtkdoc opt">&lt;/</span>a<span class="gtkdoc opt">&gt;</span> <span class="keyword">for</span> more<span class="gtkdoc opt">...</span><span class="string">&quot;;</span>
-<span class="string">gtk_label_set_markup (label, text);</span></pre></td>
+<span class="string">&quot;&lt;a href=</span><span class="gtkdoc esc">\&quot;</span><span class="string">http://www.gtk.org title=</span><span class="gtkdoc esc">\&quot;</span><span class="string">&amp;lt;i&amp;gt;Our&amp;lt;/i&amp;gt; website</span><span class="gtkdoc esc">\&quot;</span><span class="string">&gt;&quot;</span>
+<span class="string">&quot;GTK+ website&lt;/a&gt; for more...&quot;</span><span class="gtkdoc opt">;</span>
+GtkWidget <span class="gtkdoc opt">*</span>label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new">gtk_label_new</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">);</span>
+<span class="function"><a href="GtkLabel.html#gtk-label-set-markup">gtk_label_set_markup</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_LABEL</span> <span class="gtkdoc opt">(</span>label<span class="gtkdoc opt">),</span> text<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1009,8 +1011,12 @@ label’s text and attribute list based on the parse results.</p>
 3
 4
 5
-6</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">const char</span> <span class="gtkdoc opt">*</span>format <span class="gtkdoc opt">=</span> <span class="string">&quot;&lt;span style=</span><span class="gtkdoc esc">\&quot;</span><span class="string">italic</span><span class="gtkdoc esc">\&quot;</span><span class="string">&gt;\%s&lt;/span&gt;&quot;</span><span class="gtkdoc opt">;</span>
+6
+7
+8</pre></td>
+        <td class="listing_code"><pre class="programlisting">GtkWidget <span class="gtkdoc opt">*</span>label <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkLabel.html#gtk-label-new">gtk_label_new</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">);</span>
+<span class="gtkdoc kwb">const char</span> <span class="gtkdoc opt">*</span>str <span class="gtkdoc opt">=</span> <span class="string">&quot;some text&quot;</span><span class="gtkdoc opt">;</span>
+<span class="gtkdoc kwb">const char</span> <span class="gtkdoc opt">*</span>format <span class="gtkdoc opt">=</span> <span class="string">&quot;&lt;span style=</span><span class="gtkdoc esc">\&quot;</span><span class="string">italic</span><span class="gtkdoc esc">\&quot;</span><span class="string">&gt;\%s&lt;/span&gt;&quot;</span><span class="gtkdoc opt">;</span>
 <span class="gtkdoc kwb">char</span> <span class="gtkdoc opt">*</span>markup<span class="gtkdoc opt">;</span>
 
 markup <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Simple-XML-Subset-Parser.html#g-markup-printf-escaped">g_markup_printf_escaped</a></span> <span class="gtkdoc opt">(</span>format<span class="gtkdoc opt">,</span> str<span class="gtkdoc opt">);</span>

@@ -2741,9 +2741,9 @@ gtk_range_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
     }
   else if (priv->mouse_location == priv->trough_gadget &&
            (source == GDK_SOURCE_TOUCHSCREEN ||
-            (button == GDK_BUTTON_PRIMARY &&
-             ((primary_warps && !shift_pressed) ||
-              (!primary_warps && shift_pressed)))))
+            (primary_warps && !shift_pressed && button == GDK_BUTTON_PRIMARY) ||
+            (!primary_warps && shift_pressed && button == GDK_BUTTON_PRIMARY) ||
+            (!primary_warps && button == GDK_BUTTON_MIDDLE)))
     {
       /* warp to location */
       GdkRectangle slider;
@@ -2772,9 +2772,9 @@ gtk_range_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
       update_slider_position (range, x, y);
     }
   else if (priv->mouse_location == priv->trough_gadget &&
-           button == GDK_BUTTON_PRIMARY &&
-           ((primary_warps && shift_pressed) ||
-            (!primary_warps && !shift_pressed)))
+           ((primary_warps && shift_pressed && button == GDK_BUTTON_PRIMARY) ||
+            (!primary_warps && !shift_pressed && button == GDK_BUTTON_PRIMARY) ||
+            (primary_warps && button == GDK_BUTTON_MIDDLE)))
     {
       /* jump by pages */
       GtkScrollType scroll;
@@ -3053,7 +3053,7 @@ _gtk_range_get_wheel_delta (GtkRange       *range,
 #endif
 
       if (gtk_orientable_get_orientation (GTK_ORIENTABLE (range)) == GTK_ORIENTATION_HORIZONTAL)
-        delta = - (dx ? dx : dy) * scroll_unit;
+        delta = (dx ? dx : -dy) * scroll_unit;
       else
         delta = dy * scroll_unit;
     }

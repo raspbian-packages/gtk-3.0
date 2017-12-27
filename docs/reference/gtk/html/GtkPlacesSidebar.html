@@ -295,6 +295,11 @@
 </tr>
 <tr>
 <td class="property_type"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
+<td class="property_name"><a class="link" href="GtkPlacesSidebar.html#GtkPlacesSidebar--show-starred-location" title="The “show-starred-location” property">show-starred-location</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
 <td class="property_name"><a class="link" href="GtkPlacesSidebar.html#GtkPlacesSidebar--show-trash" title="The “show-trash” property">show-trash</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
@@ -363,6 +368,11 @@
 <tr>
 <td class="signal_type"><span class="returnvalue">void</span></td>
 <td class="signal_name"><a class="link" href="GtkPlacesSidebar.html#GtkPlacesSidebar-show-other-locations-with-flags" title="The “show-other-locations-with-flags” signal">show-other-locations-with-flags</a></td>
+<td class="signal_flags"><a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></td>
+</tr>
+<tr>
+<td class="signal_type"><span class="returnvalue">void</span></td>
+<td class="signal_name"><a class="link" href="GtkPlacesSidebar.html#GtkPlacesSidebar-show-starred-location" title="The “show-starred-location” signal">show-starred-location</a></td>
 <td class="signal_flags"><a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></td>
 </tr>
 <tr>
@@ -1403,6 +1413,14 @@ is also emitted for popovers.</p>
 </div>
 <hr>
 <div class="refsect2">
+<a name="GtkPlacesSidebar--show-starred-location"></a><h3>The <code class="literal">“show-starred-location”</code> property</h3>
+<pre class="programlisting">  “show-starred-location”    <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
+<p>Whether the sidebar includes an item to show starred files.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="GtkPlacesSidebar--show-trash"></a><h3>The <code class="literal">“show-trash”</code> property</h3>
 <pre class="programlisting">  “show-trash”               <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
 <p>Whether the sidebar includes a builtin shortcut to the Trash location.</p>
@@ -1950,6 +1968,42 @@ volumes and discovered network addresses.</p>
 </div>
 <p>Flags: <a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></p>
 <p class="since">Since: <a class="link" href="api-index-3-20.html#api-index-3.20">3.20</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GtkPlacesSidebar-show-starred-location"></a><h3>The <code class="literal">“show-starred-location”</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+user_function (<a class="link" href="GtkPlacesSidebar.html" title="GtkPlacesSidebar"><span class="type">GtkPlacesSidebar</span></a>  *sidebar,
+               <a class="link" href="GtkPlacesSidebar.html#GtkPlacesOpenFlags" title="enum GtkPlacesOpenFlags"><span class="type">GtkPlacesOpenFlags</span></a> arg1,
+               <a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>           user_data)</pre>
+<p>The places sidebar emits this signal when it needs the calling
+application to present a way to show the starred files. In GNOME,
+starred files are implemented by setting the nao:predefined-tag-favorite
+tag in the tracker database.</p>
+<div class="refsect3">
+<a name="GtkPlacesSidebar-show-starred-location.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>sidebar</p></td>
+<td class="parameter_description"><p>the object which received the signal.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Flags: <a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></p>
+<p class="since">Since: 3.22.26</p>
 </div>
 <hr>
 <div class="refsect2">

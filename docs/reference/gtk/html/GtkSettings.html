@@ -1860,8 +1860,13 @@ navigation, such as menus, menubars and notebooks.</p>
 <div class="refsect2">
 <a name="GtkSettings--gtk-primary-button-warps-slider"></a><h3>The <code class="literal">“gtk-primary-button-warps-slider”</code> property</h3>
 <pre class="programlisting">  “gtk-primary-button-warps-slider” <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
-<p>Whether a click in a <a class="link" href="GtkRange.html" title="GtkRange"><span class="type">GtkRange</span></a> trough should scroll to the click position or
-scroll by a single page in the respective direction.</p>
+<p>If the value of this setting is <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, clicking the primary button in a
+<a class="link" href="GtkRange.html" title="GtkRange"><span class="type">GtkRange</span></a> trough will move the slider, and hence set the range’s value, to
+the point that you clicked. If it is <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, a primary click will cause the
+slider/value to move by the range’s page-size towards the point clicked.</p>
+<p>Whichever action you choose for the primary button, the other action will
+be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
+clicking the middle mouse button.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: TRUE</p>
 <p class="since">Since: <a class="link" href="api-index-3-6.html#api-index-3.6">3.6</a></p>

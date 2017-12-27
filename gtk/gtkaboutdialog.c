@@ -90,10 +90,11 @@
  * set the title property explicitly when constructing a GtkAboutDialog,
  * as shown in the following example:
  * |[<!-- language="C" -->
+ * GdkPixbuf *example_logo = gdk_pixbuf_new_from_file ("./logo.png", NULL);
  * gtk_show_about_dialog (NULL,
  *                        "program-name", "ExampleCode",
  *                        "logo", example_logo,
- *                        "title" _("About ExampleCode"),
+ *                        "title", _("About ExampleCode"),
  *                        NULL);
  * ]|
  *
@@ -1686,8 +1687,9 @@ gtk_about_dialog_get_translator_credits (GtkAboutDialog *about)
  * Using gettext(), a simple way to achieve that is to mark the
  * string for translation:
  * |[<!-- language="C" -->
- *  gtk_about_dialog_set_translator_credits (about,
- *                                           _("translator-credits"));
+ * GtkWidget *about = gtk_about_dialog_new ();
+ * gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about),
+ *                                          _("translator-credits"));
  * ]|
  * It is a good idea to use the customary msgid “translator-credits” for this
  * purpose, since translators will already know the purpose of that msgid, and
@@ -2457,7 +2459,7 @@ gtk_about_dialog_set_license_type (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
   g_return_if_fail (license_type >= GTK_LICENSE_UNKNOWN &&
-                    license_type <= GTK_LICENSE_LGPL_3_0_ONLY);
+                    license_type <= GTK_LICENSE_AGPL_3_0);
 
   priv = about->priv;
 

@@ -1138,6 +1138,12 @@ receive input while the popover is visible).</p>
 <a name="GtkPopover--transitions-enabled"></a><h3>The <code class="literal">“transitions-enabled”</code> property</h3>
 <pre class="programlisting">  “transitions-enabled”      <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
 <p>Whether show/hide transitions are enabled for this popover.</p>
+<div class="warning">
+<p><code class="literal">GtkPopover:transitions-enabled</code> has been deprecated since version 3.22 and should not be used in newly-written code.</p>
+<p>You can show or hide the popover without transitions
+  using <a class="link" href="GtkWidget.html#gtk-widget-show" title="gtk_widget_show ()"><code class="function">gtk_widget_show()</code></a> and <a class="link" href="GtkWidget.html#gtk-widget-hide" title="gtk_widget_hide ()"><code class="function">gtk_widget_hide()</code></a> while <a class="link" href="GtkPopover.html#gtk-popover-popup" title="gtk_popover_popup ()"><code class="function">gtk_popover_popup()</code></a>
+  and <a class="link" href="GtkPopover.html#gtk-popover-popdown" title="gtk_popover_popdown ()"><code class="function">gtk_popover_popdown()</code></a> will use transitions.</p>
+</div>
 <p>Flags: Read / Write</p>
 <p>Default value: TRUE</p>
 <p class="since">Since: <a class="link" href="api-index-3-16.html#api-index-3.16">3.16</a></p>

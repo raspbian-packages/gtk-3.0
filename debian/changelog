@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.24-3+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.22.26-2+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,53 @@ gtk+3.0 (3.22.24-3+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Peter Michael Green <plugwash@raspbian.org>  Thu, 16 Nov 2017 17:21:06 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Wed, 27 Dec 2017 21:47:16 +0000
+
+gtk+3.0 (3.22.26-2) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Set Rules-Requires-Root to no
+  * Add a Lintian override to silence warnings about the non-standard
+    name of libgail-3-0, which should really have been libgailutil-3-0
+    but isn't going to be changed now
+
+  [ Jeremy Bicha ]
+  * Add git_text-view-support-emoji-chooser.patch:
+    - Offer right-click "Insert Emoji" menu item for GtkTextView too
+
+ -- Jeremy Bicha <jbicha@debian.org>  Tue, 28 Nov 2017 17:16:13 -0500
+
+gtk+3.0 (3.22.26-1) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Move examples, udebs from Priority: extra to optional
+
+  [ Michael Biebl ]
+  * New upstream release
+  * Rebase patches
+  * Update symbols file for libgtk-3-0
+  * Bump Standards-Version to 4.1.1
+  * Drop no longer needed Breaks/Replaces
+  * Add (versioned) Provides to gir1.2-gtk-3.0 to follow the latest changes in
+    the GObject introspection policy wrt bundled typelibs.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 13 Nov 2017 00:54:47 +0100
+
+gtk+3.0 (3.22.25-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+    - Fix tiling behaviour with Mutter/Shell 3.26 (Closes: #879566)
+    - Update symbols file
+    - d/p/0001-Adwaita-Fix-typo-.backgrounf-.background.patch,
+      d/p/0002-theme-Fix-Adwaita-headerbars.patch,
+      d/p/0003-display-x11-Unset-tiled-state-if-_GTK_EDGE_CONSTRAIN.patch:
+      Drop patches, applied upstream
+    - d/p/gdk-wayland-protocol-server-decoration.patch:
+      Add server-decoration.xml from upstream git. It is missing from the
+      tarball release.
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 29 Oct 2017 17:21:51 +0000
 
 gtk+3.0 (3.22.24-3) unstable; urgency=medium
 

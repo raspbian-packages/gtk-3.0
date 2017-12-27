@@ -3973,6 +3973,7 @@
     <keyword type="property" name="The “show-enter-location” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-enter-location"/>
     <keyword type="property" name="The “show-other-locations” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-other-locations"/>
     <keyword type="property" name="The “show-recent” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-recent"/>
+    <keyword type="property" name="The “show-starred-location” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-starred-location"/>
     <keyword type="property" name="The “show-trash” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-trash"/>
     <keyword type="signal" name="The “drag-action-ask” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-drag-action-ask"/>
     <keyword type="signal" name="The “drag-action-requested” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-drag-action-requested"/>
@@ -3985,6 +3986,7 @@
     <keyword type="signal" name="The “show-error-message” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-error-message"/>
     <keyword type="signal" name="The “show-other-locations” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-other-locations"/>
     <keyword type="signal" name="The “show-other-locations-with-flags” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-other-locations-with-flags"/>
+    <keyword type="signal" name="The “show-starred-location” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-starred-location"/>
     <keyword type="signal" name="The “unmount” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-unmount"/>
     <keyword type="function" name="gtk_frame_new ()" link="GtkFrame.html#gtk-frame-new"/>
     <keyword type="function" name="gtk_frame_set_label ()" link="GtkFrame.html#gtk-frame-set-label"/>
@@ -5592,7 +5594,7 @@
     <keyword type="function" name="gtk_paint_shadow ()" link="GtkStyle.html#gtk-paint-shadow" deprecated="3.0: Use gtk_render_frame() instead"/>
     <keyword type="function" name="gtk_paint_shadow_gap ()" link="GtkStyle.html#gtk-paint-shadow-gap" deprecated="3.0: Use gtk_render_frame_gap() instead"/>
     <keyword type="function" name="gtk_paint_slider ()" link="GtkStyle.html#gtk-paint-slider" deprecated="3.0: Use gtk_render_slider() instead"/>
-    <keyword type="function" name="gtk_paint_spinner ()" link="GtkStyle.html#gtk-paint-spinner" deprecated="3.0: Use gtk_render_activity() instead"/>
+    <keyword type="function" name="gtk_paint_spinner ()" link="GtkStyle.html#gtk-paint-spinner" deprecated=""/>
     <keyword type="function" name="gtk_paint_tab ()" link="GtkStyle.html#gtk-paint-tab" deprecated="3.0: Use cairo instead"/>
     <keyword type="function" name="gtk_paint_vline ()" link="GtkStyle.html#gtk-paint-vline" deprecated="3.0: Use gtk_render_line() instead"/>
     <keyword type="function" name="gtk_paint_expander ()" link="GtkStyle.html#gtk-paint-expander" deprecated="3.0: Use gtk_render_expander() instead"/>

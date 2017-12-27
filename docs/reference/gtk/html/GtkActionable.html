@@ -377,14 +377,15 @@ gtk_actionable_set_detailed_action_name
                                 <em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *detailed_action_name</code></em>);</pre>
 <p>Sets the action-name and associated string target value of an
 actionable widget.</p>
-<p>This allows for the effect of both <a class="link" href="GtkActionable.html#gtk-actionable-set-action-name" title="gtk_actionable_set_action_name ()"><code class="function">gtk_actionable_set_action_name()</code></a>
-and <a class="link" href="GtkActionable.html#gtk-actionable-set-action-target-value" title="gtk_actionable_set_action_target_value ()"><code class="function">gtk_actionable_set_action_target_value()</code></a> in the common case that
-the target is string-valued.</p>
 <p><em class="parameter"><code>detailed_action_name</code></em>
- is a string of the form
-<code class="literal">"action::target"</code> where <code class="literal">action</code>
-is the action name and <code class="literal">target</code> is the string to use
-as the target.</p>
+ is a string in the format accepted by
+<a href="../gio/GAction.html#g-action-parse-detailed-name"><code class="function">g_action_parse_detailed_name()</code></a>.</p>
+<p>(Note that prior to version 3.22.25,
+this function is only usable for actions with a simple "s" target, and
+<em class="parameter"><code>detailed_action_name</code></em>
+ must be of the form <code class="literal">"action::target"</code> where
+<code class="literal">action</code> is the action name and <code class="literal">target</code> is the string to use
+as the target.)</p>
 <div class="refsect3">
 <a name="gtk-actionable-set-detailed-action-name.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

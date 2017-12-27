@@ -2358,11 +2358,11 @@ the prelight state:</p>
 6
 7
 8</pre></td>
-        <td class="listing_code"><pre class="programlisting">GtkButton <span class="gtkdoc opt">{</span>
+        <td class="listing_code"><pre class="programlisting">button <span class="gtkdoc opt">{</span>
     background<span class="gtkdoc opt">-</span>color<span class="gtkdoc opt">:</span> <span class="gtkdoc ppc">#f00</span>
 <span class="gtkdoc opt">}</span>
 
-GtkButton<span class="gtkdoc opt">:</span>hover <span class="gtkdoc opt">{</span>
+button<span class="gtkdoc opt">:</span>hover <span class="gtkdoc opt">{</span>
     background<span class="gtkdoc opt">-</span>color<span class="gtkdoc opt">:</span> <span class="gtkdoc ppc">#fff;</span>
     transition<span class="gtkdoc opt">:</span> <span class="number">200</span>ms linear
 <span class="gtkdoc opt">}</span></pre></td>
@@ -3118,7 +3118,7 @@ region, would be matched by:</p>
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting">GtkTreeView row <span class="gtkdoc opt">{ ... }</span></pre></td>
+        <td class="listing_code"><pre class="programlisting">treeview row <span class="gtkdoc opt">{ ... }</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -3134,8 +3134,8 @@ following rules:</p>
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting">GtkTreeView row<span class="gtkdoc opt">:</span>nth<span class="gtkdoc opt">-</span><span class="function">child</span><span class="gtkdoc opt">(</span>even<span class="gtkdoc opt">) { ... }</span>
-GtkTreeView row<span class="gtkdoc opt">:</span>nth<span class="gtkdoc opt">-</span><span class="function">child</span><span class="gtkdoc opt">(</span>odd<span class="gtkdoc opt">) { ... }</span></pre></td>
+        <td class="listing_code"><pre class="programlisting">treeview row<span class="gtkdoc opt">:</span>nth<span class="gtkdoc opt">-</span><span class="function">child</span><span class="gtkdoc opt">(</span>even<span class="gtkdoc opt">) { ... }</span>
+treeview row<span class="gtkdoc opt">:</span>nth<span class="gtkdoc opt">-</span><span class="function">child</span><span class="gtkdoc opt">(</span>odd<span class="gtkdoc opt">) { ... }</span></pre></td>
       </tr>
     </tbody>
   </table>

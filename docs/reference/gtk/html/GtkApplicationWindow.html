@@ -209,9 +209,9 @@ windows client-side decorations.</p>
 19
 20
 21</pre></td>
-        <td class="listing_code"><pre class="programlisting">app <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkApplication.html#gtk-application-new">gtk_application_new</a></span> <span class="gtkdoc opt">();</span>
+        <td class="listing_code"><pre class="programlisting">GtkApplication <span class="gtkdoc opt">*</span>app <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkApplication.html#gtk-application-new">gtk_application_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;org.gtk.test&quot;</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
 
-builder <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkBuilder.html#gtk-builder-new-from-string">gtk_builder_new_from_string</a></span> <span class="gtkdoc opt">(</span>
+GtkBuilder <span class="gtkdoc opt">*</span>builder <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkBuilder.html#gtk-builder-new-from-string">gtk_builder_new_from_string</a></span> <span class="gtkdoc opt">(</span>
     <span class="string">&quot;&lt;interface&gt;&quot;</span>
     <span class="string">&quot;  &lt;menu id=&apos;menubar&apos;&gt;&quot;</span>
     <span class="string">&quot;    &lt;submenu label=&apos;_Edit&apos;&gt;&quot;</span>
@@ -222,14 +222,14 @@ builder <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkBui
     <span class="string">&quot;&lt;/interface&gt;&quot;</span><span class="gtkdoc opt">,</span>
     <span class="gtkdoc opt">-</span><span class="number">1</span><span class="gtkdoc opt">);</span>
 
-menubar <span class="gtkdoc opt">=</span> <span class="function">G_MENU_MODEL</span> <span class="gtkdoc opt">(</span><span class="function"><a href="GtkBuilder.html#gtk-builder-get-object">gtk_builder_get_object</a></span> <span class="gtkdoc opt">(</span>builder<span class="gtkdoc opt">,</span>
-                                                <span class="string">&quot;menubar&quot;</span><span class="gtkdoc opt">));</span>
-<span class="function"><a href="GtkApplication.html#gtk-application-set-menubar">gtk_application_set_menubar</a></span> <span class="gtkdoc opt">(</span><span class="function">G_APPLICATION</span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">),</span> menubar<span class="gtkdoc opt">);</span>
+GMenuModel <span class="gtkdoc opt">*</span>menubar <span class="gtkdoc opt">=</span> <span class="function">G_MENU_MODEL</span> <span class="gtkdoc opt">(</span><span class="function"><a href="GtkBuilder.html#gtk-builder-get-object">gtk_builder_get_object</a></span> <span class="gtkdoc opt">(</span>builder<span class="gtkdoc opt">,</span>
+                                                            <span class="string">&quot;menubar&quot;</span><span class="gtkdoc opt">));</span>
+<span class="function"><a href="GtkApplication.html#gtk-application-set-menubar">gtk_application_set_menubar</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_APPLICATION</span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">),</span> menubar<span class="gtkdoc opt">);</span>
 <span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>builder<span class="gtkdoc opt">);</span>
 
-<span class="gtkdoc opt">...</span>
+<span class="gtkdoc slc">// ...</span>
 
-window <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkApplicationWindow.html#gtk-application-window-new">gtk_application_window_new</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span></pre></td>
+GtkWidget <span class="gtkdoc opt">*</span>window <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkApplicationWindow.html#gtk-application-window-new">gtk_application_window_new</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>

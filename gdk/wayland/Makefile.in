@@ -127,7 +127,7 @@ am__objects_1 = pointer-gestures-unstable-v1-protocol.lo \
 	gtk-primary-selection-protocol.lo \
 	tablet-unstable-v2-protocol.lo \
 	keyboard-shortcuts-inhibit-unstable-v1-protocol.lo \
-	gtk-shell-protocol.lo
+	server-decoration-protocol.lo gtk-shell-protocol.lo
 nodist_libgdk_wayland_la_OBJECTS = $(am__objects_1)
 libgdk_wayland_la_OBJECTS = $(am_libgdk_wayland_la_OBJECTS) \
 	$(nodist_libgdk_wayland_la_OBJECTS)
@@ -504,7 +504,8 @@ GTESTER = gtester -k		# in $PATH for non-GLIB packages
 GTESTER_REPORT = gtester-report		# in $PATH for non-GLIB packages
 
 # initialize variables for unconditional += appending
-EXTRA_DIST = protocol/gtk-primary-selection.xml protocol/gtk-shell.xml
+EXTRA_DIST = protocol/gtk-primary-selection.xml protocol/gtk-shell.xml \
+	protocol/server-decoration.xml
 TEST_PROGS = 
 
 ### testing rules
@@ -563,6 +564,8 @@ BUILT_SOURCES = \
 	tablet-unstable-v2-protocol.c		\
 	keyboard-shortcuts-inhibit-unstable-v1-client-protocol.h \
 	keyboard-shortcuts-inhibit-unstable-v1-protocol.c	\
+	server-decoration-client-protocol.h		\
+	server-decoration-protocol.c			\
 	gtk-shell-client-protocol.h		\
 	gtk-shell-protocol.c
 
@@ -677,6 +680,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk-shell-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/keyboard-shortcuts-inhibit-unstable-v1-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pointer-gestures-unstable-v1-protocol.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server-decoration-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tablet-unstable-v2-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wm-button-layout-translation.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdg-foreign-unstable-v1-protocol.Plo@am__quote@

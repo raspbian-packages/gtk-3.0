@@ -213,8 +213,12 @@ though it is almost always used to display just one accelerator key.</p>
 16
 17
 18
-19</pre></td>
-        <td class="listing_code"><pre class="programlisting">GtkWidget <span class="gtkdoc opt">*</span>save_item<span class="gtkdoc opt">;</span>
+19
+20
+21</pre></td>
+        <td class="listing_code"><pre class="programlisting">GtkWidget <span class="gtkdoc opt">*</span>window <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWindow.html#gtk-window-new">gtk_window_new</a></span> <span class="gtkdoc opt">(</span>GTK_WINDOW_TOPLEVEL<span class="gtkdoc opt">);</span>
+GtkWidget <span class="gtkdoc opt">*</span>menu <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkMenu.html#gtk-menu-new">gtk_menu_new</a></span> <span class="gtkdoc opt">();</span>
+GtkWidget <span class="gtkdoc opt">*</span>save_item<span class="gtkdoc opt">;</span>
 GtkAccelGroup <span class="gtkdoc opt">*</span>accel_group<span class="gtkdoc opt">;</span>
 
 <span class="gtkdoc slc">// Create a GtkAccelGroup and add it to the window.</span>

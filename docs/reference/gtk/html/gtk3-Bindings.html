@@ -631,10 +631,20 @@ be of the given type). There must be <em class="parameter"><code>n_args</code></
 2
 3
 4
-5</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gtk3-Bindings.html#gtk-binding-entry-add-signal">gtk_binding_entry_add_signal</a></span> <span class="gtkdoc opt">(</span>binding_set<span class="gtkdoc opt">,</span> keyval<span class="gtkdoc opt">,</span> modmask<span class="gtkdoc opt">,</span>
-                              <span class="string">&quot;move-cursor&quot;</span><span class="gtkdoc opt">,</span> <span class="number">3</span><span class="gtkdoc opt">,</span>
-                              G_TYPE_ENUM<span class="gtkdoc opt">,</span> step<span class="gtkdoc opt">,</span>
+5
+6
+7
+8
+9
+10</pre></td>
+        <td class="listing_code"><pre class="programlisting">GtkBindingSet <span class="gtkdoc opt">*</span>binding_set<span class="gtkdoc opt">;</span>
+GdkModifierType modmask <span class="gtkdoc opt">=</span> GDK_CONTROL_MASK<span class="gtkdoc opt">;</span>
+<span class="gtkdoc kwb">int</span> count <span class="gtkdoc opt">=</span> <span class="number">1</span><span class="gtkdoc opt">;</span>
+<span class="function"><a href="gtk3-Bindings.html#gtk-binding-entry-add-signal">gtk_binding_entry_add_signal</a></span> <span class="gtkdoc opt">(</span>binding_set<span class="gtkdoc opt">,</span>
+                              GDK_KEY_space<span class="gtkdoc opt">,</span>
+                              modmask<span class="gtkdoc opt">,</span>
+                              <span class="string">&quot;move-cursor&quot;</span><span class="gtkdoc opt">,</span> <span class="number">2</span><span class="gtkdoc opt">,</span>
+                              GTK_TYPE_MOVEMENT_STEP<span class="gtkdoc opt">,</span> GTK_MOVEMENT_PAGES<span class="gtkdoc opt">,</span>
                               G_TYPE_INT<span class="gtkdoc opt">,</span> count<span class="gtkdoc opt">,</span>
                               G_TYPE_BOOLEAN<span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">);</span></pre></td>
       </tr>

@@ -143,8 +143,8 @@ override_dh_clean: debian/control
 	sed -i s/optional=nowayland/arch=linux-any/ debian/libgtk-3-0.symbols
 	rm -rf debian/build debian/install
 	# The build system does not automatically update the GResource files
-	# when resources change. Force an update since we modify CSS files in
-	# 0002-theme-Fix-Adwaita-headerbars.patch
+	# when resources change. Force an update in case we ship a patch which
+	# modifies the theme CSS files.
 	rm -f gtk/gtkresources.c gtk/gtkresources.h
 	dh_clean
 
@@ -152,7 +152,7 @@ override_dh_clean: debian/control
 override_dh_auto_build: $(call dh_subst_files,$(binaries))
 
 override_dh_autoreconf:
-	dh_autoreconf "NOCONFIGURE=true ./autogen.sh"
+	NOCONFIGURE=true dh_autoreconf ./autogen.sh
 
 override_dh_auto_configure: debian/control
 	sed -i s/arch=linux-any/optional=nowayland/ debian/libgtk-3-0.symbols
