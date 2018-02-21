@@ -10,8 +10,8 @@
 
 m4_define([gtk_major_version], [3])
 m4_define([gtk_minor_version], [22])
-m4_define([gtk_micro_version], [26])
-m4_define([gtk_interface_age], [26])
+m4_define([gtk_micro_version], [28])
+m4_define([gtk_interface_age], [28])
 m4_define([gtk_binary_age],
           [m4_eval(100 * gtk_minor_version + gtk_micro_version)])
 m4_define([gtk_version],
@@ -64,7 +64,7 @@ m4_define([wayland_protocols_required_version], [1.9])
 m4_define([mirclient_required_version], [0.22.0])
 m4_define([mircookie_required_version], [0.17.0])
 m4_define([epoxy_required_version], [1.0])
-m4_define([cloudproviders_required_version], [0.2.0])
+m4_define([cloudproviders_required_version], [0.2.5])
 GLIB_REQUIRED_VERSION=glib_required_version
 PANGO_REQUIRED_VERSION=pango_required_version
 ATK_REQUIRED_VERSION=atk_required_version
@@ -1820,7 +1820,7 @@ case "$host" in
     SAVED_CFLAGS="${CFLAGS}"
     CFLAGS="-fvisibility=hidden"
     AC_MSG_CHECKING([for -fvisibility=hidden compiler flag])
-    AC_TRY_COMPILE([], [int main (void) { return 0; }],
+    AC_TRY_COMPILE([], [return 0],
                    AC_MSG_RESULT(yes)
                    enable_fvisibility_hidden=yes,
                    AC_MSG_RESULT(no)
@@ -1901,8 +1901,7 @@ AC_ARG_ENABLE(Bsymbolic,
               [SAVED_LDFLAGS="${LDFLAGS}"
                AC_MSG_CHECKING([for -Bsymbolic-functions linker flag])
                LDFLAGS=-Wl,-Bsymbolic-functions
-               AC_LINK_IFELSE([AC_LANG_PROGRAM([[]],
-                                               [[int main (void) { return 0; }]])],
+               AC_LINK_IFELSE([AC_LANG_PROGRAM([[]], [[return 0]])],
                               [AC_MSG_RESULT(yes)
                                enable_Bsymbolic=yes],
                               [AC_MSG_RESULT(no)

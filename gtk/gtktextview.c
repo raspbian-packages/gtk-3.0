@@ -1454,9 +1454,11 @@ G_GNUC_END_IGNORE_DEPRECATIONS
    *
    * The ::insert-emoji signal is a
    * [keybinding signal][GtkBindingSignal]
-   * which gets emitted to present the Emoji chooser for the text_view.
+   * which gets emitted to present the Emoji chooser for the @text_view.
    *
    * The default bindings for this signal are Ctrl-. and Ctrl-;
+   *
+   * Since: 3.22.27
    */
   signals[INSERT_EMOJI] =
     g_signal_new (I_("insert-emoji"),
@@ -8208,13 +8210,17 @@ gtk_text_view_reset_im_context (GtkTextView *text_view)
  * gtk_foo_bar_key_press_event (GtkWidget   *widget,
  *                              GdkEventKey *event)
  * {
- *   if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter))
+ *   guint keyval;
+ *
+ *   gdk_event_get_keyval ((GdkEvent*)event, &keyval);
+ *
+ *   if (keyval == GDK_KEY_Return || keyval == GDK_KEY_KP_Enter)
  *     {
- *       if (gtk_text_view_im_context_filter_keypress (GTK_TEXT_VIEW (view), event))
+ *       if (gtk_text_view_im_context_filter_keypress (GTK_TEXT_VIEW (widget), event))
  *         return TRUE;
  *     }
  *
- *     // Do some stuff
+ *   // Do some stuff
  *
  *   return GTK_WIDGET_CLASS (gtk_foo_bar_parent_class)->key_press_event (widget, event);
  * }
@@ -11477,4 +11483,3 @@ gtk_text_view_insert_emoji (GtkTextView *text_view)
 
   gtk_popover_popup (GTK_POPOVER (chooser));
 }
-

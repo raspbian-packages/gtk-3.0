@@ -6,5 +6,4 @@
 no-accessibility-dump.patch
 reftest-known-fail.patch
 gdk-x11-Check-if-we-have-access-to-GL-before-using-G.patch
-git_text-view-support-emoji-chooser.patch
 auto-3.22.11-1+rpi1-bbd9d41abb4e27ecfc2cd7bd15f11332f36883bf-1491663248

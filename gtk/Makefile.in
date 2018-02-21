@@ -1978,21 +1978,22 @@ gtk_private_h_sources = $(inspector_h_sources) \
 	gtkfilechooserwidgetprivate.h gtkfilechooserutils.h \
 	gtkfilefilterprivate.h gtkfilesystem.h gtkfilesystemmodel.h \
 	gtkfontchooserprivate.h gtkfontchooserutils.h \
-	gtkgestureprivate.h gtkgesturedragprivate.h \
-	gtkgesturelongpressprivate.h gtkgesturemultipressprivate.h \
-	gtkgesturepanprivate.h gtkgesturerotateprivate.h \
-	gtkgesturesingleprivate.h gtkgestureswipeprivate.h \
-	gtkgesturezoomprivate.h gtkheaderbarprivate.h gtkhslaprivate.h \
-	gtkiconcache.h gtkiconhelperprivate.h gtkiconprivate.h \
-	gtkiconthemeprivate.h gtkiconviewprivate.h \
-	gtkimagedefinitionprivate.h gtkimageprivate.h \
-	gtkimcontextsimpleprivate.h gtkimmoduleprivate.h \
-	gtkimcontextsimpleseqs.h gtkintl.h gtkkeyhash.h \
-	gtkkineticscrolling.h gtklabelprivate.h gtklockbuttonprivate.h \
-	gtkmagnifierprivate.h gtkmenubuttonprivate.h gtkmenuprivate.h \
-	gtkmenuitemprivate.h gtkmenusectionbox.h gtkmenushellprivate.h \
-	gtkmenutracker.h gtkmenutrackeritem.h gtkmnemonichash.h \
-	gtkmodelmenuitem.h gtkmodifierstyle.h gtkmodulesprivate.h \
+	gtkfontchooserwidgetprivate.h gtkgestureprivate.h \
+	gtkgesturedragprivate.h gtkgesturelongpressprivate.h \
+	gtkgesturemultipressprivate.h gtkgesturepanprivate.h \
+	gtkgesturerotateprivate.h gtkgesturesingleprivate.h \
+	gtkgestureswipeprivate.h gtkgesturezoomprivate.h \
+	gtkheaderbarprivate.h gtkhslaprivate.h gtkiconcache.h \
+	gtkiconhelperprivate.h gtkiconprivate.h gtkiconthemeprivate.h \
+	gtkiconviewprivate.h gtkimagedefinitionprivate.h \
+	gtkimageprivate.h gtkimcontextsimpleprivate.h \
+	gtkimmoduleprivate.h gtkimcontextsimpleseqs.h gtkintl.h \
+	gtkkeyhash.h gtkkineticscrolling.h gtklabelprivate.h \
+	gtklockbuttonprivate.h gtkmagnifierprivate.h \
+	gtkmenubuttonprivate.h gtkmenuprivate.h gtkmenuitemprivate.h \
+	gtkmenusectionbox.h gtkmenushellprivate.h gtkmenutracker.h \
+	gtkmenutrackeritem.h gtkmnemonichash.h gtkmodelmenuitem.h \
+	gtkmodifierstyle.h gtkmodulesprivate.h \
 	gtkmountoperationprivate.h gtknativedialogprivate.h \
 	gtkorientableprivate.h gtkpango.h gtkpathbar.h \
 	gtkplacessidebarprivate.h gtkplacesviewprivate.h \

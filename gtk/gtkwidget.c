@@ -426,6 +426,12 @@
  *   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
  *                                                 FooWidget, goodbye_button);
  * }
+ *
+ * static void
+ * foo_widget_init (FooWidget *widget)
+ * {
+ *
+ * }
  * ]|
  *
  * You can also use gtk_widget_class_bind_template_callback() to connect a signal
@@ -5791,7 +5797,7 @@ gtk_widget_queue_resize_no_redraw (GtkWidget *widget)
  * Unrealized widgets do not have a frame clock.
  *
  * Returns: (nullable) (transfer none): a #GdkFrameClock,
- * or #NULL if widget is unrealized
+ * or %NULL if widget is unrealized
  *
  * Since: 3.8
  */
@@ -11518,14 +11524,21 @@ gtk_widget_add_device_events (GtkWidget    *widget,
  * inside a #GtkSocket within the same application.
  *
  * To reliably find the toplevel #GtkWindow, use
- * gtk_widget_get_toplevel() and call gtk_widget_is_toplevel()
- * on the result.
+ * gtk_widget_get_toplevel() and call GTK_IS_WINDOW()
+ * on the result. For instance, to get the title of a widget's toplevel
+ * window, one might use:
  * |[<!-- language="C" -->
- *  GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
- *  if (gtk_widget_is_toplevel (toplevel))
- *    {
- *      // Perform action on toplevel.
- *    }
+ * static const char *
+ * get_widget_toplevel_title (GtkWidget *widget)
+ * {
+ *   GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
+ *   if (GTK_IS_WINDOW (toplevel))
+ *     {
+ *       return gtk_window_get_title (GTK_WINDOW (toplevel));
+ *     }
+ *
+ *   return NULL;
+ * }
  * ]|
  *
  * Returns: (transfer none): the topmost ancestor of @widget, or @widget itself
@@ -14396,7 +14409,7 @@ gtk_widget_buildable_custom_tag_start (GtkBuildable     *buildable,
       AccelGroupParserData *data;
 
       data = g_slice_new0 (AccelGroupParserData);
-      data->object = g_object_ref (buildable);
+      data->object = G_OBJECT (g_object_ref (buildable));
       data->builder = builder;
 
       *parser = accel_group_parser;
@@ -17470,6 +17483,10 @@ gtk_widget_reset_controllers (GtkWidget *widget)
   for (l = priv->event_controllers; l; l = l->next)
     {
       controller_data = l->data;
+
+      if (controller_data->controller == NULL)
+        continue;
+
       gtk_event_controller_reset (controller_data->controller);
     }
 }

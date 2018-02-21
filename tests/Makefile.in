@@ -118,45 +118,45 @@ noinst_PROGRAMS = $(am__EXEEXT_1) overlayscroll$(EXEEXT) \
 	testiconview-keynav$(EXEEXT) testicontheme$(EXEEXT) \
 	testimage$(EXEEXT) testinput$(EXEEXT) \
 	testkineticscrolling$(EXEEXT) testlist$(EXEEXT) \
-	testlist2$(EXEEXT) testlist3$(EXEEXT) testlevelbar$(EXEEXT) \
-	testlockbutton$(EXEEXT) testmenubutton$(EXEEXT) \
-	testmountoperation$(EXEEXT) testmultidisplay$(EXEEXT) \
-	testnotebookdnd$(EXEEXT) testnumerableicon$(EXEEXT) \
-	testnouiprint$(EXEEXT) testoffscreen$(EXEEXT) \
-	testoffscreenwindow$(EXEEXT) testorientable$(EXEEXT) \
-	testoverlay$(EXEEXT) testoverlaystyleclass$(EXEEXT) \
-	testprint$(EXEEXT) testrecentchooser$(EXEEXT) \
-	testrecentchoosermenu$(EXEEXT) testrichtext$(EXEEXT) \
-	testscale$(EXEEXT) testselection$(EXEEXT) \
-	testselectionmode$(EXEEXT) $(am__EXEEXT_3) \
-	testspinbutton$(EXEEXT) teststatusicon$(EXEEXT) \
-	teststockbuttonmenu$(EXEEXT) testtoolbar$(EXEEXT) \
-	testtoolbar2$(EXEEXT) stresstest-toolbar$(EXEEXT) \
-	testtreechanging$(EXEEXT) testtreednd$(EXEEXT) \
-	testtreeedit$(EXEEXT) testtreemodel$(EXEEXT) \
-	testtreeview$(EXEEXT) testtreefocus$(EXEEXT) \
-	testtreeflow$(EXEEXT) testtreecolumns$(EXEEXT) \
-	testtreecolumnsizing$(EXEEXT) testtreesort$(EXEEXT) \
-	testverticalcells$(EXEEXT) treestoretest$(EXEEXT) \
-	testxinerama$(EXEEXT) testwindows$(EXEEXT) testmerge$(EXEEXT) \
-	testactions$(EXEEXT) testgrouping$(EXEEXT) \
-	testtooltips$(EXEEXT) testexpand$(EXEEXT) \
-	testexpander$(EXEEXT) testvolumebutton$(EXEEXT) \
-	testscrolledwindow$(EXEEXT) testscrolledge$(EXEEXT) \
-	testswitch$(EXEEXT) testcellarea$(EXEEXT) testswitch$(EXEEXT) \
-	styleexamples$(EXEEXT) testtreemenu$(EXEEXT) \
-	testtoplevelembed$(EXEEXT) testnoscreen$(EXEEXT) \
-	testtreepos$(EXEEXT) testsensitive$(EXEEXT) \
-	testtextview$(EXEEXT) testanimation$(EXEEXT) \
-	testpixbuf-save$(EXEEXT) testpixbuf-color$(EXEEXT) \
-	testpixbuf-scale$(EXEEXT) testgmenu$(EXEEXT) \
-	testlogout$(EXEEXT) teststack$(EXEEXT) testrevealer$(EXEEXT) \
-	testrevealer2$(EXEEXT) testtitlebar$(EXEEXT) \
-	testsplitheaders$(EXEEXT) teststackedheaders$(EXEEXT) \
-	testactionbar$(EXEEXT) testwindowsize$(EXEEXT) \
-	testpopover$(EXEEXT) gdkgears$(EXEEXT) listmodel$(EXEEXT) \
-	testpopup$(EXEEXT) testpopupat$(EXEEXT) $(am__EXEEXT_4) \
-	$(am__EXEEXT_5)
+	testlist2$(EXEEXT) testlist3$(EXEEXT) testlist4$(EXEEXT) \
+	testlevelbar$(EXEEXT) testlockbutton$(EXEEXT) \
+	testmenubutton$(EXEEXT) testmountoperation$(EXEEXT) \
+	testmultidisplay$(EXEEXT) testnotebookdnd$(EXEEXT) \
+	testnumerableicon$(EXEEXT) testnouiprint$(EXEEXT) \
+	testoffscreen$(EXEEXT) testoffscreenwindow$(EXEEXT) \
+	testorientable$(EXEEXT) testoverlay$(EXEEXT) \
+	testoverlaystyleclass$(EXEEXT) testprint$(EXEEXT) \
+	testrecentchooser$(EXEEXT) testrecentchoosermenu$(EXEEXT) \
+	testrichtext$(EXEEXT) testscale$(EXEEXT) \
+	testselection$(EXEEXT) testselectionmode$(EXEEXT) \
+	$(am__EXEEXT_3) testspinbutton$(EXEEXT) \
+	teststatusicon$(EXEEXT) teststockbuttonmenu$(EXEEXT) \
+	testtoolbar$(EXEEXT) testtoolbar2$(EXEEXT) \
+	stresstest-toolbar$(EXEEXT) testtreechanging$(EXEEXT) \
+	testtreednd$(EXEEXT) testtreeedit$(EXEEXT) \
+	testtreemodel$(EXEEXT) testtreeview$(EXEEXT) \
+	testtreefocus$(EXEEXT) testtreeflow$(EXEEXT) \
+	testtreecolumns$(EXEEXT) testtreecolumnsizing$(EXEEXT) \
+	testtreesort$(EXEEXT) testverticalcells$(EXEEXT) \
+	treestoretest$(EXEEXT) testxinerama$(EXEEXT) \
+	testwindows$(EXEEXT) testmerge$(EXEEXT) testactions$(EXEEXT) \
+	testgrouping$(EXEEXT) testtooltips$(EXEEXT) \
+	testexpand$(EXEEXT) testexpander$(EXEEXT) \
+	testvolumebutton$(EXEEXT) testscrolledwindow$(EXEEXT) \
+	testscrolledge$(EXEEXT) testcellarea$(EXEEXT) \
+	testswitch$(EXEEXT) styleexamples$(EXEEXT) \
+	testtreemenu$(EXEEXT) testtoplevelembed$(EXEEXT) \
+	testnoscreen$(EXEEXT) testtreepos$(EXEEXT) \
+	testsensitive$(EXEEXT) testtextview$(EXEEXT) \
+	testanimation$(EXEEXT) testpixbuf-save$(EXEEXT) \
+	testpixbuf-color$(EXEEXT) testpixbuf-scale$(EXEEXT) \
+	testgmenu$(EXEEXT) testlogout$(EXEEXT) teststack$(EXEEXT) \
+	testrevealer$(EXEEXT) testrevealer2$(EXEEXT) \
+	testtitlebar$(EXEEXT) testsplitheaders$(EXEEXT) \
+	teststackedheaders$(EXEEXT) testactionbar$(EXEEXT) \
+	testwindowsize$(EXEEXT) testpopover$(EXEEXT) gdkgears$(EXEEXT) \
+	listmodel$(EXEEXT) testpopup$(EXEEXT) testpopupat$(EXEEXT) \
+	$(am__EXEEXT_4) $(am__EXEEXT_5)
 @USE_WAYLAND_TRUE@am__append_1 = testforeign
 @USE_X11_TRUE@am__append_2 = testerrors
 subdir = tests
@@ -484,6 +484,12 @@ testlist3_LDADD = $(LDADD)
 testlist3_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
 	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+testlist4_SOURCES = testlist4.c
+testlist4_OBJECTS = testlist4.$(OBJEXT)
+testlist4_LDADD = $(LDADD)
+testlist4_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
+	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 testlockbutton_SOURCES = testlockbutton.c
 testlockbutton_OBJECTS = testlockbutton.$(OBJEXT)
 testlockbutton_LDADD = $(LDADD)
@@ -776,8 +782,8 @@ SOURCES = $(animated_resizing_SOURCES) $(animated_revealing_SOURCES) \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
 	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
 	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlockbutton.c testlogout.c \
-	$(testmenubutton_SOURCES) $(testmerge_SOURCES) \
+	testlist2.c testlist3.c testlist4.c testlockbutton.c \
+	testlogout.c $(testmenubutton_SOURCES) $(testmerge_SOURCES) \
 	testmountoperation.c testmultidisplay.c testnoscreen.c \
 	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
 	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
@@ -833,8 +839,8 @@ DIST_SOURCES = $(animated_resizing_SOURCES) \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
 	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
 	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlockbutton.c testlogout.c \
-	$(testmenubutton_SOURCES) $(testmerge_SOURCES) \
+	testlist2.c testlist3.c testlist4.c testlockbutton.c \
+	testlogout.c $(testmenubutton_SOURCES) $(testmerge_SOURCES) \
 	testmountoperation.c testmultidisplay.c testnoscreen.c \
 	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
 	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
@@ -1966,6 +1972,10 @@ testlist3$(EXEEXT): $(testlist3_OBJECTS) $(testlist3_DEPENDENCIES) $(EXTRA_testl
 	@rm -f testlist3$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testlist3_OBJECTS) $(testlist3_LDADD) $(LIBS)
 
+testlist4$(EXEEXT): $(testlist4_OBJECTS) $(testlist4_DEPENDENCIES) $(EXTRA_testlist4_DEPENDENCIES) 
+	@rm -f testlist4$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testlist4_OBJECTS) $(testlist4_LDADD) $(LIBS)
+
 testlockbutton$(EXEEXT): $(testlockbutton_OBJECTS) $(testlockbutton_DEPENDENCIES) $(EXTRA_testlockbutton_DEPENDENCIES) 
 	@rm -f testlockbutton$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testlockbutton_OBJECTS) $(testlockbutton_LDADD) $(LIBS)
@@ -2323,6 +2333,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist3.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlockbutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlogout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmenubutton.Po@am__quote@
