@@ -1,0 +1,12 @@
+016_no_offscreen_widgets_grabbing.patch
+017_no_offscreen_device_grabbing.patch
+018_gdkenumtypes.c_location.patch
+022_disable-viqr-im-for-vi-locale.patch
+060_ignore-random-icons.patch
+no-accessibility-dump.patch
+reftest-known-fail.patch
+gdk-x11-Check-if-we-have-access-to-GL-before-using-G.patch
+0009-gtkimmodule-make-match_backend-query-the-wayland-reg.patch
+0010-imwayland-Avoid-TOGGLE_INPUT_PANEL-requests-if-there.patch
+0011-gtkstylecontext-guard-against-gtk_css_widget_node_ge.patch
+0012-widget-Only-print-allocation-warnings-with-enable-de.patch
