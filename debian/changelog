@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.28-1+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.22.29-1+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,16 @@ gtk+3.0 (3.22.28-1+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Wed, 21 Feb 2018 06:21:32 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 22 Mar 2018 22:26:09 +0000
+
+gtk+3.0 (3.22.29-1) unstable; urgency=medium
+
+  * New upstream release
+    - Reverts confusing single-click open behavior in file chooser
+      (Closes: #824606)
+  * debian/libgtk-3-0.symbols: Add new symbols
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 15 Mar 2018 07:42:30 -0400
 
 gtk+3.0 (3.22.28-1) unstable; urgency=medium
 
@@ -1203,7 +1212,7 @@ gtk+3.0 (3.8.2-2) unstable; urgency=low
 gtk+3.0 (3.8.2-1) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * Switch to interest-noawait for triggers. They only affect IM 
+  * Switch to interest-noawait for triggers. They only affect IM
     modules, so this is not likely to cause upgrade problems.
 
   [ Michael Biebl ]
@@ -1554,8 +1563,8 @@ gtk+3.0 (3.2.2-3) unstable; urgency=low
   * Break murrine-themes (same reason as gnome-themes-standard).
   * Move /etc/gtk-3.0 to libgtk-3-common.
   * Add appropriate Breaks/Replaces to handle it.
-  * Remove gtk-query-immodules-3.0 from libgtk-3-bin since it is 
-    clearly not Multi-Arch compatible. It should not be needed anyway, 
+  * Remove gtk-query-immodules-3.0 from libgtk-3-bin since it is
+    clearly not Multi-Arch compatible. It should not be needed anyway,
     everything is handled by triggers from the private directory.
   * Remove incorrect M-A: same statement for the debug package.
   * Make libgtk-3-bin arch-any, thanks Rico for noticing.
@@ -1628,9 +1637,9 @@ gtk+3.0 (3.2.1-1) experimental; urgency=low
 
 gtk+3.0 (3.0.12-3) unstable; urgency=low
 
-  * 030_xim-modules.patch: stolen from upstream git. Fix the behavior of 
+  * 030_xim-modules.patch: stolen from upstream git. Fix the behavior of
     XIM modules. Closes: #633720.
-  * 043_notebook_scroll.patch: handle a few more widgets to avoid 
+  * 043_notebook_scroll.patch: handle a few more widgets to avoid
     alt+scroll being intercepted by ranges, spin buttons, combo boxes…
 
  -- Josselin Mouette <joss@debian.org>  Thu, 08 Sep 2011 13:01:03 +0200
@@ -1688,11 +1697,11 @@ gtk+3.0 (3.0.10-1) unstable; urgency=low
   * Drop debian/gruik2devhelp.awk and Build-Depends on gawk, obsolete.
 
   [ Josselin Mouette ]
-  * 043_notebook_scroll.patch: new patch. Reintroduce tab scrolling in 
-    GtkNotebook, but this time only when Alt is pressed, as recommended 
+  * 043_notebook_scroll.patch: new patch. Reintroduce tab scrolling in
+    GtkNotebook, but this time only when Alt is pressed, as recommended
     by upstream, and from the whole notebook area.
   * Drop debhelper 8 requirement so that it can build.
-  * libgtk-3-bin.preinst: only remove libgtk3.0-bin diversions if they 
+  * libgtk-3-bin.preinst: only remove libgtk3.0-bin diversions if they
     already exist.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 04 Jun 2011 22:51:06 +0200
@@ -2316,7 +2325,7 @@ gtk+2.0 (2.18.0-1) unstable; urgency=low
   * New upstream stable release:
     + debian/rules,
       debian/*.symbols:
-      - Updated for the new version. 
+      - Updated for the new version.
     + debian/patches/005_gdk_directfb_window_new.patch:
       - Dropped, merged upstream.
     + debian/patches/070_mandatory-relibtoolize.patch:
@@ -2331,7 +2340,7 @@ gtk+2.0 (2.17.11-1) experimental; urgency=low
       - Updated for the new version.
     + debian/rules,
       debian/*.symbols:
-      - Updated for the new version. 
+      - Updated for the new version.
 
  -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Sep 2009 07:16:24 +0200
 
@@ -2342,7 +2351,7 @@ gtk+2.0 (2.17.10-1) experimental; urgency=low
       - Updated for the new version.
     + debian/rules,
       debian/*.symbols:
-      - Updated for the new version. 
+      - Updated for the new version.
   * -
 
  -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Sep 2009 07:16:21 +0200
@@ -2350,7 +2359,7 @@ gtk+2.0 (2.17.10-1) experimental; urgency=low
 gtk+2.0 (2.17.9-1) experimental; urgency=low
 
   [ Josselin Mouette ]
-  * Clean up the .la files in all -dev packages, not only in the main 
+  * Clean up the .la files in all -dev packages, not only in the main
     one.
 
   [ Sebastian Dröge ]
@@ -2604,12 +2613,12 @@ gtk+2.0 (2.15.5-1) experimental; urgency=low
 
 gtk+2.0 (2.14.7-3) experimental; urgency=low
 
-  * 032_gdkwindowimpl_directfb.patch: new version of the patch. This 
-    should restore the basic functionality of the backend, but there is 
+  * 032_gdkwindowimpl_directfb.patch: new version of the patch. This
+    should restore the basic functionality of the backend, but there is
     still work underway.
-  * 033_directfb_client-message.patch: stolen from the upstream SVN. Fix 
+  * 033_directfb_client-message.patch: stolen from the upstream SVN. Fix
     the DirectFB client_message API.
-  * 034_directfb_memleak.patch: stolen from the upstream SVN. Fix memory 
+  * 034_directfb_memleak.patch: stolen from the upstream SVN. Fix memory
     leak in the DirectFB code.
   * Require DirectFB 1.0.0 for the 034 patch.
   * 070_mandatory-relibtoolize.patch: updated accordingly.
@@ -2618,18 +2627,18 @@ gtk+2.0 (2.14.7-3) experimental; urgency=low
 
 gtk+2.0 (2.14.7-2) experimental; urgency=low
 
-  * 008_implicit_pointer_conversion_gdkgc_directfb.patch: removed, it’s 
+  * 008_implicit_pointer_conversion_gdkgc_directfb.patch: removed, it’s
     obsolete and just defines the same macro a second time.
-  * 007_implicit_pointer_conversion_gdkdrawable_directfb.patch: removed, 
+  * 007_implicit_pointer_conversion_gdkdrawable_directfb.patch: removed,
     it’s not needed anymore with the latest directfb.
-  * 006_proper-directfb-modules.patch: removed from the package, it 
+  * 006_proper-directfb-modules.patch: removed from the package, it
     won’t be necessary anymore.
   * 001_static-linking-dont-query-immodules.patch,
     002_static-linking-dont-build-perf.patch,
     003_gdk.pc_privates.patch,
     004_gtk+-ximian-gtk2-filesel-navbutton-5.patch: refreshed.
-  * Remove 071_correct_directfb_declarations.patch, and replace it by 
-    032_gdkwindowimpl_directfb.patch, a patch from Sven Neumann to 
+  * Remove 071_correct_directfb_declarations.patch, and replace it by
+    032_gdkwindowimpl_directfb.patch, a patch from Sven Neumann to
     (hopefully) fix DirectFB support for GTK+ 2.14.
 
  -- Josselin Mouette <joss@debian.org>  Tue, 17 Feb 2009 23:17:56 +0100
@@ -2650,10 +2659,10 @@ gtk+2.0 (2.14.7-1) experimental; urgency=low
 gtk+2.0 (2.14.5-1) experimental; urgency=low
 
   [ Josselin Mouette ]
-  * Really install the faq and tutorial files correctly so that the 
+  * Really install the faq and tutorial files correctly so that the
     devhelp file is read.
   * Update doc-base files accordingly.
-  * gruik2devhelp.awk: new script to generate the devhelp files 
+  * gruik2devhelp.awk: new script to generate the devhelp files
     automatically for the FAQ and tutorial, based on the HTML doc.
   * Build-depend on gawk, run the script appropriately.
 
@@ -2678,7 +2687,7 @@ gtk+2.0 (2.14.4-3) experimental; urgency=low
   * Bump dependencies for the development package.
   * Fix dependencies of gail packages.
   * Don’t install libgail in the udeb.
-  * Stop shipping /usr/lib/pkgconfig/libgtk-directfb-2.0-0/, nobody uses 
+  * Stop shipping /usr/lib/pkgconfig/libgtk-directfb-2.0-0/, nobody uses
     it.
   * Remove versioned conflicts with libgail packages.
   * Remove libgail18.shlibs.

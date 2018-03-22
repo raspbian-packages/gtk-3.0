@@ -116,7 +116,7 @@ noinst_PROGRAMS = $(am__EXEEXT_1) overlayscroll$(EXEEXT) \
 	testgtk$(EXEEXT) testheaderbar$(EXEEXT) \
 	testheightforwidth$(EXEEXT) testiconview$(EXEEXT) \
 	testiconview-keynav$(EXEEXT) testicontheme$(EXEEXT) \
-	testimage$(EXEEXT) testinput$(EXEEXT) \
+	testimage$(EXEEXT) testinfobar$(EXEEXT) testinput$(EXEEXT) \
 	testkineticscrolling$(EXEEXT) testlist$(EXEEXT) \
 	testlist2$(EXEEXT) testlist3$(EXEEXT) testlist4$(EXEEXT) \
 	testlevelbar$(EXEEXT) testlockbutton$(EXEEXT) \
@@ -463,6 +463,12 @@ testiconview_keynav_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
 testimage_SOURCES = testimage.c
 testimage_OBJECTS = testimage.$(OBJEXT)
 testimage_LDADD = $(LDADD)
+testinfobar_SOURCES = testinfobar.c
+testinfobar_OBJECTS = testinfobar.$(OBJEXT)
+testinfobar_LDADD = $(LDADD)
+testinfobar_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
+	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 testinput_SOURCES = testinput.c
 testinput_OBJECTS = testinput.$(OBJEXT)
 testinput_LDADD = $(LDADD)
@@ -780,17 +786,18 @@ SOURCES = $(animated_resizing_SOURCES) $(animated_revealing_SOURCES) \
 	$(testglblending_SOURCES) testgmenu.c $(testgrid_SOURCES) \
 	$(testgrouping_SOURCES) $(testgtk_SOURCES) testheaderbar.c \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
-	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
-	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlist4.c testlockbutton.c \
-	testlogout.c $(testmenubutton_SOURCES) $(testmerge_SOURCES) \
-	testmountoperation.c testmultidisplay.c testnoscreen.c \
-	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
-	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
-	testorientable.c $(testoverlay_SOURCES) \
-	$(testoverlaystyleclass_SOURCES) $(testpixbuf_color_SOURCES) \
-	$(testpixbuf_save_SOURCES) $(testpixbuf_scale_SOURCES) \
-	testpopover.c testpopup.c testpopupat.c $(testprint_SOURCES) \
+	$(testiconview_keynav_SOURCES) testimage.c testinfobar.c \
+	testinput.c $(testkineticscrolling_SOURCES) testlevelbar.c \
+	testlist.c testlist2.c testlist3.c testlist4.c \
+	testlockbutton.c testlogout.c $(testmenubutton_SOURCES) \
+	$(testmerge_SOURCES) testmountoperation.c testmultidisplay.c \
+	testnoscreen.c testnotebookdnd.c testnouiprint.c \
+	$(testnumerableicon_SOURCES) $(testoffscreen_SOURCES) \
+	$(testoffscreenwindow_SOURCES) testorientable.c \
+	$(testoverlay_SOURCES) $(testoverlaystyleclass_SOURCES) \
+	$(testpixbuf_color_SOURCES) $(testpixbuf_save_SOURCES) \
+	$(testpixbuf_scale_SOURCES) testpopover.c testpopup.c \
+	testpopupat.c $(testprint_SOURCES) \
 	$(testrecentchooser_SOURCES) $(testrecentchoosermenu_SOURCES) \
 	$(testrevealer_SOURCES) $(testrevealer2_SOURCES) \
 	testrichtext.c testscale.c testscrolledge.c \
@@ -837,17 +844,18 @@ DIST_SOURCES = $(animated_resizing_SOURCES) \
 	$(testglblending_SOURCES) testgmenu.c $(testgrid_SOURCES) \
 	$(testgrouping_SOURCES) $(testgtk_SOURCES) testheaderbar.c \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
-	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
-	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlist4.c testlockbutton.c \
-	testlogout.c $(testmenubutton_SOURCES) $(testmerge_SOURCES) \
-	testmountoperation.c testmultidisplay.c testnoscreen.c \
-	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
-	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
-	testorientable.c $(testoverlay_SOURCES) \
-	$(testoverlaystyleclass_SOURCES) $(testpixbuf_color_SOURCES) \
-	$(testpixbuf_save_SOURCES) $(testpixbuf_scale_SOURCES) \
-	testpopover.c testpopup.c testpopupat.c $(testprint_SOURCES) \
+	$(testiconview_keynav_SOURCES) testimage.c testinfobar.c \
+	testinput.c $(testkineticscrolling_SOURCES) testlevelbar.c \
+	testlist.c testlist2.c testlist3.c testlist4.c \
+	testlockbutton.c testlogout.c $(testmenubutton_SOURCES) \
+	$(testmerge_SOURCES) testmountoperation.c testmultidisplay.c \
+	testnoscreen.c testnotebookdnd.c testnouiprint.c \
+	$(testnumerableicon_SOURCES) $(testoffscreen_SOURCES) \
+	$(testoffscreenwindow_SOURCES) testorientable.c \
+	$(testoverlay_SOURCES) $(testoverlaystyleclass_SOURCES) \
+	$(testpixbuf_color_SOURCES) $(testpixbuf_save_SOURCES) \
+	$(testpixbuf_scale_SOURCES) testpopover.c testpopup.c \
+	testpopupat.c $(testprint_SOURCES) \
 	$(testrecentchooser_SOURCES) $(testrecentchoosermenu_SOURCES) \
 	$(testrevealer_SOURCES) $(testrevealer2_SOURCES) \
 	testrichtext.c testscale.c testscrolledge.c \
@@ -1948,6 +1956,10 @@ testimage$(EXEEXT): $(testimage_OBJECTS) $(testimage_DEPENDENCIES) $(EXTRA_testi
 	@rm -f testimage$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testimage_OBJECTS) $(testimage_LDADD) $(LIBS)
 
+testinfobar$(EXEEXT): $(testinfobar_OBJECTS) $(testinfobar_DEPENDENCIES) $(EXTRA_testinfobar_DEPENDENCIES) 
+	@rm -f testinfobar$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testinfobar_OBJECTS) $(testinfobar_LDADD) $(LIBS)
+
 testinput$(EXEEXT): $(testinput_OBJECTS) $(testinput_DEPENDENCIES) $(EXTRA_testinput_DEPENDENCIES) 
 	@rm -f testinput$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testinput_OBJECTS) $(testinput_LDADD) $(LIBS)
@@ -2327,6 +2339,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testiconview-keynav.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testiconview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testimage.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testinfobar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testinput.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testkineticscrolling.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlevelbar.Po@am__quote@

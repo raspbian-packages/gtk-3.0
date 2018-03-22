@@ -2421,7 +2421,26 @@ mode permits it.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 user_function (<a class="link" href="GtkListBox.html#GtkListBoxRow"><span class="type">GtkListBoxRow</span></a> *listboxrow,
                <span class="type">gpointer</span>       user_data)</pre>
+<p>This is a keybinding signal, which will cause this row to be activated.</p>
+<p>If you want to be notified when the user activates a row (by key or not),
+use the <a class="link" href="GtkListBox.html#GtkListBox-row-activated" title="The “row-activated” signal"><span class="type">“row-activated”</span></a> signal on the row’s parent <a class="link" href="GtkListBox.html" title="GtkListBox"><span class="type">GtkListBox</span></a>.</p>
+<div class="refsect3">
+<a name="GtkListBoxRow-activate.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
 <p>Flags: Action</p>
+<p class="since">Since: <a class="link" href="api-index-3-10.html#api-index-3.10">3.10</a></p>
 </div>
 </div>
 <div class="refsect1">

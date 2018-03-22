@@ -1466,6 +1466,7 @@
     <keyword type="function" name="gtk_info_bar_set_show_close_button ()" link="GtkInfoBar.html#gtk-info-bar-set-show-close-button" since="3.10"/>
     <keyword type="struct" name="struct GtkInfoBar" link="GtkInfoBar.html#GtkInfoBar-struct"/>
     <keyword type="property" name="The “message-type” property" link="GtkInfoBar.html#GtkInfoBar--message-type"/>
+    <keyword type="property" name="The “revealed” property" link="GtkInfoBar.html#GtkInfoBar--revealed"/>
     <keyword type="property" name="The “show-close-button” property" link="GtkInfoBar.html#GtkInfoBar--show-close-button"/>
     <keyword type="property" name="The “action-area-border” style property" link="GtkInfoBar.html#GtkInfoBar--s-action-area-border"/>
     <keyword type="property" name="The “button-spacing” style property" link="GtkInfoBar.html#GtkInfoBar--s-button-spacing"/>
@@ -6117,40 +6118,40 @@
     <keyword type="property" name="The “arrow-type” property" link="GtkArrow.html#GtkArrow--arrow-type"/>
     <keyword type="property" name="The “shadow-type” property" link="GtkArrow.html#GtkArrow--shadow-type"/>
     <keyword type="property" name="The “arrow-scaling” style property" link="GtkArrow.html#GtkArrow--s-arrow-scaling"/>
-    <keyword type="function" name="gtk_status_icon_new ()" link="GtkStatusIcon.html#gtk-status-icon-new" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_new_from_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-pixbuf" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_new_from_file ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-file" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_new_from_stock ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-stock" deprecated="3.10: Use gtk_status_icon_new_from_icon_name() instead." since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_new_from_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-icon-name" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_new_from_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-gicon" deprecated="3.14: Use notifications" since="2.14"/>
-    <keyword type="function" name="gtk_status_icon_set_from_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-pixbuf" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_set_from_file ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-file" deprecated="3.14: Use notifications" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new ()" link="GtkStatusIcon.html#gtk-status-icon-new" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new_from_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-pixbuf" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new_from_file ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-file" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new_from_stock ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-stock" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new_from_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-icon-name" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_new_from_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-new-from-gicon" deprecated="" since="2.14"/>
+    <keyword type="function" name="gtk_status_icon_set_from_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-pixbuf" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_set_from_file ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-file" deprecated="" since="2.10"/>
     <keyword type="function" name="gtk_status_icon_set_from_stock ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-stock" deprecated="3.10: Use gtk_status_icon_set_from_icon_name() instead." since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_set_from_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-icon-name" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_set_from_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-gicon" deprecated="3.14: Use notifications" since="2.14"/>
-    <keyword type="function" name="gtk_status_icon_get_storage_type ()" link="GtkStatusIcon.html#gtk-status-icon-get-storage-type" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-get-pixbuf" deprecated="3.14: Use notifications" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_set_from_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-icon-name" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_set_from_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-set-from-gicon" deprecated="" since="2.14"/>
+    <keyword type="function" name="gtk_status_icon_get_storage_type ()" link="GtkStatusIcon.html#gtk-status-icon-get-storage-type" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_get_pixbuf ()" link="GtkStatusIcon.html#gtk-status-icon-get-pixbuf" deprecated="" since="2.10"/>
     <keyword type="function" name="gtk_status_icon_get_stock ()" link="GtkStatusIcon.html#gtk-status-icon-get-stock" deprecated="3.10: Use gtk_status_icon_get_icon_name() instead." since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-get-icon-name" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-get-gicon" deprecated="3.14: Use notifications" since="2.14"/>
-    <keyword type="function" name="gtk_status_icon_get_size ()" link="GtkStatusIcon.html#gtk-status-icon-get-size" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_set_screen ()" link="GtkStatusIcon.html#gtk-status-icon-set-screen" deprecated="3.14: Use notifications" since="2.12"/>
-    <keyword type="function" name="gtk_status_icon_get_screen ()" link="GtkStatusIcon.html#gtk-status-icon-get-screen" deprecated="3.14: Use notifications" since="2.12"/>
-    <keyword type="function" name="gtk_status_icon_set_tooltip_text ()" link="GtkStatusIcon.html#gtk-status-icon-set-tooltip-text" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_get_tooltip_text ()" link="GtkStatusIcon.html#gtk-status-icon-get-tooltip-text" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_set_tooltip_markup ()" link="GtkStatusIcon.html#gtk-status-icon-set-tooltip-markup" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_get_tooltip_markup ()" link="GtkStatusIcon.html#gtk-status-icon-get-tooltip-markup" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_set_has_tooltip ()" link="GtkStatusIcon.html#gtk-status-icon-set-has-tooltip" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_get_has_tooltip ()" link="GtkStatusIcon.html#gtk-status-icon-get-has-tooltip" deprecated="3.14: Use notifications" since="2.16"/>
-    <keyword type="function" name="gtk_status_icon_set_title ()" link="GtkStatusIcon.html#gtk-status-icon-set-title" deprecated="3.14: Use notifications" since="2.18"/>
-    <keyword type="function" name="gtk_status_icon_get_title ()" link="GtkStatusIcon.html#gtk-status-icon-get-title" deprecated="3.14: Use notifications" since="2.18"/>
-    <keyword type="function" name="gtk_status_icon_set_name ()" link="GtkStatusIcon.html#gtk-status-icon-set-name" deprecated="3.14: Use notifications" since="2.20"/>
-    <keyword type="function" name="gtk_status_icon_set_visible ()" link="GtkStatusIcon.html#gtk-status-icon-set-visible" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_visible ()" link="GtkStatusIcon.html#gtk-status-icon-get-visible" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_is_embedded ()" link="GtkStatusIcon.html#gtk-status-icon-is-embedded" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_position_menu ()" link="GtkStatusIcon.html#gtk-status-icon-position-menu" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_geometry ()" link="GtkStatusIcon.html#gtk-status-icon-get-geometry" deprecated="3.14: Use notifications" since="2.10"/>
-    <keyword type="function" name="gtk_status_icon_get_x11_window_id ()" link="GtkStatusIcon.html#gtk-status-icon-get-x11-window-id" deprecated="3.14: Use notifications" since="2.14"/>
+    <keyword type="function" name="gtk_status_icon_get_icon_name ()" link="GtkStatusIcon.html#gtk-status-icon-get-icon-name" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_get_gicon ()" link="GtkStatusIcon.html#gtk-status-icon-get-gicon" deprecated="" since="2.14"/>
+    <keyword type="function" name="gtk_status_icon_get_size ()" link="GtkStatusIcon.html#gtk-status-icon-get-size" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_set_screen ()" link="GtkStatusIcon.html#gtk-status-icon-set-screen" deprecated="" since="2.12"/>
+    <keyword type="function" name="gtk_status_icon_get_screen ()" link="GtkStatusIcon.html#gtk-status-icon-get-screen" deprecated="" since="2.12"/>
+    <keyword type="function" name="gtk_status_icon_set_tooltip_text ()" link="GtkStatusIcon.html#gtk-status-icon-set-tooltip-text" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_get_tooltip_text ()" link="GtkStatusIcon.html#gtk-status-icon-get-tooltip-text" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_set_tooltip_markup ()" link="GtkStatusIcon.html#gtk-status-icon-set-tooltip-markup" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_get_tooltip_markup ()" link="GtkStatusIcon.html#gtk-status-icon-get-tooltip-markup" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_set_has_tooltip ()" link="GtkStatusIcon.html#gtk-status-icon-set-has-tooltip" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_get_has_tooltip ()" link="GtkStatusIcon.html#gtk-status-icon-get-has-tooltip" deprecated="" since="2.16"/>
+    <keyword type="function" name="gtk_status_icon_set_title ()" link="GtkStatusIcon.html#gtk-status-icon-set-title" deprecated="" since="2.18"/>
+    <keyword type="function" name="gtk_status_icon_get_title ()" link="GtkStatusIcon.html#gtk-status-icon-get-title" deprecated="" since="2.18"/>
+    <keyword type="function" name="gtk_status_icon_set_name ()" link="GtkStatusIcon.html#gtk-status-icon-set-name" deprecated="" since="2.20"/>
+    <keyword type="function" name="gtk_status_icon_set_visible ()" link="GtkStatusIcon.html#gtk-status-icon-set-visible" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_get_visible ()" link="GtkStatusIcon.html#gtk-status-icon-get-visible" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_is_embedded ()" link="GtkStatusIcon.html#gtk-status-icon-is-embedded" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_position_menu ()" link="GtkStatusIcon.html#gtk-status-icon-position-menu" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_get_geometry ()" link="GtkStatusIcon.html#gtk-status-icon-get-geometry" deprecated="" since="2.10"/>
+    <keyword type="function" name="gtk_status_icon_get_x11_window_id ()" link="GtkStatusIcon.html#gtk-status-icon-get-x11-window-id" deprecated="" since="2.14"/>
     <keyword type="struct" name="struct GtkStatusIcon" link="GtkStatusIcon.html#GtkStatusIcon-struct"/>
     <keyword type="property" name="The “embedded” property" link="GtkStatusIcon.html#GtkStatusIcon--embedded"/>
     <keyword type="property" name="The “file” property" link="GtkStatusIcon.html#GtkStatusIcon--file"/>
