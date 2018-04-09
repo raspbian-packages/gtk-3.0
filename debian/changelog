@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.29-2+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.22.29-3+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,24 @@ gtk+3.0 (3.22.29-2+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Wed, 28 Mar 2018 23:09:12 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Mon, 09 Apr 2018 01:31:39 +0000
+
+gtk+3.0 (3.22.29-3) unstable; urgency=medium
+
+  * Team upload
+  * Allow stderr in autopkgtests. They produce harmless diagnostics.
+  * d/p/0013-wayland-Drop-cairo-surfaces-when-withdrawing.patch:
+    Add patch from upstream fixing a Wayland client crash if it unmaps
+    a window while gdk is processing updates
+  * d/p/0014-AM_PATH_GTK_3_0-Use-AC_PATH_TOOL-to-find-pkg-config.patch,
+    d/p/0015-m4macros-Fix-underquoting-in-AC_PATH_TOOL.patch:
+    Use AC_PATH_TOOL to find pkg-config in the deprecated AM_PATH_GTK_3_0
+    macro (Closes: #894069)
+  * d/p/0016-imwayland-destroy-objects-only-if-it-matches-our-man.patch:
+    Add patch proposed upstream to fix crashes on screen blank in some
+    dual-monitor configurations (Closes: #894388)
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 03 Apr 2018 08:41:09 +0100
 
 gtk+3.0 (3.22.29-2) unstable; urgency=medium
 
