@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gtk+ 3.22.29\n"
+"Project-Id-Version: gtk+ 3.22.30\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtk"
 "%2B\n"
-"POT-Creation-Date: 2018-03-12 21:36+0000\n"
+"POT-Creation-Date: 2018-04-16 18:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1214,7 +1214,7 @@ msgstr ""
 
 #: gtk/deprecated/gtkcolorseldialog.c:191 gtk/deprecated/gtkfontsel.c:1689
 #: gtk/gtkfilechoosernative.c:540 gtk/gtkfilechoosernative.c:632
-#: gtk/gtkfilechooserwidget.c:1475 gtk/gtkfilechooserwidget.c:6333
+#: gtk/gtkfilechooserwidget.c:1475 gtk/gtkfilechooserwidget.c:6330
 #: gtk/gtkmessagedialog.c:952 gtk/gtkmessagedialog.c:965
 #: gtk/gtkmountoperation.c:545 gtk/gtkpagesetupunixdialog.c:196
 #: gtk/gtkprintbackend.c:763 gtk/gtkprinteroptionwidget.c:545
@@ -1659,24 +1659,24 @@ msgstr ""
 msgid "Failed to start GNOME Software"
 msgstr ""
 
-#: gtk/gtkappchooserwidget.c:626
+#: gtk/gtkappchooserwidget.c:593
 msgid "Default Application"
 msgstr ""
 
-#: gtk/gtkappchooserwidget.c:676
+#: gtk/gtkappchooserwidget.c:643
 #, c-format
 msgid "No applications found for “%s”."
 msgstr ""
 
-#: gtk/gtkappchooserwidget.c:759
+#: gtk/gtkappchooserwidget.c:726
 msgid "Recommended Applications"
 msgstr ""
 
-#: gtk/gtkappchooserwidget.c:774
+#: gtk/gtkappchooserwidget.c:741
 msgid "Related Applications"
 msgstr ""
 
-#: gtk/gtkappchooserwidget.c:788
+#: gtk/gtkappchooserwidget.c:755
 msgid "Other Applications"
 msgstr ""
 
@@ -2437,96 +2437,96 @@ msgstr ""
 msgid "_Name:"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:3274
-msgid "Searching"
-msgstr ""
-
-#: gtk/gtkfilechooserwidget.c:3279 gtk/gtkfilechooserwidget.c:3293
+#: gtk/gtkfilechooserwidget.c:3277 gtk/gtkfilechooserwidget.c:3291
 #, c-format
 msgid "Searching in %s"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:3303
+#: gtk/gtkfilechooserwidget.c:3297
+msgid "Searching"
+msgstr ""
+
+#: gtk/gtkfilechooserwidget.c:3304
 msgid "Enter location"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:3305
+#: gtk/gtkfilechooserwidget.c:3306
 msgid "Enter location or URL"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4343 gtk/gtkfilechooserwidget.c:7247
+#: gtk/gtkfilechooserwidget.c:4340 gtk/gtkfilechooserwidget.c:7244
 #: gtk/ui/gtkfilechooserwidget.ui:235
 msgid "Modified"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4621
+#: gtk/gtkfilechooserwidget.c:4618
 #, c-format
 msgid "Could not read the contents of %s"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4625
+#: gtk/gtkfilechooserwidget.c:4622
 msgid "Could not read the contents of the folder"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4755 gtk/gtkfilechooserwidget.c:4803
+#: gtk/gtkfilechooserwidget.c:4752 gtk/gtkfilechooserwidget.c:4800
 msgid "%H:%M"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4757 gtk/gtkfilechooserwidget.c:4805
+#: gtk/gtkfilechooserwidget.c:4754 gtk/gtkfilechooserwidget.c:4802
 msgid "%l:%M %p"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4761
+#: gtk/gtkfilechooserwidget.c:4758
 msgid "Yesterday"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4769
+#: gtk/gtkfilechooserwidget.c:4766
 msgid "%-e %b"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:4773
+#: gtk/gtkfilechooserwidget.c:4770
 msgid "%-e %b %Y"
 msgstr ""
 
 #. Translators: We don't know whether this printer is
 #. * available to print to.
-#: gtk/gtkfilechooserwidget.c:5008 gtk/inspector/prop-editor.c:1689
+#: gtk/gtkfilechooserwidget.c:5005 gtk/inspector/prop-editor.c:1689
 #: modules/printbackends/cloudprint/gtkprintbackendcloudprint.c:748
 msgid "Unknown"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:5047 gtk/gtkplacessidebar.c:1094
+#: gtk/gtkfilechooserwidget.c:5044 gtk/gtkplacessidebar.c:1094
 msgid "Home"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:5540
+#: gtk/gtkfilechooserwidget.c:5537
 msgid "Cannot change to folder because it is not local"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:6326 gtk/gtkprintunixdialog.c:664
+#: gtk/gtkfilechooserwidget.c:6323 gtk/gtkprintunixdialog.c:664
 #, c-format
 msgid "A file named “%s” already exists.  Do you want to replace it?"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:6329 gtk/gtkprintunixdialog.c:668
+#: gtk/gtkfilechooserwidget.c:6326 gtk/gtkprintunixdialog.c:668
 #, c-format
 msgid ""
 "The file already exists in “%s”.  Replacing it will overwrite its contents."
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:6334 gtk/gtkprintunixdialog.c:676
+#: gtk/gtkfilechooserwidget.c:6331 gtk/gtkprintunixdialog.c:676
 msgid "_Replace"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:6548
+#: gtk/gtkfilechooserwidget.c:6545
 msgid "You do not have access to the specified folder."
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:7171
+#: gtk/gtkfilechooserwidget.c:7168
 msgid "Could not send the search request"
 msgstr ""
 
-#: gtk/gtkfilechooserwidget.c:7457
+#: gtk/gtkfilechooserwidget.c:7454
 msgid "Accessed"
 msgstr ""
 
@@ -2890,7 +2890,7 @@ msgstr ""
 msgid "Open %s"
 msgstr ""
 
-#: gtk/gtkplacessidebar.c:1070
+#: gtk/gtkplacessidebar.c:1070 gtk/ui/gtkemojichooser.ui:197
 msgid "Recent"
 msgstr ""
 
@@ -3566,12 +3566,12 @@ msgstr ""
 msgid "Search Shortcuts"
 msgstr ""
 
-#: gtk/gtkshortcutswindow.c:1053 gtk/ui/gtkemojichooser.ui:314
+#: gtk/gtkshortcutswindow.c:1053 gtk/ui/gtkemojichooser.ui:326
 #: gtk/ui/gtkfilechooserwidget.ui:310
 msgid "No Results Found"
 msgstr ""
 
-#: gtk/gtkshortcutswindow.c:1060 gtk/ui/gtkemojichooser.ui:328
+#: gtk/gtkshortcutswindow.c:1060 gtk/ui/gtkemojichooser.ui:340
 #: gtk/ui/gtkfilechooserwidget.ui:324 gtk/ui/gtkplacesview.ui:406
 msgid "Try a different search"
 msgstr ""
@@ -5495,40 +5495,40 @@ msgstr ""
 msgid "Saturation"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:52
+#: gtk/ui/gtkemojichooser.ui:53 gtk/ui/gtkemojichooser.ui:207
 msgid "Smileys & People"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:67
+#: gtk/ui/gtkemojichooser.ui:68 gtk/ui/gtkemojichooser.ui:217
 msgid "Body & Clothing"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:82
+#: gtk/ui/gtkemojichooser.ui:83 gtk/ui/gtkemojichooser.ui:227
 msgid "Animals & Nature"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:97
+#: gtk/ui/gtkemojichooser.ui:98 gtk/ui/gtkemojichooser.ui:237
 msgid "Food & Drink"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:112
+#: gtk/ui/gtkemojichooser.ui:113 gtk/ui/gtkemojichooser.ui:247
 msgid "Travel & Places"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:127
+#: gtk/ui/gtkemojichooser.ui:128 gtk/ui/gtkemojichooser.ui:257
 msgid "Activities"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:142
+#: gtk/ui/gtkemojichooser.ui:143 gtk/ui/gtkemojichooser.ui:267
 msgctxt "emoji category"
 msgid "Objects"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:157
+#: gtk/ui/gtkemojichooser.ui:158 gtk/ui/gtkemojichooser.ui:277
 msgid "Symbols"
 msgstr ""
 
-#: gtk/ui/gtkemojichooser.ui:172
+#: gtk/ui/gtkemojichooser.ui:173 gtk/ui/gtkemojichooser.ui:287
 msgid "Flags"
 msgstr ""
 
@@ -6089,7 +6089,7 @@ msgid "Vietnamese (VIQR)"
 msgstr ""
 
 #. ID
-#: modules/input/imwayland.c:81
+#: modules/input/imwayland.c:82
 msgctxt "input method menu"
 msgid "Wayland"
 msgstr ""

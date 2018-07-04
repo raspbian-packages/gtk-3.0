@@ -131,10 +131,10 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: @SHARED_PKG@ (= ${binary:Version}),
-         gir1.2-gtk-3.0 (= ${binary:Version}),
          @COMMON_PKG@,
          ${misc:Depends},
          ${shlibs:Depends},
+         gir1.2-gtk-3.0 (= ${binary:Version}),
          libglib2.0-dev (>= 2.49.4),
          libgdk-pixbuf2.0-dev (>= 2.30.0),
          libpango1.0-dev (>= 1.40.5),

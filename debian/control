@@ -2,7 +2,7 @@ Source: gtk+3.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
+Uploaders: Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
 Build-Depends: debhelper (>= 10.3~),
                gnome-pkg-tools (>= 0.11),
                gtk-doc-tools (>= 1.20),
