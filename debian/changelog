@@ -1,4 +1,4 @@
-gtk+3.0 (3.22.30-2+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.24.0-3+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -9,7 +9,111 @@ gtk+3.0 (3.22.30-2+rpi1) buster-staging; urgency=medium
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
 
- -- Raspbian forward porter <root@raspbian.org>  Wed, 04 Jul 2018 03:09:05 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Sat, 22 Sep 2018 20:47:39 +0000
+
+gtk+3.0 (3.24.0-3) unstable; urgency=medium
+
+  * Cherry-pick 3c7d5e7 to fix a critical on gtk_application_shutdown when not
+    using portals (Closes: #908070)
+  * Add Applied-Upstream to last cherry-pick
+  * Fix-portal-path-handling.patch: Cherry-pick from upstream.  Fix an
+    incorrect dereference in the portal handling code.
+
+ -- Iain Lane <laney@debian.org>  Tue, 11 Sep 2018 17:33:38 +0100
+
+gtk+3.0 (3.24.0-2) unstable; urgency=medium
+
+  * Team upload
+  * d/p/Revert-imwayland-clear-preedit-on-focus-out.patch:
+    Revert an upstream change that caused the cursor to disappear on
+    focus changes in vte terminals like gnome-terminal and lxterminal
+    under Wayland (Closes: #908120)
+  * debian/libgtk-3-0.symbols: gtk_color_picker_kwin_new() is new in
+    3.24.0, not 3.24.3 which doesn't exist yet
+  * d/p/Don-t-test-default-constructed-GdkPixbuf-properties.patch:
+    Work around a gdk-pixbuf bug that caused test failures
+    (Closes: #908439)
+  * d/gbp.conf: Don't number patches
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 10 Sep 2018 01:15:53 +0100
+
+gtk+3.0 (3.24.0-1) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * debian/libgtk-3-0.bug-control:
+    When bugs are reported against GTK+, include details of various
+    engines, modules and LD_PRELOADs if installed
+  * Don't install ChangeLog, which currently just says
+    "A git checkout and git-log is required to generate this file";
+    even if it was complete, Policy 4.2.0 does not require detailed
+    changelogs to be installed. Please see NEWS for a summary of changes,
+    or the upstream git repository https://gitlab.gnome.org/GNOME/gtk
+    for a comprehensive change history.
+
+  [ Iain Lane ]
+  * Revert "debian/{control{,.in},gbp.conf,watch}: Update for experimental"
+    This reverts commit 99b78e089c952661fcf3c4897769dd7a463c5cb7.
+  * New upstream stable release 3.24.0
+    + GtkApplication can now track screensaver state
+    + Deprecate a few APIs that are gone in GTK+ 4:
+       - focus chains in GtkContainer
+       - stepper sensitivity in GtkRange
+    + Allow picking colors under kwin
+  * debian/control{,.in}: Bump Standards-Version to 4.2.1, no changes required
+  * debian/libgtk-3-0.symbols: Update for this release
+
+ -- Iain Lane <laney@debian.org>  Tue, 04 Sep 2018 18:10:53 +0100
+
+gtk+3.0 (3.23.2-1) experimental; urgency=medium
+
+  [ Andrea Azzarone ]
+  * New upstream release
+  * debian/patches/0008-defaultvalue-Ignore-more-style-properties-that-Adwai.patch:
+    Drop, included in this release.
+  * debian/libgtk-3-0.symbols: New symbols for this release
+
+  [ Iain Lane ]
+  * Stanrdards-Version → 4.2.0 - no changes required.
+
+ -- Andrea Azzarone <andrea.azzarone@canonical.com>  Thu, 09 Aug 2018 14:11:12 +0000
+
+gtk+3.0 (3.23.1-1) experimental; urgency=medium
+
+  * debian/{control{,.in},gbp.conf,watch}: Update for experimental
+  * New upstream development releases (!!!) 3.23.0 & 3.23.1:
+    + New font chooser features:
+     - Allow setting OpenType font features
+     - Show examples for OpenType font features
+     - Allow selecting OpenType font variations
+     - Support levels of details for selection
+    + New Emoji features:
+     - Support a completion popup for Emoji
+     - Drop Ctrl-Shift-e shortcut
+    + Other new apis:
+     - gdk_window_move_to_rect
+    + Backported event controllers from GTK+ 4:
+     - GtkEventControllerScroll
+     - GtkEventControllerMotion
+     - GtkEventControllerKey
+     - GtkGestureStylus
+    + Support markup in GtkModelButtons
+    + Themes
+     - The Raleigh theme has been removed
+     - Expander size in HighContrast has been increased
+    + Wayland
+     - Update cursor scale when needed
+     - Decoration negotiation protocol fixes
+  * debian/patches/m4macros-Set-a-serial-number.patch: Drop, included in this
+    release.
+  * debian/control{,.in}: Bump libepoxy (1.4) and pango (1.41.0) per upstream.
+  * debian/patches/gdk-x11-Check-if-we-have-access-to-GL-before-using-G.patch:
+    Drop - GTK now calls epoxy_has_glx() directly so this bypassed approach
+    isn't necessary.
+  * debian/libgail-3-0.symbols: New symbols from both releases.
+  * debian/patches/0008-defaultvalue-Ignore-more-style-properties-that-Adwai.patch:
+    Cherry-pick test fix patch from upstream !253.
+
+ -- Iain Lane <laney@debian.org>  Thu, 19 Jul 2018 17:55:42 +0100
 
 gtk+3.0 (3.22.30-2) unstable; urgency=medium
 

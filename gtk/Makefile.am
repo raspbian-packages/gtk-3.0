@@ -23,6 +23,7 @@ AM_CPPFLAGS =						\
 	$(GTK_BASE_CFLAGS_DEFINES)			\
 	$(GTK_PLAT_CFLAGS_DEFINES)			\
 	-DX11_DATA_PREFIX=\"$(X11_PREFIX)\"		\
+	-DISO_CODES_PREFIX=\"$(ISO_CODES_PREFIX)\"	\
 	-I$(top_builddir)				\
 	-I$(top_builddir)/gtk				\
 	-I$(top_srcdir) 				\
@@ -191,6 +192,9 @@ gtk_public_h_sources = 		\
 	gtkenums.h		\
 	gtkeventbox.h		\
 	gtkeventcontroller.h	\
+	gtkeventcontrollerkey.h	\
+	gtkeventcontrollermotion.h	\
+	gtkeventcontrollerscroll.h	\
 	gtkexpander.h		\
 	gtkfilechooser.h	\
 	gtkfilechooserbutton.h	\
@@ -212,6 +216,7 @@ gtk_public_h_sources = 		\
 	gtkgesturepan.h		\
 	gtkgesturerotate.h	\
 	gtkgesturesingle.h	\
+	gtkgesturestylus.h	\
 	gtkgestureswipe.h	\
 	gtkgesturezoom.h	\
 	gtkglarea.h		\
@@ -393,6 +398,10 @@ gtk_private_h_sources =		\
 	gtkclipboardprivate.h		\
 	gtkcolorswatchprivate.h	\
 	gtkcoloreditorprivate.h	\
+	gtkcolorpickerprivate.h	\
+	gtkcolorpickerkwinprivate.h	\
+	gtkcolorpickerportalprivate.h	\
+	gtkcolorpickershellprivate.h	\
 	gtkcolorplaneprivate.h	\
 	gtkcolorscaleprivate.h	\
 	gtkcolorchooserprivate.h	\
@@ -468,6 +477,7 @@ gtk_private_h_sources =		\
 	gtkdialogprivate.h 	\
 	gtkdndprivate.h		\
 	gtkemojichooser.h	\
+	gtkemojicompletion.h	\
 	gtkentryprivate.h	\
 	gtkeventcontrollerprivate.h	\
 	gtkfilechooserembed.h	\
@@ -489,6 +499,7 @@ gtk_private_h_sources =		\
 	gtkgesturepanprivate.h	\
 	gtkgesturerotateprivate.h	\
 	gtkgesturesingleprivate.h	\
+	gtkgesturestylusprivate.h	\
 	gtkgestureswipeprivate.h	\
 	gtkgesturezoomprivate.h	\
 	gtkheaderbarprivate.h	\
@@ -590,7 +601,10 @@ gtk_private_h_sources =		\
 	gtkwin32themeprivate.h	\
 	gtkwindowprivate.h	\
 	gtktreemenu.h		\
-	gdkpixbufutilsprivate.h
+	gdkpixbufutilsprivate.h \
+	open-type-layout.h	\
+	language-names.h	\
+	script-names.h
 
 # GTK+ C sources to build the library from
 gtk_base_c_sources = 		\
@@ -665,6 +679,10 @@ gtk_base_c_sources = 		\
 	gtkcolorchooserwidget.c	\
 	gtkcolorchooserdialog.c	\
 	gtkcoloreditor.c	\
+	gtkcolorpicker.c	\
+	gtkcolorpickerkwin.c	\
+	gtkcolorpickerportal.c	\
+	gtkcolorpickershell.c	\
 	gtkcolorplane.c		\
 	gtkcolorscale.c		\
 	gtkcolorswatch.c	\
@@ -746,11 +764,15 @@ gtk_base_c_sources = 		\
 	gtkdrawingarea.c	\
 	gtkeditable.c		\
 	gtkemojichooser.c	\
+	gtkemojicompletion.c	\
 	gtkentry.c		\
 	gtkentrybuffer.c	\
 	gtkentrycompletion.c	\
 	gtkeventbox.c		\
 	gtkeventcontroller.c	\
+	gtkeventcontrollerkey.c	\
+	gtkeventcontrollermotion.c	\
+	gtkeventcontrollerscroll.c	\
 	gtkexpander.c		\
 	gtkfilechooser.c	\
 	gtkfilechooserbutton.c	\
@@ -780,6 +802,7 @@ gtk_base_c_sources = 		\
 	gtkgesturepan.c		\
 	gtkgesturerotate.c	\
 	gtkgesturesingle.c	\
+	gtkgesturestylus.c	\
 	gtkgestureswipe.c	\
 	gtkgesturezoom.c	\
 	gtkglarea.c		\
@@ -811,7 +834,6 @@ gtk_base_c_sources = 		\
 	gtklockbutton.c		\
 	gtkmain.c		\
 	gtkmagnifier.c		\
-	gtkmarshalers.c		\
 	gtkmenu.c		\
 	gtkmenubar.c		\
 	gtkmenubutton.c		\
@@ -848,7 +870,6 @@ gtk_base_c_sources = 		\
 	gtkprintsettings.c	\
 	gtkprintutils.c		\
 	gtkprivate.c		\
-	gtkprivatetypebuiltins.c \
 	gtkprogressbar.c	\
 	gtkprogresstracker.c	\
 	gtkpixelcache.c		\
@@ -871,7 +892,6 @@ gtk_base_c_sources = 		\
 	gtkrenderbackground.c	\
 	gtkrenderborder.c	\
 	gtkrendericon.c		\
-	gtkresources.c		\
 	gtkrevealer.c		\
 	gtkroundedbox.c		\
 	gtkscale.c		\
@@ -947,7 +967,6 @@ gtk_base_c_sources = 		\
 	gtktreestore.c		\
 	gtktreeview.c		\
 	gtktreeviewcolumn.c	\
-	gtktypebuiltins.c	\
 	gtkutils.c		\
 	gtkvolumebutton.c	\
 	gtkviewport.c		\
@@ -957,7 +976,9 @@ gtk_base_c_sources = 		\
 	gtkwindowgroup.c	\
 	gtkwin32draw.c		\
 	gtkwin32theme.c		\
-	gdkpixbufutils.c
+	gdkpixbufutils.c	\
+	language-names.c	\
+	script-names.c
 
 if USE_QUARTZ
 gtk_base_c_sources += 		\
@@ -1127,9 +1148,10 @@ gtk_built_sources =				\
 	gtkresources.c				\
 	gtk.gresource.xml			\
 	gtktypebuiltins.c			\
-	gtktypefuncs.c				\
 	gtkmarshalers.c				\
 	gtkprivatetypebuiltins.c
+
+nodist_gtk_c_sources += $(gtk_built_sources)
 
 stamp_files =					\
 	stamp-gtkmarshalers.h			\
@@ -1267,10 +1289,6 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	$(AM_V_GEN) echo "<?xml version='1.0' encoding='UTF-8'?>" > $@; \
 	echo "<gresources>" >> $@; \
 	echo "  <gresource prefix='/org/gtk/libgtk'>" >> $@; \
-	for f in $(srcdir)/theme/Raleigh/*.css; do \
-	  n=`basename $$f`; \
-	  echo "    <file alias='theme/Raleigh/gtk.css'>theme/Raleigh/$$n</file>" >> $@; \
-	done; \
         echo "    <file>theme/Adwaita/gtk.css</file>" >> $@; \
         echo "    <file>theme/Adwaita/gtk-dark.css</file>" >> $@; \
         echo "    <file>theme/Adwaita/gtk-contained.css</file>" >> $@; \
@@ -1307,10 +1325,10 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	done; \
 	for f in $(srcdir)/ui/*.ui; do \
 	  n=`basename $$f`; \
-	  echo "    <file compressed='true'>ui/$$n</file>" >> $@; \
+	  echo "    <file preprocess='xml-stripblanks'>ui/$$n</file>" >> $@; \
 	done; \
 	for s in 16x16 22x22 24x24 32x32 48x48; do \
-	  for c in actions status; do \
+	  for c in actions status categories; do \
 	    for f in $(srcdir)/icons/$$s/$$c/*.png; do \
 	      test "$$f" = "$(srcdir)/icons/$$s/$$c/*.png" && continue; \
 	      n=`basename $$f`; \
@@ -1320,7 +1338,7 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	done; \
 	for f in $(srcdir)/inspector/*.ui; do \
 	  n=`basename $$f`; \
-	  echo "    <file compressed='true'>inspector/$$n</file>" >> $@; \
+	  echo "    <file compressed='true' preprocess='xml-stripblanks'>inspector/$$n</file>" >> $@; \
 	done; \
 	echo "    <file>inspector/logo.png</file>" >> $@; \
 	echo "    <file>emoji/emoji.data</file>" >> $@; \
@@ -1391,8 +1409,7 @@ theme_sources = 				\
 	theme/HighContrast/gtk-contained.css 	\
 	theme/HighContrast/gtk-contained-inverse.css \
 	theme/HighContrast/gtk.css 		\
-	theme/HighContrast/gtk-inverse.css 	\
-	theme/Raleigh/gtk-default.css
+	theme/HighContrast/gtk-inverse.css
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(builddir)/gtk.gresource.xml)
 
@@ -1426,7 +1443,7 @@ gtktypefuncs.c: stamp-gtktypebuiltins.h stamp-gtkprivatetypebuiltins.h $(top_src
 	  sort | uniq | \
 	  $(SED) '{ s/^/*tp++ = /; s/$$/();/; s/^.*\(gdk_x11\|gtk_plug_\|gtk_socket_\).*$$/#ifdef GDK_WINDOWING_X11\n&\n#endif/; }' >> xgen-gtf \
 	&& cp xgen-gtf $@ && rm -f xgen-gtf
-gtktestutils.c: gtktypefuncs.c
+$(srcdir)/gtktestutils.c: gtktypefuncs.c
 
 # target platform:
 lib_LTLIBRARIES = libgtk-3.la
@@ -1478,7 +1495,8 @@ gtk_3_FILES = \
 	$(gtk_base_c_sources)		\
 	$(gtk_os_win32_c_sources)	\
 	$(gtk_use_win32_c_sources)	\
-	$(gtk_dbus_built_sources)
+	$(gtk_dbus_built_sources)	\
+	$(gtk_built_sources)
 
 gtk_3_EXCLUDES = dummy
 gtk_3_HEADERS_DIR = $(gtkincludedir)

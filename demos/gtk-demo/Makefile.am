@@ -28,7 +28,6 @@ demos_base =					\
 	expander.c  				\
         filtermodel.c				\
 	fishbowl.c				\
-	widgetbowl.c 				\
 	foreigndrawing.c			\
 	gestures.c				\
 	glarea.c				\
@@ -49,6 +48,7 @@ demos_base =					\
 	offscreen_window2.c			\
 	overlay.c				\
 	overlay2.c				\
+	paint.c					\
 	panes.c					\
 	pickers.c				\
 	pixbufs.c				\
@@ -103,11 +103,6 @@ LDADDS = \
 	$(GTK_DEP_LIBS)				\
 	$(GDK_DEP_LIBS)				\
 	-lm
-
-if BUILD_FONT_DEMO
-AM_CPPFLAGS += $(FONTDEMO_CFLAGS)
-LDADDS += $(FONTDEMO_LIBS)
-endif
 
 bin_PROGRAMS = gtk3-demo gtk3-demo-application
 

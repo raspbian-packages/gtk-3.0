@@ -51,6 +51,7 @@
 #include "gdkmonitorprivate.h"
 #include "gdkwin32.h"
 #include "gdkkeysyms.h"
+#include "gdkglcontext-win32.h"
 #include "gdkdevicemanager-win32.h"
 #include "gdkdeviceprivate.h"
 #include "gdkdevice-wintab.h"
@@ -3070,13 +3071,35 @@ gdk_event_translate (MSG  *msg,
 
       event = gdk_event_new (GDK_SCROLL);
       event->scroll.window = window;
+      event->scroll.direction = GDK_SCROLL_SMOOTH;
 
       if (msg->message == WM_MOUSEWHEEL)
-	  event->scroll.direction = (((short) HIWORD (msg->wParam)) > 0) ?
-	    GDK_SCROLL_UP : GDK_SCROLL_DOWN;
+        {
+          UINT lines_multiplier = 3;
+          event->scroll.delta_y = (gdouble) GET_WHEEL_DELTA_WPARAM (msg->wParam) / (gdouble) WHEEL_DELTA;
+          /* -1 means that we should scroll in screens, not lines.
+           * Right now GDK doesn't support that.
+           */
+          if (SystemParametersInfo (SPI_GETWHEELSCROLLLINES, 0, &lines_multiplier, 0) &&
+              lines_multiplier != (UINT) -1)
+            event->scroll.delta_y *= (gdouble) lines_multiplier;
+        }
       else if (msg->message == WM_MOUSEHWHEEL)
-	  event->scroll.direction = (((short) HIWORD (msg->wParam)) > 0) ?
-	    GDK_SCROLL_RIGHT : GDK_SCROLL_LEFT;
+        {
+          UINT chars_multiplier = 3;
+          event->scroll.delta_x = (gdouble) GET_WHEEL_DELTA_WPARAM (msg->wParam) / (gdouble) WHEEL_DELTA;
+          /* There doesn't seem to be any indication that
+           * h-scroll has an equivalent of the "screen" mode,
+           * indicated by multiplier being (UINT) -1.
+           */
+          if (SystemParametersInfo (SPI_GETWHEELSCROLLCHARS, 0, &chars_multiplier, 0))
+            event->scroll.delta_x *= (gdouble) chars_multiplier;
+        }
+      /* It seems that delta values given by Windows are
+       * inverted (positive delta scrolls up, not down).
+       */
+      event->scroll.delta_x *= -1.0;
+      event->scroll.delta_y *= -1.0;
       event->scroll.time = _gdk_win32_get_next_tick (msg->time);
       event->scroll.x = (gint16) point.x / impl->window_scale;
       event->scroll.y = (gint16) point.y / impl->window_scale;
@@ -3248,6 +3271,9 @@ gdk_event_translate (MSG  *msg,
 	case SC_MINIMIZE:
 	case SC_RESTORE:
 	  do_show_window (window, msg->wParam == SC_MINIMIZE ? TRUE : FALSE);
+
+    if (msg->wParam == SC_RESTORE)
+      _gdk_win32_window_invalidate_egl_framebuffer (window);
 	  break;
         case SC_MAXIMIZE:
           impl = GDK_WINDOW_IMPL_WIN32 (window->impl);
@@ -3336,6 +3362,8 @@ gdk_event_translate (MSG  *msg,
           if (impl->maximizing)
             {
               MINMAXINFO our_mmi;
+
+              _gdk_win32_window_invalidate_egl_framebuffer (window);
 
               if (_gdk_win32_window_fill_min_max_info (window, &our_mmi))
                 {
