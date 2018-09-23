@@ -8,8 +8,11 @@ gtk+3.0 (3.24.0-3+rpi1) buster-staging; urgency=medium
   * Fix clean target.
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
+  [changes introduced in by Peter Michael Green]
+  * Manually mark a symbol that was not caught by our symbols file hack as
+    optional.
 
- -- Raspbian forward porter <root@raspbian.org>  Sat, 22 Sep 2018 20:47:39 +0000
+ -- Peter Micheal Green <plugwash@raspbian.org>  Sat, 22 Sep 2018 20:47:39 +0000
 
 gtk+3.0 (3.24.0-3) unstable; urgency=medium
 
