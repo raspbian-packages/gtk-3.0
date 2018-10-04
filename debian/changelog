@@ -8,11 +8,13 @@ gtk+3.0 (3.24.1-2+rpi1) buster-staging; urgency=medium
   * Fix clean target.
   [changes introduced in 3.20.6-2+rpi1 by Peter Michael Green]
   * Disable testsuite.
-  [changes introduced in by Peter Michael Green]
+  [changes introduced in 3.24.0-3+rpi1 by Peter Michael Green]
   * Manually mark a symbol that was not caught by our symbols file hack as
     optional.
+  [changes introduced in 3.24.1-2+rpi1 by Peter Michael Green]
+  * Remove depends and build-depends on libepoxy-dev
 
- -- Raspbian forward porter <root@raspbian.org>  Thu, 04 Oct 2018 08:49:44 +0000
+ -- Peter Michael Green <plugwash@raspbian.org>  Thu, 04 Oct 2018 08:49:44 +0000
 
 gtk+3.0 (3.24.1-2) unstable; urgency=medium
 
