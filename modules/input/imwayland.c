@@ -41,6 +41,8 @@ struct _GtkIMContextWaylandGlobal
   struct zwp_text_input_v3 *text_input;
 
   GtkIMContext *current;
+
+  guint serial;
 };
 
 struct _GtkIMContextWaylandClass
@@ -76,8 +78,6 @@ struct _GtkIMContextWayland
   } surrounding;
 
   enum zwp_text_input_v3_change_cause surrounding_change;
-
-  guint serial;
 
   struct surrounding_delete pending_surrounding_delete;
 
@@ -121,6 +121,9 @@ notify_external_change (GtkIMContextWayland *context)
 {
   gboolean result;
 
+  if (!global->current)
+    return;
+
   context->surrounding_change = ZWP_TEXT_INPUT_V3_CHANGE_CAUSE_OTHER;
   g_signal_emit_by_name (global->current, "retrieve-surrounding", &result);
 }
@@ -135,18 +138,7 @@ static void
 text_input_leave (void                     *data,
                   struct zwp_text_input_v3 *text_input,
                   struct wl_surface        *surface)
-{
-  /*
-  GtkIMContextWayland *context;
-
-  if (!global->current)
-    return;
-
-  context = GTK_IM_CONTEXT_WAYLAND (global->current);
-  TODO: does this clear text input or modify text?
-  reset_preedit (context);
-  */
-}
+{}
 
 static void
 text_input_preedit (void                     *data,
@@ -168,7 +160,6 @@ text_input_preedit (void                     *data,
   context->pending_preedit.cursor_begin = cursor_begin;
   context->pending_preedit.cursor_end = cursor_end;
 }
-
 
 static void
 text_input_preedit_apply (GtkIMContextWaylandGlobal *global)
@@ -269,7 +260,6 @@ text_input_done (void                     *data,
                  struct zwp_text_input_v3 *text_input,
                  uint32_t                  serial)
 {
-  GtkIMContextWayland *context;
   GtkIMContextWaylandGlobal *global = data;
   gboolean result;
   gboolean valid;
@@ -277,9 +267,7 @@ text_input_done (void                     *data,
   if (!global->current)
     return;
 
-  context = GTK_IM_CONTEXT_WAYLAND (global->current);
-
-  valid = serial == context->serial;
+  valid = serial == global->serial;
   text_input_delete_surrounding_text_apply(global, valid);
   text_input_commit_apply(global, valid);
   g_signal_emit_by_name (global->current, "retrieve-surrounding", &result);
@@ -314,6 +302,7 @@ registry_handle_global (void               *data,
       global->text_input =
         zwp_text_input_manager_v3_get_text_input (global->text_input_manager,
                                           gdk_wayland_seat_get_wl_seat (seat));
+      global->serial = 0;
       zwp_text_input_v3_add_listener (global->text_input,
                                       &text_input_listener, global);
     }
@@ -472,7 +461,7 @@ commit_state (GtkIMContextWayland *context)
 {
   if (global->current != GTK_IM_CONTEXT (context))
     return;
-  context->serial++;
+  global->serial++;
   zwp_text_input_v3_commit (global->text_input);
   context->surrounding_change = ZWP_TEXT_INPUT_V3_CHANGE_CAUSE_INPUT_METHOD;
 }
@@ -664,6 +653,14 @@ gtk_im_context_wayland_focus_out (GtkIMContext *context)
 
   zwp_text_input_v3_disable (global->text_input);
   commit_state (context_wayland);
+
+  /* after disable, incoming state changes won't take effect anyway */
+  if (context_wayland->current_preedit.text)
+    {
+      text_input_preedit (global, global->text_input, NULL, 0, 0);
+      text_input_preedit_apply (global);
+    }
+
   global->current = NULL;
 }
 

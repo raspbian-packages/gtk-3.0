@@ -1,4 +1,4 @@
-gtk+3.0 (3.24.0-3+rpi1) buster-staging; urgency=medium
+gtk+3.0 (3.24.1-2+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 3.16.6-1+rpi1 by Peter Michael Green <plugwash@raspbian.org> at Fri, 25 Sep 2015 01:49:45 +0000]
   * Disable wayland backend in debian/rules
@@ -12,7 +12,63 @@ gtk+3.0 (3.24.0-3+rpi1) buster-staging; urgency=medium
   * Manually mark a symbol that was not caught by our symbols file hack as
     optional.
 
- -- Peter Micheal Green <plugwash@raspbian.org>  Sat, 22 Sep 2018 20:47:39 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 04 Oct 2018 08:49:44 +0000
+
+gtk+3.0 (3.24.1-2) unstable; urgency=medium
+
+  * Team upload
+  * Upload to unstable
+  * d/libgtk-3-0.symbols: Mark gdk_wayland_window_announce_ssd() as
+    Linux-specific, since we do not enable Wayland on non-Linux.
+    This might fix FTBFS on kfreebsd-any.
+  * d/rules: Generate files from .in counterparts for every package,
+    not just the ones we are going to build. This avoids dh_missing
+    false positives for files that would have gone into packages not
+    included in the current build, for example libgtk-3-common during
+    an amd64-only build.
+  * d/tests: Also mark reftests as flaky due to a known failure:
+    symbolic-icon-translucent-color appears to have regressed and now
+    differs from the reference by 1 column of pixels
+  * Revert "Temporarily (B-)D on libgl1-mesa-dev and libegl1-mesa-dev"
+    now that libepoxy has been fixed
+  * d/p/reftest-known-fail.patch: Reinstate
+  * Make symbolic-icon-translucent-color.ui non-fatal during
+    build-time tests
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 30 Sep 2018 16:45:24 +0100
+
+gtk+3.0 (3.24.1-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release
+    - Bump GLib build-dependency to 2.53.4 as per configure.ac
+    - d/p/Revert-imwayland-clear-preedit-on-focus-out.patch:
+      Remove, rely on the upstream fix for #908120 instead
+    - d/p/GtkApplication-Fix-CRITICAL-on-shutdown-when-register_ses.patch,
+      d/p/Fix-portal-path-handling.patch: Remove, applied upstream
+  * Build installed-tests
+    - Install them in gtk-3-examples for now to avoid the NEW queue
+  * d/p/no-accessibility-dump.patch: Drop, no longer needed.
+    The build-time tests correctly set GTK_CSD=1 now.
+  * Stop marking some reftests as known failures. They now succeed on
+    all release architectures.
+    - d/p/reftest-known-fail.patch: Drop, no longer needed
+  * Run installed-tests as autopkgtests (Closes: #908440)
+    - Run a11ystate.test separately and mark it as flaky for now due to a
+      known failure: state/focus1.ui passes in a desktop session but fails
+      in a minimal autopkgtest VM
+  * Sort dependency lists (wrap-and-sort -a)
+  * d/gtk-3-examples.install: Sort file list (wrap-and-sort -a)
+  * Use the same Xvfb screen configuration as in the upstream GTK+ 4
+    Gitlab-CI tests. This will hopefully make GLX work (see also #874077)
+  * Update d/gbp.conf from glib2.0
+  * Temporarily (Build-)Depend on libgl1-mesa-dev and libegl1-mesa-dev to
+    work around #909173 in libepoxy
+  * d/rules: Make it clearer that we respect the nocheck option
+  * d/copyright: Fix some lintian warnings
+  * Upload to experimental for now, to avoid disrupting migration
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 19 Sep 2018 23:35:29 +0100
 
 gtk+3.0 (3.24.0-3) unstable; urgency=medium
 
