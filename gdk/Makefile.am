@@ -184,8 +184,8 @@ gdk_c_sources = 				\
 	gdkwindowimpl.c
 
 gdk_built_sources = 				\
-	$(srcdir)/gdkenumtypes.h		\
-	$(srcdir)/gdkenumtypes.c		\
+	gdkenumtypes.h				\
+	gdkenumtypes.c				\
 	gdkmarshalers.h 			\
 	gdkmarshalers.c				\
 	gdkresources.h				\
@@ -434,7 +434,7 @@ BUILT_SOURCES = \
 gdkenumtypes.h: $(gdk_public_h_sources) $(srcdir)/gdkenumtypes.h.template
 	$(AM_V_GEN) ( cd $(srcdir) && $(GLIB_MKENUMS) --template gdkenumtypes.h.template \
 		$(gdk_h_sources) ) >> xgen-geth \
-	&& (cmp -s xgen-geth gdkenumtypes.h || cp xgen-geth $(srcdir)/gdkenumtypes.h ) \
+	&& (cmp -s xgen-geth gdkenumtypes.h || cp xgen-geth gdkenumtypes.h ) \
 	&& rm -f xgen-geth 
 gdkenumtypes.c: $(gdk_h_sources) gdkenumtypes.c.template
 	$(AM_V_GEN) ( cd $(srcdir) && $(GLIB_MKENUMS) --template gdkenumtypes.c.template \
